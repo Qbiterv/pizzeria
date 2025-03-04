@@ -19,22 +19,40 @@ configurations {
 	}
 }
 
-repositories {
-	mavenCentral()
+allprojects {
+	repositories {
+		mavenCentral()
+	}
+
+	apply(plugin = "org.springframework.boot")
+	apply(plugin = "io.spring.dependency-management")
+	apply(plugin = "java")
 }
 
-dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
-	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-	implementation("org.springframework.boot:spring-boot-starter-jdbc")
-	implementation("org.springframework.boot:spring-boot-starter-validation")
-	implementation("org.springframework.boot:spring-boot-starter-web")
-	compileOnly("org.projectlombok:lombok")
-	runtimeOnly("org.postgresql:postgresql")
-	annotationProcessor("org.projectlombok:lombok")
-	testImplementation("org.springframework.boot:spring-boot-starter-test")
-	testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+subprojects {
+	dependencies {
+		implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+		implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+		implementation("org.springframework.boot:spring-boot-starter-jdbc")
+		implementation("org.springframework.boot:spring-boot-starter-validation")
+		implementation("org.springframework.boot:spring-boot-starter-web")
+		compileOnly("org.projectlombok:lombok")
+		runtimeOnly("org.postgresql:postgresql")
+		annotationProcessor("org.projectlombok:lombok")
+		testImplementation("org.springframework.boot:spring-boot-starter-test")
+		testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	}
 }
+
+tasks.register("buildAll") {
+	group = "build"
+	description = "Builds all subprojects"
+
+	dependsOn(subprojects.map {
+		it.tasks.named("build")
+	})
+}
+
 
 tasks.withType<Test> {
 	useJUnitPlatform()

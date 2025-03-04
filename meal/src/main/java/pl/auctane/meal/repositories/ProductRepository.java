@@ -1,4 +1,7 @@
-package pl.auctane.meal.entities;
+package pl.auctane.meal.repositories;
 
-public interface ProductRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import pl.auctane.meal.entities.Product;
+
+public interface ProductRepository extends JpaRepository<Product, Integer> {
 }
