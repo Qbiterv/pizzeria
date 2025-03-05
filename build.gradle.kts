@@ -44,6 +44,12 @@ subprojects {
 	}
 }
 
+project(":meal") {
+	dependencies {
+		implementation(group = "com.github.java-json-tools", name = "json-patch", version = "1.13")
+	}
+}
+
 tasks.register("buildAll") {
 	group = "build"
 	description = "Builds all subprojects"
