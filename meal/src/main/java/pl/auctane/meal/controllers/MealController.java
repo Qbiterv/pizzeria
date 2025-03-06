@@ -2,8 +2,6 @@ package pl.auctane.meal.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.github.fge.jsonpatch.JsonPatch;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +12,6 @@ import pl.auctane.meal.entities.Meal;
 import pl.auctane.meal.services.MealService;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 // Registering API REST controller on path /v1/meal/get
@@ -75,7 +72,7 @@ public class MealController {
 
         JSON.put("success", true);
         JSON.put("message", "Created meal: " + name + " with description: " + description);
-        return ResponseEntity.ok(name);
+        return ResponseEntity.ok().body(JSON);
     }
 
     @DeleteMapping("/delete/{id}")

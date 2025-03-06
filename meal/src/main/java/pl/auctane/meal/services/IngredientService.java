@@ -2,7 +2,11 @@ package pl.auctane.meal.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.auctane.meal.entities.Ingredient;
 import pl.auctane.meal.repositories.IngredientRepository;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class IngredientService {
@@ -11,5 +15,31 @@ public class IngredientService {
     @Autowired
     public IngredientService(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
+    }
+
+    public List<Ingredient> getAllIngredients() {
+        return ingredientRepository.findAll();
+    }
+
+    public Optional<Ingredient> getIngredient(int id) {
+        return ingredientRepository.findById(id);
+    }
+
+    public void createIngredient(String name) {
+        Ingredient ingredient = new Ingredient();
+        ingredient.setName(name);
+
+        ingredientRepository.save(ingredient);
+    }
+
+    public void updateIngredient(Ingredient ingredient) {
+        ingredientRepository.save(ingredient);
+    }
+
+    public boolean deleteIngredient(int id) {
+        if(getIngredient(id).isEmpty()) return false;
+
+        ingredientRepository.deleteById(id);
+        return true;
     }
 }
