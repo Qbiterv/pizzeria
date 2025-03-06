@@ -42,13 +42,20 @@ public class MealIngredientController {
         return ResponseEntity.ok().body(mealIngredients);
     }
 
-    @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getMealIngredient(@PathVariable("id") int id) {
-        Optional<MealIngredient> mealIngredient = mealIngredientService.getMealIngredient(id);
+    @GetMapping(value = "/get/{mealId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getMealIngredient(@PathVariable("mealId") int mealId) {
+        ObjectNode JSON = objectMapper.createObjectNode();
 
-        if(mealIngredient.isEmpty()) return ResponseEntity.noContent().build();
+        //check if meal exist
+        if(mealService.getMeal(mealId).isEmpty()) {
+            JSON.put("succes", false);
+            JSON.put("message", "Meal with id " + mealId + " does not exist");
+            return ResponseEntity.badRequest().body(JSON);
+        }
 
-        return ResponseEntity.ok().body(mealIngredient.get());
+        List<Ingredient> ingredients =  mealIngredientService.getAllIngredientsForMeal(mealId);
+
+        return ResponseEntity.ok().body(ingredients);
     }
 
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -108,24 +115,21 @@ public class MealIngredientController {
         }
 
         //check if there is something to patch
-        if(mealIngredientDto.getIngredientId() == 0 && mealIngredientDto.getMealId() == 0) {
+        if(mealIngredientDto.getIngredientId() == 0 && mealIngredientDto.getMealId() == 0)
             return ResponseEntity.noContent().build();
-        } else {
-            //there is something to change inside
-            if(mealIngredientDto.getMealId() != 0) {
-                //check if meal exist and update
-                Optional<Meal> meal = mealService.getMeal(mealIngredientDto.getMealId());
-                if(!meal.isEmpty()) {
-                    mealIngredient.get().setMealId(meal.get());
-                }
-            }
-            if(mealIngredientDto.getIngredientId() != 0) {
-                //check if ingredient exist and update
-                Optional<Ingredient> ingredient = ingredientService.getIngredient(mealIngredientDto.getIngredientId());
-                if(!ingredient.isEmpty()) {
-                    mealIngredient.get().setIngredientId(ingredient.get());
-                }
-            }
+
+        //there is something to change inside
+        if(mealIngredientDto.getMealId() != 0) {
+            //check if meal exist and update
+            Optional<Meal> meal = mealService.getMeal(mealIngredientDto.getMealId());
+            if(!meal.isEmpty())
+                mealIngredient.get().setMealId(meal.get());
+        }
+        if(mealIngredientDto.getIngredientId() != 0) {
+            //check if ingredient exist and update
+            Optional<Ingredient> ingredient = ingredientService.getIngredient(mealIngredientDto.getIngredientId());
+            if(!ingredient.isEmpty())
+                mealIngredient.get().setIngredientId(ingredient.get());
         }
 
         mealIngredientService.updateMealIngredient(mealIngredient.get());

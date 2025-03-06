@@ -7,20 +7,29 @@ import pl.auctane.meal.entities.Meal;
 import pl.auctane.meal.entities.MealIngredient;
 import pl.auctane.meal.repositories.MealIngredientRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class MealIngredientService {
     private final MealIngredientRepository mealIngredientRepository;
+    private final IngredientService ingredientService;
 
     @Autowired
-    public MealIngredientService(MealIngredientRepository mealIngredientRepository) {
+    public MealIngredientService(MealIngredientRepository mealIngredientRepository, IngredientService ingredientService) {
         this.mealIngredientRepository = mealIngredientRepository;
+        this.ingredientService = ingredientService;
     }
 
     public List<MealIngredient> getAllMealIngredients() {
         return mealIngredientRepository.findAll();
+    }
+
+    public List<Ingredient> getAllIngredientsForMeal(int mealId) {
+        List<Ingredient> list = new ArrayList<>();
+        mealIngredientRepository.findAllByMealId_Id(mealId).forEach(mealIngredient -> {ingredientService.getIngredient(mealIngredient.getIngredientId().getId()).ifPresent(ingredient -> list.add(ingredient));});
+        return list;
     }
 
     public Optional<MealIngredient> getMealIngredient(int id) {
