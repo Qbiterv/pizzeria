@@ -63,13 +63,13 @@ public class IngredientController {
 
         if(ingredientService.deleteIngredient(id)) {
             JSON.put("success", true);
-            JSON.put("message", "Deleted meal with id: " + id);
+            JSON.put("message", "Deleted ingredient with id: " + id);
 
             return ResponseEntity.ok().body(JSON);
         }
 
         JSON.put("success", false);
-        JSON.put("message", "Couldn't delete meal with id: " + id);
+        JSON.put("message", "Couldn't delete ingredient with id: " + id);
 
         return ResponseEntity.badRequest().body(JSON);
     }
@@ -82,7 +82,7 @@ public class IngredientController {
 
         if(ingredient.isEmpty()) {
             JSON.put("success", false);
-            JSON.put("message", "Meal with id: " + id + " doesn't exist");
+            JSON.put("message", "Ingredient with id: " + id + " doesn't exist");
 
             return ResponseEntity.badRequest().body(JSON);
         }
@@ -98,8 +98,8 @@ public class IngredientController {
         ingredientService.updateIngredient(ingredient.get());
 
         JSON.put("success", true);
-        JSON.put("message", "Updated meal with id: " + id);
+        JSON.put("message", "Updated ingredient with id: " + id);
 
-        return ResponseEntity.ok(JSON);
+        return ResponseEntity.ok().body(JSON);
     }
 }
