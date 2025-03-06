@@ -1,11 +1,11 @@
-package pl.auctane.meal.dtos;
+package pl.auctane.meal.dtos.meal;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class MealEditDto {
+public class MealCrateDto {
     private String name;
     private String description;
 }

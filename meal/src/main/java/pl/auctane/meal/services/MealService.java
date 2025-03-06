@@ -1,13 +1,8 @@
 package pl.auctane.meal.services;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.github.fge.jsonpatch.JsonPatch;
-import com.github.fge.jsonpatch.JsonPatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.auctane.meal.dtos.MealEditDto;
 import pl.auctane.meal.entities.Meal;
 import pl.auctane.meal.repositories.MealRepository;
 
@@ -17,12 +12,10 @@ import java.util.Optional;
 @Service
 public class MealService {
     private final MealRepository mealRepository;
-    private final ObjectMapper objectMapper;
 
     @Autowired
-    public MealService(MealRepository mealRepository, ObjectMapper objectMapper) {
+    public MealService(MealRepository mealRepository) {
         this.mealRepository = mealRepository;
-        this.objectMapper = objectMapper;
     }
 
     public List<Meal> getMeals() {
