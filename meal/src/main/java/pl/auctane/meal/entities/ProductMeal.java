@@ -11,6 +11,7 @@ public class ProductMeal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
     @ManyToOne
     private Product productId;
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.auctane.meal.entities.Meal;
+import pl.auctane.meal.entities.Product;
 import pl.auctane.meal.repositories.MealRepository;
 
 import java.util.List;

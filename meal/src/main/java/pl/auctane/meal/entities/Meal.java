@@ -18,4 +18,13 @@ public class Meal {
     private String name;
 
     private String description;
+
+    public Meal() {
+    }
+
+    public Meal(int id, String name, String description) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+    }
 }
