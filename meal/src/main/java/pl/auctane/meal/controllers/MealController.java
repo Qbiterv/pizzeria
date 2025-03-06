@@ -2,19 +2,16 @@ package pl.auctane.meal.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
-import com.github.fge.jsonpatch.JsonPatch;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.auctane.meal.dtos.MealCrateDto;
-import pl.auctane.meal.dtos.MealEditDto;
+import pl.auctane.meal.dtos.meal.MealCrateDto;
+import pl.auctane.meal.dtos.meal.MealEditDto;
 import pl.auctane.meal.entities.Meal;
 import pl.auctane.meal.services.MealService;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 // Registering API REST controller on path /v1/meal/get
@@ -26,9 +23,9 @@ public class MealController {
     private final ObjectMapper objectMapper;
 
     @Autowired
-    public MealController(MealService mealService) {
+    public MealController(MealService mealService, ObjectMapper objectMapper) {
         this.mealService = mealService;
-        this.objectMapper = new ObjectMapper();
+        this.objectMapper = objectMapper;
     }
 
     // RECEIVING ALL MEALS
@@ -38,7 +35,7 @@ public class MealController {
 
         if(meals.isEmpty()) return ResponseEntity.noContent().build();
 
-        return ResponseEntity.ok(meals);
+        return ResponseEntity.ok().body(meals);
     }
 
     // GETTING SINGLE MEAL BY ID
@@ -48,7 +45,7 @@ public class MealController {
 
         if(meal.isEmpty()) return ResponseEntity.noContent().build();
 
-        return ResponseEntity.ok(meal.get());
+        return ResponseEntity.ok().body(meal.get());
     }
 
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
@@ -64,18 +61,11 @@ public class MealController {
 
         ObjectNode JSON = objectMapper.createObjectNode();
 
-        try {
-            mealService.createMeal(name, description);
-        } catch (Exception e) {
-            JSON.put("success", false);
-            JSON.put("message", "Error while creating meal");
-
-            return ResponseEntity.badRequest().body(JSON);
-        }
+        mealService.createMeal(name, description);
 
         JSON.put("success", true);
         JSON.put("message", "Created meal: " + name + " with description: " + description);
-        return ResponseEntity.ok(name);
+        return ResponseEntity.ok().body(JSON);
     }
 
     @DeleteMapping("/delete/{id}")
@@ -125,6 +115,6 @@ public class MealController {
 
         JSON.put("success", true);
         JSON.put("message", "Updated meal with id: " + id);
-        return ResponseEntity.ok(JSON);
+        return ResponseEntity.ok().body(JSON);
     }
 }
