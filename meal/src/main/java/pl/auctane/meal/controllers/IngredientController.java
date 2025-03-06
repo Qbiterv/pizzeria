@@ -25,7 +25,7 @@ public class IngredientController {
         this.objectMapper = objectMapper;
     }
 
-    @GetMapping("/get")
+    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getIngredients() {
         List<Ingredient> ingredients = ingredientService.getAllIngredients();
 
@@ -34,7 +34,7 @@ public class IngredientController {
         return ResponseEntity.ok().body(ingredients);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getIngredient(@PathVariable("id") int id) {
         Optional<Ingredient> ingredient = ingredientService.getIngredient(id);
 
@@ -43,7 +43,7 @@ public class IngredientController {
         return ResponseEntity.ok().body(ingredient.get());
     }
 
-    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addIngredient(@RequestBody IngredientDto ingredientDto) {
         if(ingredientDto.getName() == null || ingredientDto.getName().isEmpty()) return ResponseEntity.noContent().build();
 
@@ -57,7 +57,7 @@ public class IngredientController {
         return ResponseEntity.ok().body(JSON);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteMeal(@PathVariable("id") int id) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
@@ -74,7 +74,7 @@ public class IngredientController {
         return ResponseEntity.badRequest().body(JSON);
     }
 
-    @PatchMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> editMeal(@PathVariable("id") int id, @RequestBody IngredientDto ingredientDto) {
         ObjectNode JSON = objectMapper.createObjectNode();
 

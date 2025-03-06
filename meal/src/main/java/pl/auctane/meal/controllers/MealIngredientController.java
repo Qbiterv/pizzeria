@@ -33,7 +33,7 @@ public class MealIngredientController {
         this.mealService = mealService;
     }
 
-    @GetMapping("/get")
+    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getMealIngredients() {
         List<MealIngredient> mealIngredients = mealIngredientService.getAllMealIngredients();
 
@@ -42,7 +42,7 @@ public class MealIngredientController {
         return ResponseEntity.ok().body(mealIngredients);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getMealIngredient(@PathVariable("id") int id) {
         Optional<MealIngredient> mealIngredient = mealIngredientService.getMealIngredient(id);
 
@@ -51,7 +51,7 @@ public class MealIngredientController {
         return ResponseEntity.ok().body(mealIngredient.get());
     }
 
-    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addMealIngredient(@RequestBody MealIngredientDto mealIngredientDto) {
 
         ObjectNode JSON = objectMapper.createObjectNode();
@@ -78,7 +78,7 @@ public class MealIngredientController {
         return ResponseEntity.ok().body(JSON);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteMeal(@PathVariable("id") int id) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
@@ -95,7 +95,7 @@ public class MealIngredientController {
         return ResponseEntity.badRequest().body(JSON);
     }
 
-    @PatchMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PatchMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> editMeal(@PathVariable("id") int id, @RequestBody MealIngredientDto mealIngredientDto) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
