@@ -30,12 +30,12 @@ public class ProductController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/get")
+    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getProducts() {
         return ResponseEntity.ok().body(productService.getProducts());
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getProductById(@PathVariable("id") int id) {
         Optional<Product> product = productService.getProduct(id);
 
@@ -44,7 +44,7 @@ public class ProductController {
         return ResponseEntity.ok().body(product.get());
     }
 
-    @PostMapping("/create")
+    @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> createProduct(@RequestBody ProductCreateDto product) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
@@ -109,7 +109,7 @@ public class ProductController {
         return ResponseEntity.ok().body(JSON);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping(value = "/delete/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteProduct(@PathVariable("id") int id) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
