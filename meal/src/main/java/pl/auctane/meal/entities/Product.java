@@ -19,4 +19,6 @@ public class Product {
     private Category categoryId;
 
     private Double price;
+
+    private String description;
 }
