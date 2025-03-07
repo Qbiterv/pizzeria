@@ -28,7 +28,7 @@ public class MealIngredientService {
 
     public List<Ingredient> getAllIngredientsForMeal(int mealId) {
         List<Ingredient> list = new ArrayList<>();
-        mealIngredientRepository.findAllByMealId_Id(mealId).forEach(mealIngredient -> {ingredientService.getIngredient(mealIngredient.getIngredientId().getId()).ifPresent(ingredient -> list.add(ingredient));});
+        mealIngredientRepository.findAllByMealId_Id(mealId).forEach(mealIngredient -> {ingredientService.getIngredient(mealIngredient.getIngredient().getId()).ifPresent(ingredient -> list.add(ingredient));});
         return list;
     }
 
@@ -39,8 +39,8 @@ public class MealIngredientService {
     public void createMealIngredient(Meal meal, Ingredient ingredient) {
         MealIngredient mealIngredient = new MealIngredient();
 
-        mealIngredient.setMealId(meal);
-        mealIngredient.setIngredientId(ingredient);
+        mealIngredient.setMeal(meal);
+        mealIngredient.setIngredient(ingredient);
 
         mealIngredientRepository.save(mealIngredient);
     }

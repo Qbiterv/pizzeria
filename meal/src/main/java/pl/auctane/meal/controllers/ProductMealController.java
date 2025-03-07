@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.auctane.meal.dtos.meal.MealCrateDto;
 import pl.auctane.meal.dtos.productMeal.ProductMealsListDto;
 import pl.auctane.meal.entities.Meal;
 import pl.auctane.meal.entities.Product;
@@ -15,7 +14,6 @@ import pl.auctane.meal.services.MealService;
 import pl.auctane.meal.services.ProductMealService;
 import pl.auctane.meal.services.ProductService;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
@@ -86,8 +84,8 @@ public class ProductMealController {
         }
 
         ProductMeal productMeal = new ProductMeal();
-        productMeal.setProductId(product.get());
-        productMeal.setMealId(meal.get());
+        productMeal.setProduct(product.get());
+        productMeal.setMeal(meal.get());
 
         productMealService.save(productMeal);
 

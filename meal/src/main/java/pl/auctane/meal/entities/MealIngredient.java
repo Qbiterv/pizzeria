@@ -14,9 +14,9 @@ public class MealIngredient {
 
     @ManyToOne
     @JoinColumn(name = "meal_id", nullable = false)
-    private Meal mealId;
+    private Meal meal;
 
     @ManyToOne
     @JoinColumn(name = "ingredient_id", nullable = false)
-    private Ingredient ingredientId;
+    private Ingredient ingredient;
 }

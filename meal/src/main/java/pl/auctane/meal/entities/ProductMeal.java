@@ -13,8 +13,8 @@ public class ProductMeal {
     private int id;
 
     @ManyToOne
-    private Product productId;
+    private Product product;
 
     @ManyToOne
-    private Meal mealId;
+    private Meal meal;
 }
