@@ -15,6 +15,7 @@ import pl.auctane.meal.services.MealIngredientService;
 import pl.auctane.meal.services.MealService;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("v1/mealIngredient")
