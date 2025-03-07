@@ -44,6 +44,22 @@ subprojects {
 
 		compileOnly("com.rabbitmq:amqp-client:5.24.0")
 	}
+
+	tasks.register("dockerBuild") {
+		group = "docker"
+		description = "Builds a Docker image for this module"
+
+		doLast {
+			val moduleName = project.name
+			exec {
+				commandLine("docker", "build", "-t", "pizzeria-$moduleName:latest", ".")
+			}
+		}
+	}
+
+	tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootJar> {
+		archiveFileName.set("${project.name}.jar") // Ensures correct JAR naming
+	}
 }
 
 tasks.register("buildAll") {
