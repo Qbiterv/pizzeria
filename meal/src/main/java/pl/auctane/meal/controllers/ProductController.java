@@ -12,8 +12,6 @@ import pl.auctane.meal.entities.Product;
 import pl.auctane.meal.services.CategoryService;
 import pl.auctane.meal.services.ProductService;
 
-import javax.print.attribute.standard.Media;
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @RestController
@@ -66,7 +64,7 @@ public class ProductController {
 
         Product newProduct = new Product();
         newProduct.setName(product.getName());
-        newProduct.setCategoryId(category.get());
+        newProduct.setCategory(category.get());
         newProduct.setPrice(product.getPrice());
         newProduct.setDescription(product.getDescription());
 
@@ -89,7 +87,7 @@ public class ProductController {
         if(product.getDescription() != null) productOptional.get().setDescription(product.getDescription());
         if(product.getPrice() > 0 && product.getPrice() != productOptional.get().getPrice()) productOptional.get().setPrice(product.getPrice());
 
-        if(product.getCategoryId() > 0 && productOptional.get().getCategoryId().getId() != product.getCategoryId()) {
+        if(product.getCategoryId() > 0 && productOptional.get().getCategory().getId() != product.getCategoryId()) {
             Optional<Category> category = categoryService.getCategory(product.getCategoryId());
             if(category.isEmpty()) {
                 JSON.put("success", false);
@@ -98,7 +96,7 @@ public class ProductController {
                 return ResponseEntity.badRequest().body(JSON);
             }
 
-            productOptional.get().setCategoryId(category.get());
+            productOptional.get().setCategory(category.get());
         }
 
         productService.updateProduct(productOptional.get());

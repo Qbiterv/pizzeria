@@ -2,7 +2,6 @@ package pl.auctane.meal.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.auctane.meal.controllers.ProductMealController;
 import pl.auctane.meal.dtos.productMeal.ProductMealsListDto;
 import pl.auctane.meal.entities.Meal;
 import pl.auctane.meal.entities.Product;
@@ -24,7 +23,7 @@ public class ProductMealService {
 
     public List<ProductMealsListDto> getProductMeals(Product product) {
         return productMealRepository.getAllByProductId(product).stream()
-                .map(productMeal -> new ProductMealsListDto(productMeal.getId(), new Meal(productMeal.getMealId().getId(), productMeal.getMealId().getName(), productMeal.getMealId().getDescription())))
+                .map(productMeal -> new ProductMealsListDto(productMeal.getId(), new Meal(productMeal.getMeal().getId(), productMeal.getMeal().getName(), productMeal.getMeal().getDescription())))
                 .collect(Collectors.toList());
     }
 

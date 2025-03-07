@@ -41,6 +41,8 @@ subprojects {
 		annotationProcessor("org.projectlombok:lombok")
 		testImplementation("org.springframework.boot:spring-boot-starter-test")
 		testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+		compileOnly("com.rabbitmq:amqp-client:5.24.0")
 	}
 }
 

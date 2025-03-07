@@ -13,7 +13,6 @@ import pl.auctane.meal.entities.MealIngredient;
 import pl.auctane.meal.services.IngredientService;
 import pl.auctane.meal.services.MealIngredientService;
 import pl.auctane.meal.services.MealService;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -123,13 +122,13 @@ public class MealIngredientController {
             //check if meal exist and update
             Optional<Meal> meal = mealService.getMeal(mealIngredientDto.getMealId());
             if(!meal.isEmpty())
-                mealIngredient.get().setMealId(meal.get());
+                mealIngredient.get().setMeal(meal.get());
         }
         if(mealIngredientDto.getIngredientId() != 0) {
             //check if ingredient exist and update
             Optional<Ingredient> ingredient = ingredientService.getIngredient(mealIngredientDto.getIngredientId());
             if(!ingredient.isEmpty())
-                mealIngredient.get().setIngredientId(ingredient.get());
+                mealIngredient.get().setIngredient(ingredient.get());
         }
 
         mealIngredientService.updateMealIngredient(mealIngredient.get());
