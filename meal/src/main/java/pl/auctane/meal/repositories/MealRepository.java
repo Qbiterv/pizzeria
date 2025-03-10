@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.auctane.meal.entities.Meal;
 
 @Repository
-public interface MealRepository extends JpaRepository<Meal, Integer> {
+public interface MealRepository extends JpaRepository<Meal, Long> {
 }

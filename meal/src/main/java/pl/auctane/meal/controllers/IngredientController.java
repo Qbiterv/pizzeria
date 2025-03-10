@@ -35,7 +35,7 @@ public class IngredientController {
     }
 
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getIngredient(@PathVariable("id") int id) {
+    public ResponseEntity<?> getIngredient(@PathVariable("id") Long id) {
         Optional<Ingredient> ingredient = ingredientService.getIngredient(id);
 
         if(ingredient.isEmpty()) return ResponseEntity.noContent().build();
@@ -58,7 +58,7 @@ public class IngredientController {
     }
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteMeal(@PathVariable("id") int id) {
+    public ResponseEntity<?> deleteMeal(@PathVariable("id") Long id) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         if(ingredientService.deleteIngredient(id)) {
@@ -75,7 +75,7 @@ public class IngredientController {
     }
 
     @PatchMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> editMeal(@PathVariable("id") int id, @RequestBody IngredientDto ingredientDto) {
+    public ResponseEntity<?> editMeal(@PathVariable("id") Long id, @RequestBody IngredientDto ingredientDto) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         Optional<Ingredient> ingredient = ingredientService.getIngredient(id);

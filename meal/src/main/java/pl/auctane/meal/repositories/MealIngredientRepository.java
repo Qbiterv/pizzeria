@@ -7,6 +7,6 @@ import pl.auctane.meal.entities.MealIngredient;
 import java.util.List;
 
 @Repository
-public interface MealIngredientRepository extends JpaRepository<MealIngredient, Integer> {
-    List<MealIngredient> findAllByMealId_Id(int mealIdId);
+public interface MealIngredientRepository extends JpaRepository<MealIngredient, Long> {
+    List<MealIngredient> findAllByMealId_Id(Long mealIdId);
 }

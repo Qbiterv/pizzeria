@@ -23,7 +23,7 @@ public class MealService {
         return mealRepository.findAll();
     }
 
-    public Optional<Meal> getMeal(int id) {
+    public Optional<Meal> getMeal(Long id) {
         return mealRepository.findById(id);
     }
 
@@ -39,7 +39,7 @@ public class MealService {
         mealRepository.save(meal);
     }
 
-    public boolean deleteMeal(int id) {
+    public boolean deleteMeal(Long id) {
         if(getMeal(id).isEmpty()) return false;
 
         mealRepository.deleteById(id);

@@ -10,10 +10,10 @@ import java.util.stream.Collector;
 @Getter
 @Setter
 public class ProductMealsListDto {
-    private int id;
+    private Long id;
     private Meal meal;
 
-    public ProductMealsListDto(int id, Meal meal) {
+    public ProductMealsListDto(Long id, Meal meal) {
         this.id = id;
         this.meal = meal;
     }

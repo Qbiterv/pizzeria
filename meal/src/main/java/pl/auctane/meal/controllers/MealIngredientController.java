@@ -85,7 +85,7 @@ public class MealIngredientController {
     }
 
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteMeal(@PathVariable("id") int id) {
+    public ResponseEntity<?> deleteMeal(@PathVariable("id") Long id) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         if(mealIngredientService.deleteMealIngredient(id)) {
@@ -102,7 +102,7 @@ public class MealIngredientController {
     }
 
     @PatchMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> editMeal(@PathVariable("id") int id, @RequestBody MealIngredientDto mealIngredientDto) {
+    public ResponseEntity<?> editMeal(@PathVariable("id") Long id, @RequestBody MealIngredientDto mealIngredientDto) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         //check if mealIngredient exist

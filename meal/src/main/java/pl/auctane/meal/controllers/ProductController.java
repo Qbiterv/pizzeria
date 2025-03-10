@@ -34,7 +34,7 @@ public class ProductController {
     }
 
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getProductById(@PathVariable("id") int id) {
+    public ResponseEntity<?> getProductById(@PathVariable("id") Long id) {
         Optional<Product> product = productService.getProduct(id);
 
         if(product.isEmpty()) return ResponseEntity.noContent().build();
@@ -77,7 +77,7 @@ public class ProductController {
     }
 
     @PatchMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> editProduct(@PathVariable("id") int id, @RequestBody ProductCreateDto product) {
+    public ResponseEntity<?> editProduct(@PathVariable("id") Long id, @RequestBody ProductCreateDto product) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         Optional<Product> productOptional = productService.getProduct(id);
@@ -108,7 +108,7 @@ public class ProductController {
     }
 
     @DeleteMapping(value = "/delete/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> deleteProduct(@PathVariable("id") int id) {
+    public ResponseEntity<?> deleteProduct(@PathVariable("id") Long id) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         Optional<Product> product = productService.getProduct(id);
