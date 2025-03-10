@@ -29,6 +29,8 @@ services:
       POSTGRES_DB: postgres
     ports:
       - "5432:5432"
+    networks:
+      - "pizzaNetwork"
 
   meal:
     container_name: meal-service
@@ -42,3 +44,9 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - db
+    networks:
+      - "pizzaNetwork"
+
+networks:
+  pizzaNetwork:
+    driver: "bridge"

@@ -7,6 +7,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
+@Table
 public class MealIngredient {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
