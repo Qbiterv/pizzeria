@@ -1,0 +1,2 @@
+CREATE DATABASE mealdb;
+CREATE DATABASE orderdb;
