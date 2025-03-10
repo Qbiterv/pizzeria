@@ -107,7 +107,7 @@ public class ProductController {
         return ResponseEntity.ok().body(JSON);
     }
 
-    @DeleteMapping(value = "/delete/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> deleteProduct(@PathVariable("id") Long id) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
