@@ -40,7 +40,7 @@ public class MealController {
 
     // GETTING SINGLE MEAL BY ID
     @GetMapping("/get/{id}")
-    public ResponseEntity<?> getMeal(@PathVariable("id") int id) {
+    public ResponseEntity<?> getMeal(@PathVariable("id") Long id) {
         Optional<Meal> meal = mealService.getMeal(id);
 
         if(meal.isEmpty()) return ResponseEntity.noContent().build();
@@ -69,7 +69,7 @@ public class MealController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteMeal(@PathVariable("id") int id) {
+    public ResponseEntity<?> deleteMeal(@PathVariable("id") Long id) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         if(mealService.deleteMeal(id)) {
@@ -86,7 +86,7 @@ public class MealController {
     }
 
     @PatchMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> editMeal(@PathVariable("id") int id, @RequestBody MealEditDto patch) {
+    public ResponseEntity<?> editMeal(@PathVariable("id") Long id, @RequestBody MealEditDto patch) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         Optional<Meal> meal = mealService.getMeal(id);

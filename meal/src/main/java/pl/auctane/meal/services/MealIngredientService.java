@@ -32,7 +32,7 @@ public class MealIngredientService {
         return list;
     }
 
-    public Optional<MealIngredient> getMealIngredient(int id) {
+    public Optional<MealIngredient> getMealIngredient(Long id) {
         return mealIngredientRepository.findById(id);
     }
 
@@ -49,7 +49,7 @@ public class MealIngredientService {
         mealIngredientRepository.save(mealIngredient);
     }
 
-    public boolean deleteMealIngredient(int id) {
+    public boolean deleteMealIngredient(Long id) {
         if(getMealIngredient(id).isEmpty()) return false;
 
         mealIngredientRepository.deleteById(id);

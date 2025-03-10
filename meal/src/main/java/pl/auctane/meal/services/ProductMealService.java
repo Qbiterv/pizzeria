@@ -31,7 +31,7 @@ public class ProductMealService {
         productMealRepository.save(productMeal);
     }
 
-    public Optional<ProductMeal> getProductMeal(int id) {
+    public Optional<ProductMeal> getProductMeal(Long id) {
         return productMealRepository.findById(id);
     }
 

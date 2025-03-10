@@ -13,7 +13,7 @@ import lombok.Setter;
 public class Meal {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    private Long id;
 
     private String name;
 
@@ -22,7 +22,7 @@ public class Meal {
     public Meal() {
     }
 
-    public Meal(int id, String name, String description) {
+    public Meal(Long id, String name, String description) {
         this.id = id;
         this.name = name;
         this.description = description;

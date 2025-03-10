@@ -21,7 +21,7 @@ public class IngredientService {
         return ingredientRepository.findAll();
     }
 
-    public Optional<Ingredient> getIngredient(int id) {
+    public Optional<Ingredient> getIngredient(Long id) {
         return ingredientRepository.findById(id);
     }
 
@@ -36,7 +36,7 @@ public class IngredientService {
         ingredientRepository.save(ingredient);
     }
 
-    public boolean deleteIngredient(int id) {
+    public boolean deleteIngredient(Long id) {
         if(getIngredient(id).isEmpty()) return false;
 
         ingredientRepository.deleteById(id);

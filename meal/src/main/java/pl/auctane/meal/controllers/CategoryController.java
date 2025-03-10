@@ -34,7 +34,7 @@ public class CategoryController {
     }
 
     @GetMapping("/get/id={id}")
-    public ResponseEntity<?> getCategoryById(@PathVariable("id") int id) {
+    public ResponseEntity<?> getCategoryById(@PathVariable("id") Long id) {
         return ResponseEntity.ok().body(categoryService.getCategory(id));
     }
 
@@ -50,7 +50,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteCategory(@PathVariable("id") int id) {
+    public ResponseEntity<?> deleteCategory(@PathVariable("id") Long id) {
         Optional<Category> category = categoryService.getCategory(id);
 
         ObjectNode JSON = objectMapper.createObjectNode();
@@ -71,7 +71,7 @@ public class CategoryController {
     }
 
     @PatchMapping("/edit/{id}")
-    public ResponseEntity<?> editCategory(@PathVariable("id") int id, @RequestBody String name) {
+    public ResponseEntity<?> editCategory(@PathVariable("id") Long id, @RequestBody String name) {
         ObjectNode JSON = objectMapper.createObjectNode();
         Optional<Category> category = categoryService.getCategory(id);
 

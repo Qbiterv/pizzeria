@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 import pl.auctane.meal.entities.Ingredient;
 
 @Repository
-public interface IngredientRepository extends JpaRepository<Ingredient, Integer> {
+public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
 }

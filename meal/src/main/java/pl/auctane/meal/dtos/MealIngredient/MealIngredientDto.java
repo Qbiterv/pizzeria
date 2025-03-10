@@ -6,6 +6,6 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MealIngredientDto {
-    private int mealId;
-    private int ingredientId;
+    private Long mealId;
+    private Long ingredientId;
 }
