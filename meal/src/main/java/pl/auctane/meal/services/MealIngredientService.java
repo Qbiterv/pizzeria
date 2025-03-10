@@ -26,7 +26,7 @@ public class MealIngredientService {
         return mealIngredientRepository.findAll();
     }
 
-    public List<Ingredient> getAllIngredientsForMeal(int mealId) {
+    public List<Ingredient> getAllIngredientsForMeal(Long mealId) {
         List<Ingredient> list = new ArrayList<>();
         mealIngredientRepository.findAllByMealId_Id(mealId).forEach(mealIngredient -> {ingredientService.getIngredient(mealIngredient.getIngredient().getId()).ifPresent(ingredient -> list.add(ingredient));});
         return list;

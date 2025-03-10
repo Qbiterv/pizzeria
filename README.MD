@@ -5,7 +5,7 @@
 - 🐳 Docker for deployment
 - ☕️ Using Java 23
 
-### 🤝 Establishment
+### 🤝 Establishments
 1. Spring boot
 2. Gradle
 3. Modular (One command, run everything)

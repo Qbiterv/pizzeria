@@ -42,7 +42,7 @@ public class MealIngredientController {
     }
 
     @GetMapping(value = "/get/{mealId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getMealIngredient(@PathVariable("mealId") int mealId) {
+    public ResponseEntity<?> getMealIngredient(@PathVariable("mealId") Long mealId) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         //check if meal exist
