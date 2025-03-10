@@ -39,7 +39,7 @@ public class ProductMealController {
     }
 
     @GetMapping("/product/{id}")
-    public ResponseEntity<?> getProductMeals(@PathVariable("id") int id) {
+    public ResponseEntity<?> getProductMeals(@PathVariable("id") Long id) {
         ObjectNode JSON = objectMapper.createObjectNode();
         Optional<Product> product = productService.getProduct(id);
 
@@ -63,7 +63,7 @@ public class ProductMealController {
     }
 
     @PostMapping(value = "/add/{id}/{mealId}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> addProductMeal(@PathVariable("id") int id, @PathVariable("mealId") int mealId) {
+    public ResponseEntity<?> addProductMeal(@PathVariable("id") Long id, @PathVariable("mealId") Long mealId) {
         ObjectNode JSON = objectMapper.createObjectNode();
         Optional<Product> product = productService.getProduct(id);
 
@@ -96,7 +96,7 @@ public class ProductMealController {
     }
 
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<?> deleteProductMeal(@PathVariable("id") int id) {
+    public ResponseEntity<?> deleteProductMeal(@PathVariable("id") Long id) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         Optional<ProductMeal> productMeal = productMealService.getProductMeal(id);
