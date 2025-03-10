@@ -58,7 +58,7 @@ subprojects {
 	}
 
 	tasks.withType<org.springframework.boot.gradle.tasks.bundling.BootJar> {
-		archiveFileName.set("app.jar") // Ensures correct JAR naming
+		archiveFileName.set("${project.name}.jar") // Ensures correct JAR naming
 	}
 }
 
