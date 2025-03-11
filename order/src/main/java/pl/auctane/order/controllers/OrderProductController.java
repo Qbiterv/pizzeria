@@ -17,6 +17,7 @@ import pl.auctane.order.entities.OrderProduct;
 import pl.auctane.order.services.OrderProductService;
 import pl.auctane.order.services.OrderService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,7 +44,7 @@ public class OrderProductController {
     }
 
     @GetMapping(value = "/get/{orderId}")
-    public ResponseEntity<?> getAllProductIdsForOrder(@PathVariable("orderId") Long orderId) {
+    public ResponseEntity<?> getAllProductsForOrder(@PathVariable("orderId") Long orderId) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         //check if order exist
@@ -53,7 +54,39 @@ public class OrderProductController {
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        List<Long> products =  orderProductService.getAllProductIdsForOrder(orderId);
+        //get list of product ids
+        List<Long> productIds =  orderProductService.getAllProductIdsForOrder(orderId);
+
+        List<ProductDto> products = new ArrayList<>();
+
+        //get product for each id
+        for (Long productId : productIds) {
+            ResponseEntity<ProductDto> response = null;
+            String url = serviceUrl + "/product/get/" + productId;
+            try {
+                response = new RestTemplate().getForEntity(url, ProductDto.class);
+                System.out.println(response.getBody());
+            } catch (HttpStatusCodeException | ResourceAccessException e) {
+                JSON.put("success", false);
+                JSON.put("message", e.getMessage());
+                return  ResponseEntity.badRequest().body(JSON);
+            }
+
+            ProductDto productDto = response.getBody();
+
+            if (productDto == null) {
+                JSON.put("success", false);
+                JSON.put("message", "Request failed");
+                return ResponseEntity.badRequest().body(JSON);
+            }
+
+            if (response.getStatusCode().isSameCodeAs(HttpStatus.NO_CONTENT)) {
+                JSON.put("success", false);
+                JSON.put("message", "Product with id " + productId + " does not exist");
+                return ResponseEntity.badRequest().body(JSON);
+            }
+            products.add(productDto);
+        }
 
         return ResponseEntity.ok().body(products);
     }
