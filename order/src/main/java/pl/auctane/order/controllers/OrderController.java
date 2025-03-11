@@ -21,8 +21,8 @@ import pl.auctane.order.services.OrderService;
 import java.util.List;
 import java.util.Optional;
 
-@RequestMapping
-@RestController("/v1/order")
+@RestController
+@RequestMapping("/v1/order")
 public class OrderController {
     private final OrderService orderService;
     private final ObjectMapper objectMapper;
@@ -56,8 +56,58 @@ public class OrderController {
 
     @PostMapping(value = "/create", consumes =  {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createOrder(@RequestBody OrderDto orderDto) {
-        List<Long> products = orderDto.getProducts();
         ObjectNode JSON = objectMapper.createObjectNode();
+
+        if(orderDto == null ) {
+            JSON.put("success", false);
+            JSON.put("message", "Order DTO is null");
+
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        if(orderDto.getName() == null || orderDto.getName().isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Name is empty");
+
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        if(orderDto.getSurname() == null || orderDto.getSurname().isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Surname is empty");
+
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        if(orderDto.getEmail() == null || orderDto.getEmail().isEmpty() || !orderDto.getEmail().matches("^((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$") || orderDto.getEmail().length() > 255) {
+            JSON.put("success", false);
+            JSON.put("message", "Email is empty or invalid");
+
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        if(orderDto.getPhone() == null || orderDto.getPhone().isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Phone is empty");
+
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        if(orderDto.getAddress() == null || orderDto.getAddress().isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Address is empty");
+
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        if(orderDto.getProducts() == null || orderDto.getProducts().isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Products list is empty");
+
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        List<Long> products = orderDto.getProducts();
 
         Order newOrder = new Order();
         newOrder.setName(orderDto.getName());
@@ -71,13 +121,19 @@ public class OrderController {
         for (Long product : products) {
             String url = serviceUrl + "/product/get/" + product;
 
+            System.out.println(url);
+            System.out.println(order.getId());
+
             ResponseEntity<ProductDto> response = null;
 
             try {
-                response = new RestTemplate().exchange(url, HttpMethod.GET, null, ProductDto.class);
+                response = new RestTemplate().getForEntity(url, ProductDto.class);
+                System.out.println(response.getBody());
             } catch (HttpStatusCodeException | ResourceAccessException e) {
                 JSON.put("success", false);
                 JSON.put("message", e.getMessage());
+
+                return  ResponseEntity.badRequest().body(JSON);
             }
 
             if (response == null) {
@@ -89,6 +145,8 @@ public class OrderController {
             }
 
             ProductDto productDto = response.getBody();
+
+            System.out.println(response.getStatusCode());
 
             if (productDto == null) {
                 JSON.put("success", false);
@@ -106,11 +164,7 @@ public class OrderController {
                 return ResponseEntity.badRequest().body(JSON);
             }
 
-            OrderProduct orderProduct = new OrderProduct();
-            orderProduct.setOrder(order);
-            orderProduct.setProduct(product);
-
-            orderProductService.createOrderProduct(orderProduct);
+            orderProductService.createOrderProduct(order, product);
         }
 
         JSON.put("success", true);

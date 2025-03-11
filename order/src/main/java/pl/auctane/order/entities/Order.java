@@ -21,7 +21,7 @@ public class Order {
     @Column(nullable = false)
     private String surname;
 
-    @Column(nullable = false)
+    @Column(nullable = false, length = 255)
     private String email;
 
     @Column(nullable = false)
