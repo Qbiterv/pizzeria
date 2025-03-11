@@ -35,12 +35,12 @@ public class OrderController {
         this.orderProductService = orderProductService;
     }
 
-    @GetMapping(value = "/get", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/get")
     public ResponseEntity<?> getOrders() {
         return ResponseEntity.ok().body(orderService.getOrders());
     }
 
-    @GetMapping(value = "/get/{id}", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping(value = "/get/{id}")
     public ResponseEntity<?> getOrder(@PathVariable Long id) {
         Optional<Order> order = orderService.getOrderById(id);
 
