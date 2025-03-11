@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 public class OrderProductService {
-    private OrderProductRepository orderProductRepository;
+    private final OrderProductRepository orderProductRepository;
 
     @Autowired
     public OrderProductService(OrderProductRepository orderProductRepository) {this.orderProductRepository = orderProductRepository;}
@@ -22,7 +22,7 @@ public class OrderProductService {
 
     public List<Long> getAllProductIdsForOrder(Long orderId) {
         List<Long> productIds = new ArrayList<>();
-        orderProductRepository.findAllByOrder_Id(orderId).forEach(OrderProduct -> productIds.add(OrderProduct.getProductId()));
+        orderProductRepository.findAllByOrder_Id(orderId).forEach(OrderProduct -> productIds.add(OrderProduct.getProduct()));
         return productIds;
     }
 
@@ -30,6 +30,10 @@ public class OrderProductService {
         OrderProduct orderProduct = new OrderProduct();
         orderProduct.setOrder(order);
         orderProduct.setProductId(productId);
+        orderProductRepository.save(orderProduct);
+    }
+
+    public void createOrderProduct(OrderProduct orderProduct) {
         orderProductRepository.save(orderProduct);
     }
 }

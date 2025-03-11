@@ -28,4 +28,8 @@ public class OrderService {
     public Order createOrder(Order order) {
         return orderRepository.save(order);
     }
+
+    public void removeOrder(Order order ) {
+        orderRepository.delete(order);
+    }
 }

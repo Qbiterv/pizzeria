@@ -41,6 +41,21 @@ services:
     networks:
       - "pizzaNetwork"
 
+  order:
+    container_name: order-service
+    image: pizzeria-order:latest
+    build:
+      context: ./order
+      dockerfile: Dockerfile
+    ports:
+      - "9091:9090"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - db
+    networks:
+      - "pizzaNetwork"
+
   rabbitmq:
     image: rabbitmq:4.0.7
     container_name: 'rabbitmq'
