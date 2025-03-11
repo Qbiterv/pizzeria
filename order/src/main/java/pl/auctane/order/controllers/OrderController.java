@@ -2,11 +2,13 @@ package pl.auctane.order.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.ResourceAccessException;
@@ -14,12 +16,13 @@ import org.springframework.web.client.RestTemplate;
 import pl.auctane.order.dtos.order.OrderDto;
 import pl.auctane.order.dtos.order.ProductDto;
 import pl.auctane.order.entities.Order;
-import pl.auctane.order.entities.OrderProduct;
 import pl.auctane.order.services.OrderProductService;
 import pl.auctane.order.services.OrderService;
+import pl.auctane.order.services.OrderStatusService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/order")
@@ -27,12 +30,14 @@ public class OrderController {
     private final OrderService orderService;
     private final ObjectMapper objectMapper;
     private final OrderProductService orderProductService;
+    private final OrderStatusService orderStatusService;
 
     @Autowired
-    public OrderController(OrderService orderService, ObjectMapper objectMapper, OrderProductService orderProductService) {
+    public OrderController(OrderService orderService, ObjectMapper objectMapper, OrderProductService orderProductService, OrderStatusService orderStatusService) {
         this.orderService = orderService;
         this.objectMapper = objectMapper;
         this.orderProductService = orderProductService;
+        this.orderStatusService = orderStatusService;
     }
 
     @GetMapping(value = "/get", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -55,54 +60,12 @@ public class OrderController {
     private String serviceUrl;
 
     @PostMapping(value = "/create", consumes =  {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<?> createOrder(@RequestBody OrderDto orderDto) {
+    public ResponseEntity<?> createOrder(@Valid @RequestBody OrderDto orderDto, BindingResult bindingResult) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
-        if(orderDto == null ) {
+        if (bindingResult.hasErrors()) {
             JSON.put("success", false);
-            JSON.put("message", "Order DTO is null");
-
-            return ResponseEntity.badRequest().body(JSON);
-        }
-
-        if(orderDto.getName() == null || orderDto.getName().isEmpty()) {
-            JSON.put("success", false);
-            JSON.put("message", "Name is empty");
-
-            return ResponseEntity.badRequest().body(JSON);
-        }
-
-        if(orderDto.getSurname() == null || orderDto.getSurname().isEmpty()) {
-            JSON.put("success", false);
-            JSON.put("message", "Surname is empty");
-
-            return ResponseEntity.badRequest().body(JSON);
-        }
-
-        if(orderDto.getEmail() == null || orderDto.getEmail().isEmpty() || !orderDto.getEmail().matches("^((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$") || orderDto.getEmail().length() > 255) {
-            JSON.put("success", false);
-            JSON.put("message", "Email is empty or invalid");
-
-            return ResponseEntity.badRequest().body(JSON);
-        }
-
-        if(orderDto.getPhone() == null || orderDto.getPhone().isEmpty()) {
-            JSON.put("success", false);
-            JSON.put("message", "Phone is empty");
-
-            return ResponseEntity.badRequest().body(JSON);
-        }
-
-        if(orderDto.getAddress() == null || orderDto.getAddress().isEmpty()) {
-            JSON.put("success", false);
-            JSON.put("message", "Address is empty");
-
-            return ResponseEntity.badRequest().body(JSON);
-        }
-
-        if(orderDto.getProducts() == null || orderDto.getProducts().isEmpty()) {
-            JSON.put("success", false);
-            JSON.put("message", "Products list is empty");
+            JSON.put("message", bindingResult.getAllErrors().stream().map(e -> ((FieldError) e).getField() + " " + e.getDefaultMessage()).collect(Collectors.joining(", ")));
 
             return ResponseEntity.badRequest().body(JSON);
         }
@@ -136,14 +99,6 @@ public class OrderController {
                 return  ResponseEntity.badRequest().body(JSON);
             }
 
-            if (response == null) {
-                JSON.put("success", false);
-                JSON.put("message", "Invalid product with id " + product);
-
-                orderService.removeOrder(order);
-                return ResponseEntity.badRequest().body(JSON);
-            }
-
             ProductDto productDto = response.getBody();
 
             System.out.println(response.getStatusCode());
@@ -170,6 +125,6 @@ public class OrderController {
         JSON.put("success", true);
         JSON.put("message", "Created order: " + order.getId());
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().body(JSON);
     }
 }

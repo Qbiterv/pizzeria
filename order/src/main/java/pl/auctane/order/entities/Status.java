@@ -17,5 +17,7 @@ public class Status {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    private int state; // 0 - new, 1 - in progress, 2 - completed
+
     private String status;
 }
