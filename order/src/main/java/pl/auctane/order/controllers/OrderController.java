@@ -84,6 +84,7 @@ public class OrderController {
                 JSON.put("success", false);
                 JSON.put("message", "Invalid product with id " + product);
 
+                orderService.removeOrder(order);
                 return ResponseEntity.badRequest().body(JSON);
             }
 
@@ -93,6 +94,7 @@ public class OrderController {
                 JSON.put("success", false);
                 JSON.put("message", "Invalid product with id " + product);
 
+                orderService.removeOrder(order);
                 return ResponseEntity.badRequest().body(JSON);
             }
 
@@ -100,6 +102,7 @@ public class OrderController {
                 JSON.put("success", false);
                 JSON.put("message", "Invalid product with id " + product);
 
+                orderService.removeOrder(order);
                 return ResponseEntity.badRequest().body(JSON);
             }
 
@@ -107,9 +110,11 @@ public class OrderController {
             orderProduct.setOrder(order);
             orderProduct.setProduct(product);
 
-            orderProductService.createOrderProduct(order, productDto);
-
+            orderProductService.createOrderProduct(orderProduct);
         }
+
+        JSON.put("success", true);
+        JSON.put("message", "Created order: " + order.getId());
 
         return ResponseEntity.ok().build();
     }

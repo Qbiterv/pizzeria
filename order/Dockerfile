@@ -5,10 +5,9 @@ FROM openjdk:23-jdk-slim
 WORKDIR /app
 
 # Copy the built JAR file into the container
-ARG MODULE_NAME
-COPY build/libs/${MODULE_NAME}.jar app.jar
+COPY build/libs/*.jar app.jar
 ENTRYPOINT ["java", "-jar", "app.jar"]
 
 
 # Expose the default Spring Boot port
-EXPOSE 8080
+EXPOSE 9090
