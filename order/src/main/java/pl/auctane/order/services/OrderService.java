@@ -29,6 +29,17 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
+    public Order createOrder(String name, String surname, String email, String phone, String address) {
+        Order order = new Order();
+        order.setName(name);
+        order.setSurname(surname);
+        order.setEmail(email);
+        order.setPhone(phone);
+        order.setAddress(address);
+
+        return orderRepository.save(order);
+    }
+
     public void removeOrder(Order order ) {
         orderRepository.delete(order);
     }

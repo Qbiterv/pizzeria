@@ -19,5 +19,5 @@ public class Status {
 
     private int state; // 0 - new, 1 - in progress, 2 - completed
 
-    private String status;
+    private String name;
 }

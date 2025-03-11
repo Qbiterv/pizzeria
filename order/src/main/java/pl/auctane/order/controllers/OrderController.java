@@ -20,6 +20,7 @@ import pl.auctane.order.services.OrderProductService;
 import pl.auctane.order.services.OrderService;
 import pl.auctane.order.services.OrderStatusService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -56,6 +57,7 @@ public class OrderController {
         return ResponseEntity.ok().body(order.get());
     }
 
+    // Initialize service url from application.properties
     @Value("${service.url}")
     private String serviceUrl;
 
@@ -63,6 +65,7 @@ public class OrderController {
     public ResponseEntity<?> createOrder(@Valid @RequestBody OrderDto orderDto, BindingResult bindingResult) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
+        // Bean validation
         if (bindingResult.hasErrors()) {
             JSON.put("success", false);
             JSON.put("message", bindingResult.getAllErrors().stream().map(e -> ((FieldError) e).getField() + " " + e.getDefaultMessage()).collect(Collectors.joining(", ")));
@@ -70,22 +73,14 @@ public class OrderController {
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        List<Long> products = orderDto.getProducts();
+        // Initialize list of products ids
+        List<Long> products = new ArrayList<>();
 
-        Order newOrder = new Order();
-        newOrder.setName(orderDto.getName());
-        newOrder.setSurname(orderDto.getSurname());
-        newOrder.setEmail(orderDto.getEmail());
-        newOrder.setPhone(orderDto.getPhone());
-        newOrder.setAddress(orderDto.getAddress());
-
-        Order order = orderService.createOrder(newOrder);
-
-        for (Long product : products) {
+        // Check if all products exist
+        for (Long product : orderDto.getProducts()) {
             String url = serviceUrl + "/product/get/" + product;
 
             System.out.println(url);
-            System.out.println(order.getId());
 
             ResponseEntity<ProductDto> response = null;
 
@@ -107,7 +102,7 @@ public class OrderController {
                 JSON.put("success", false);
                 JSON.put("message", "Invalid product with id " + product);
 
-                orderService.removeOrder(order);
+                products.clear();
                 return ResponseEntity.badRequest().body(JSON);
             }
 
@@ -115,10 +110,18 @@ public class OrderController {
                 JSON.put("success", false);
                 JSON.put("message", "Invalid product with id " + product);
 
-                orderService.removeOrder(order);
+                products.clear();
                 return ResponseEntity.badRequest().body(JSON);
             }
 
+            products.add(product);
+        }
+
+        // Create order
+        Order order = orderService.createOrder(orderDto.getName(), orderDto.getSurname(), orderDto.getEmail(), orderDto.getPhone(), orderDto.getAddress());
+
+        // Connect all products with order
+        for (Long product : products) {
             orderProductService.createOrderProduct(order, product);
         }
 
