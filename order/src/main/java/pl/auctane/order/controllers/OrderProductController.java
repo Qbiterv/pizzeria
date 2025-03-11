@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("v1/order-product")
+@RequestMapping("/v1/order-product")
 public class OrderProductController {
     private final OrderProductService orderProductService;
     private final OrderService orderService;
@@ -48,7 +48,7 @@ public class OrderProductController {
 
         //check if order exist
         if(orderService.getOrderById(orderId).isEmpty()) {
-            JSON.put("succes", false);
+            JSON.put("success", false);
             JSON.put("message", "Order with id " + orderId + " does not exist");
             return ResponseEntity.badRequest().body(JSON);
         }

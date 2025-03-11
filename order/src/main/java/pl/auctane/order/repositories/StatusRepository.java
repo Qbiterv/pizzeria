@@ -4,6 +4,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import pl.auctane.order.entities.Status;
 
+import java.util.Optional;
+
 @Repository
 public interface StatusRepository extends JpaRepository<Status, Long> {
+    Optional<Status> getStatusByState(int state);
+
+    Optional<Status> getFirstByName(String name);
 }
