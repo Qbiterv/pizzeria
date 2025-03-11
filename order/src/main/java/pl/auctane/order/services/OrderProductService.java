@@ -32,8 +32,4 @@ public class OrderProductService {
         orderProduct.setProductId(productId);
         orderProductRepository.save(orderProduct);
     }
-
-    public void createOrderProduct(OrderProduct orderProduct) {
-        orderProductRepository.save(orderProduct);
-    }
 }
