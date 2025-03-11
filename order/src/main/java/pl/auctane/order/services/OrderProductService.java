@@ -22,7 +22,7 @@ public class OrderProductService {
 
     public List<Long> getAllProductIdsForOrder(Long orderId) {
         List<Long> productIds = new ArrayList<>();
-        orderProductRepository.findAllByOrder_Id(orderId).forEach(OrderProduct -> productIds.add(OrderProduct.getProduct()));
+        orderProductRepository.findAllByOrder_Id(orderId).forEach(OrderProduct -> productIds.add(OrderProduct.getProductId()));
         return productIds;
     }
 

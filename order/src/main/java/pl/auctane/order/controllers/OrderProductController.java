@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("v1/orderProduct")
+@RequestMapping("/v1/order-product")
 public class OrderProductController {
     private final OrderProductService orderProductService;
     private final OrderService orderService;
@@ -37,7 +37,7 @@ public class OrderProductController {
         this.orderService = orderService;
     }
 
-    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/get")
     public ResponseEntity<?> getOrderProducts() {
         List<OrderProduct> orderProducts = orderProductService.getAllOrderProducts();
 
