@@ -1,10 +1,8 @@
 package pl.auctane.order.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import pl.auctane.order.entities.Order;
 import pl.auctane.order.entities.OrderProduct;
 import pl.auctane.order.repositories.OrderProductRepository;
 
@@ -26,14 +24,12 @@ public class OrderProductService {
         List<Long> productIds = new ArrayList<>();
         orderProductRepository.findAllByOrder_Id(orderId).forEach(OrderProduct -> productIds.add(OrderProduct.getProductId()));
         return productIds;
+    }
 
-        /*
-        final HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<List<String>> request = new HttpEntity<>(headers);
-
-        String url = "http://localhost:8081/v1/product/get" + orderId;
-        */
+    public void createOrderProduct(Order order, Long productId) {
+        OrderProduct orderProduct = new OrderProduct();
+        orderProduct.setOrder(order);
+        orderProduct.setProductId(productId);
+        orderProductRepository.save(orderProduct);
     }
 }

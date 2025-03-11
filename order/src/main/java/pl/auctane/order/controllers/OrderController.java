@@ -103,11 +103,7 @@ public class OrderController {
                 return ResponseEntity.badRequest().body(JSON);
             }
 
-            OrderProduct orderProduct = new OrderProduct();
-            orderProduct.setOrder(order);
-            orderProduct.setProduct(product);
-
-            orderProductService.createOrderProduct(order, productDto);
+            orderProductService.createOrderProduct(order, productDto.getId());
 
         }
 
