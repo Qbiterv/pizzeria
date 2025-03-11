@@ -80,7 +80,7 @@ public class MealController {
         }
 
         JSON.put("success", false);
-        JSON.put("message", "Couldn't delete meal with id: " + id);
+        JSON.put("message", "There is no meal with id: " + id);
 
         return ResponseEntity.badRequest().body(JSON);
     }
