@@ -1,3 +1,2 @@
 rootProject.name = "pizzeria"
-include(":meal")
-include(":order")
+include(":mail", ":meal", "order")

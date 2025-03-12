@@ -62,6 +62,15 @@ subprojects {
 	}
 }
 
+project(":mail") {
+	description = "Mail module"
+
+	dependencies {
+		implementation("org.springframework.boot:spring-boot-starter-mail")
+		implementation("org.springframework:spring-context-support")
+	}
+}
+
 tasks.register("buildAll") {
 	group = "build"
 	description = "Builds all subprojects"
