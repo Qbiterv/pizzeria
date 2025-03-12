@@ -21,6 +21,22 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    public List<Order> getOrdersSorted() {
+        return orderRepository.findAllByOrderByIdAsc();
+    }
+
+    public List<Order> getFinalizedOrders() {
+        return orderRepository.findAllByFinalizedTrue();
+    }
+
+    public List<Order> getNotFinalizedOrders() {
+        return orderRepository.findAllByFinalizedFalse();
+    }
+
+    public List<Order> getOrdersByEmail(String email) {
+        return orderRepository.findAllByEmail(email);
+    }
+
     public Optional<Order> getOrderById(Long id) {
         return orderRepository.findById(id);
     }
