@@ -40,3 +40,4 @@ application-secret.properties
 /application-secret.properties
 !**/src/main/**/application-secret.properties
 **/application-secret.properties/
+**/mail/src/main/resources/application-secret.properties
