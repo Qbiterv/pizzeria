@@ -53,6 +53,8 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - db
+      - mail
+      - meal
     networks:
       - "pizzaNetwork"
 
@@ -66,8 +68,6 @@ services:
       - "8091:8090"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-    depends_on:
-      - db
     networks:
       - "pizzaNetwork"
 
