@@ -70,6 +70,33 @@ public class OrderController {
         return ResponseEntity.ok().body(orders);
     }
 
+    @PutMapping("/set-finalized/{id}")
+    public ResponseEntity<?> setFinalized(@PathVariable("id") Long id) {
+        ObjectNode JSON = objectMapper.createObjectNode();
+        Optional<Order> order = orderService.getOrderById(id);
+
+        if(order.isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Order with id " + id + " does not exist");
+
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        if(order.get().isFinalized()) {
+            JSON.put("success", false);
+            JSON.put("message", "Order with id " + id + " is already finalized");
+
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        orderService.setFinalized(order.get());
+
+        JSON.put("success", true);
+        JSON.put("message", "Order with id " + id + " has been finalized");
+
+        return ResponseEntity.ok().body(JSON);
+    }
+
     @GetMapping(value = "/get/{id}")
     public ResponseEntity<?> getOrder(@PathVariable Long id) {
         Optional<Order> order = orderService.getOrderById(id);
