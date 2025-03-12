@@ -10,6 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import pl.auctane.order.dtos.status.StatusCreateDto;
+import pl.auctane.order.dtos.status.StatusPatchDto;
 import pl.auctane.order.entities.Status;
 import pl.auctane.order.services.StatusService;
 
@@ -90,6 +91,42 @@ public class StatusController {
 
         JSON.put("success", true);
         JSON.put("message", "Status " + statusCreateDto.getName() + " created successfully | Priority: " + statusCreateDto.getState());
+
+        return ResponseEntity.ok().body(JSON);
+    }
+
+    @PatchMapping(value = "/edit/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<?> editStatus(@PathVariable("id") Long id, @RequestBody StatusPatchDto statusPatchDto) {
+        ObjectNode JSON = objectMapper.createObjectNode();
+        Optional<Status> status = statusService.getStatusById(id);
+
+        if(status.isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Status with id: " + id + " does not exist");
+
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        if(statusPatchDto.getState() != 0 && statusPatchDto.getState() != status.get().getState()) {
+            Optional<Status> statusState = statusService.getStatusByState(statusPatchDto.getState());
+            if(statusState.isPresent()) {
+                JSON.put("success", false);
+                JSON.put("message", "Status with state " + statusPatchDto.getState() + " already exists | ID: " + statusState.get().getId());
+
+                return ResponseEntity.badRequest().body(JSON);
+            }
+
+            status.get().setState(statusPatchDto.getState());
+        }
+
+        if(statusPatchDto.getName() != null && !statusPatchDto.getName().isEmpty()) {
+            status.get().setName(statusPatchDto.getName());
+        }
+
+        statusService.updateStatus(status.get());
+
+        JSON.put("success", true);
+        JSON.put("message", "Status " + status.get().getName() + " edited successfully | Priority: " + status.get().getState());
 
         return ResponseEntity.ok().body(JSON);
     }
