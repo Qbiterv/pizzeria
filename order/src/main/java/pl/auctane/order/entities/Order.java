@@ -32,4 +32,7 @@ public class Order {
 
     @Column(nullable = false)
     private LocalDateTime orderDate = LocalDateTime.now();
+
+    @Column()
+    private boolean finalized = false;
 }

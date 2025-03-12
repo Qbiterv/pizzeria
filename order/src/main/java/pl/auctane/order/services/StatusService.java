@@ -44,4 +44,8 @@ public class StatusService {
     public void updateStatus(Status status) {
         statusRepository.save(status);
     }
+
+    public Optional<Status> getFirst() {
+        return statusRepository.findFirstByOrderByStateAsc();
+    }
 }
