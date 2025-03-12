@@ -60,7 +60,7 @@ public class OrderStatusController {
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        return ResponseEntity.ok().body(orderStatus);
+        return ResponseEntity.ok().body(orderStatus.get().getStatus());
     }
 
     @PutMapping(value = "/move-to-next-state/{orderId}")
@@ -87,10 +87,6 @@ public class OrderStatusController {
         List<Status> allStatuses = statusService.getAllStatuses();
         Status status = orderStatus.get().getStatus();
         int indexOfStatus  = allStatuses.indexOf(status);
-
-        System.out.println(status.getId() + " " + status.getState() + " " + status.getName());
-        System.out.println(indexOfStatus);
-        System.out.println(allStatuses.size() - 1);
 
         if(indexOfStatus == allStatuses.size() - 1) {
             JSON.put("succes", false);
@@ -170,6 +166,11 @@ public class OrderStatusController {
             JSON.put("succes", false);
             JSON.put("message", "Status with id " + statusId + " doest not exist");
             return ResponseEntity.badRequest().body(JSON);
+        }
+
+        if(newStatus.get().equals(orderStatus.get().getStatus())) {
+            JSON.put("succes", false);
+            JSON.put("message", "Order with id " + orderId + " is already on status with id " + statusId);
         }
 
         orderStatusService.updateOrderStatus(orderStatus.get(), newStatus.get());
