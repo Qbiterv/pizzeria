@@ -6,21 +6,22 @@ import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.bind.annotation.*;
+import pl.auctane.mail.services.EmailService;
 
 @RestController
 @RequestMapping("/v1/email")
 public class SenderController {
-    private final JavaMailSender mailSender = new JavaMailSenderImpl();
+    private final EmailService emailService;
+
+    @Autowired
+    public SenderController(EmailService emailService) {
+        this.emailService = emailService;
+    }
 
     @PutMapping("/send/email={email}")
     public ResponseEntity<?> sendEmail(@PathVariable("email") String email) {
-        SimpleMailMessage message = new SimpleMailMessage();
 
-        message.setTo(email);
-        message.setFrom("auctane@pl");
-        message.setSubject("Test email");
-        message.setText("This is a test email");
-        mailSender.send(message);
+        emailService.sendEmail(email, "test", "test");
 
         System.out.println("Sent email to " + email);
 
