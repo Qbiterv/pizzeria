@@ -43,7 +43,31 @@ public class OrderController {
 
     @GetMapping(value = "/get")
     public ResponseEntity<?> getOrders() {
-        return ResponseEntity.ok().body(orderService.getOrders());
+        return ResponseEntity.ok().body(orderService.getOrdersSorted());
+    }
+
+    @GetMapping("/get/finalized={finalized}")
+    public ResponseEntity<?> getOrdersByStatus(@PathVariable("finalized") boolean finalized) {
+        if(finalized) {
+            return ResponseEntity.ok().body(orderService.getFinalizedOrders());
+        }
+
+        if (!finalized) {
+            return ResponseEntity.ok().body(orderService.getNotFinalizedOrders());
+        }
+
+        return ResponseEntity.badRequest().build();
+    }
+
+    @GetMapping("/get/email={email}")
+    public ResponseEntity<?> getOrdersByEmail(@PathVariable("email") String email) {
+        List<Order> orders = orderService.getOrdersByEmail(email);
+
+        if (orders.isEmpty()) {
+            return ResponseEntity.noContent().build();
+        }
+
+        return ResponseEntity.ok().body(orders);
     }
 
     @GetMapping(value = "/get/{id}")
