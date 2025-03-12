@@ -8,6 +8,8 @@ import pl.auctane.order.repositories.StatusRepository;
 import java.util.List;
 import java.util.Optional;
 
+import java.util.List;
+
 @Service
 public class StatusService {
     private final StatusRepository statusRepository;
@@ -17,7 +19,7 @@ public class StatusService {
         this.statusRepository = statusRepository;
     }
 
-    public List<Status> getStatuses() {
+    public List<Status> getAllStatuses() {
         return statusRepository.findAll();
     }
 

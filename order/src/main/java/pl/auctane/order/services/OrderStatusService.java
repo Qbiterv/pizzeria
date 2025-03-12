@@ -21,8 +21,8 @@ public class OrderStatusService {
         return orderStatusRepository.findAll();
     }
 
-    public OrderStatus getOrderStatus(Long orderId) {
-        return orderStatusRepository.findById(orderId).orElse(null);
+    public Optional<OrderStatus> getOrderStatus(Long orderId) {
+        return orderStatusRepository.findByOrder_Id(orderId);
     }
 
     public void registerOrder(Order order) {
@@ -37,6 +37,11 @@ public class OrderStatusService {
         orderStatus.setOrder(order);
         orderStatus.setStatus(status.get());
 
+        orderStatusRepository.save(orderStatus);
+    }
+
+    public void updateOrderStatus(OrderStatus orderStatus, Status status) {
+        orderStatus.setStatus(status);
         orderStatusRepository.save(orderStatus);
     }
 }

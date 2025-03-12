@@ -20,4 +20,11 @@ public class Status {
     private int state; // 0 - new, 1 - in progress, 2 - completed
 
     private String name;
+
+    @Override
+    public boolean equals(Object o) {
+        if(o instanceof Status)
+            return ((Status) o).getId().equals(this.getId()) && ((Status) o).getState() == this.getState() && ((Status) o).getName().equals(this.getName());
+        return false;
+    }
 }
