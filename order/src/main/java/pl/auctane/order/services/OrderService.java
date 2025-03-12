@@ -43,4 +43,17 @@ public class OrderService {
     public void removeOrder(Order order ) {
         orderRepository.delete(order);
     }
+
+    public void setFinalized(Order order) {
+        order.setFinalized(true);
+        orderRepository.save(order);
+    }
+
+    public void setFinalized(Long id) {
+        Optional<Order> order = orderRepository.findById(id);
+        order.ifPresent(value -> {
+            value.setFinalized(true);
+            orderRepository.save(value);
+        });
+    }
 }

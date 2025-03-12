@@ -125,6 +125,8 @@ public class OrderController {
             orderProductService.createOrderProduct(order, product);
         }
 
+        orderStatusService.registerOrder(order);
+
         JSON.put("success", true);
         JSON.put("message", "Created order: " + order.getId());
 
