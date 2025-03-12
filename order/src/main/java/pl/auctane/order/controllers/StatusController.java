@@ -32,7 +32,7 @@ public class StatusController {
 
     @GetMapping("/get")
     public ResponseEntity<?> getStatuses() {
-        return ResponseEntity.ok().body(statusService.getStatuses());
+        return ResponseEntity.ok().body(statusService.getAllStatuses());
     }
 
     @GetMapping("/get/{id}")
