@@ -40,4 +40,8 @@ public class StatusService {
 
         statusRepository.save(status);
     }
+
+    public void updateStatus(Status status) {
+        statusRepository.save(status);
+    }
 }
