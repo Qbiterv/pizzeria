@@ -67,7 +67,7 @@ services:
     ports:
       - "8091:8090"
     environment:
-      - SPRING_PROFILES_ACTIVE=docker
+      - SPRING_PROFILES_ACTIVE=secret
     networks:
       - "pizzaNetwork"
 
