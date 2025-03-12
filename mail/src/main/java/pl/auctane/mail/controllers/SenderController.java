@@ -1,6 +1,7 @@
 package pl.auctane.mail.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -13,6 +14,9 @@ import pl.auctane.mail.services.EmailService;
 public class SenderController {
     private final EmailService emailService;
 
+    @Value("${spring.mail.username}")
+    private String username;
+
     @Autowired
     public SenderController(EmailService emailService) {
         this.emailService = emailService;
@@ -21,7 +25,7 @@ public class SenderController {
     @PutMapping("/send/email={email}")
     public ResponseEntity<?> sendEmail(@PathVariable("email") String email) {
 
-        emailService.sendEmail(email, "test", "test");
+        emailService.sendEmail(username, email, "test", "test");
 
         System.out.println("Sent email to " + email);
 
