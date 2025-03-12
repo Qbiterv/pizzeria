@@ -56,6 +56,21 @@ services:
     networks:
       - "pizzaNetwork"
 
+  mail:
+    container_name: mail-service
+    image: pizzeria-mail:latest
+    build:
+      context: ./mail
+      dockerfile: Dockerfile
+    ports:
+      - "8091:8090"
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - db
+    networks:
+      - "pizzaNetwork"
+
   rabbitmq:
     image: rabbitmq:4.0.7
     container_name: 'rabbitmq'
