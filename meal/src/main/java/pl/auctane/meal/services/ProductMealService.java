@@ -21,7 +21,7 @@ public class ProductMealService {
         this.productMealRepository = productMealRepository;
     }
 
-    public List<ProductMealsListDto> getProductMeals(Product product) {
+    public List<ProductMealsListDto> getProductMeals(Long product) {
         return productMealRepository.getAllByProductId(product).stream()
                 .map(productMeal -> new ProductMealsListDto(productMeal.getId(), new Meal(productMeal.getMeal().getId(), productMeal.getMeal().getName(), productMeal.getMeal().getDescription())))
                 .collect(Collectors.toList());
