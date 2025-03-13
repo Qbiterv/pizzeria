@@ -14,18 +14,16 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import pl.auctane.mail.controllers.SenderController;
 import pl.auctane.mail.dtos.*;
+
+import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
 @Service
 public class EmailService {
 
-    final JavaMailSender mailSender;
-
     @Autowired
-    public EmailService(JavaMailSender mailSender) {
-        this.mailSender = mailSender;
-    }
+    private JavaMailSender mailSender;
 
     @Value("${spring.service-url}")
     String serviceUrl;
@@ -66,9 +64,12 @@ public class EmailService {
             }
 
             //put all attachments into mail
-            for (HtmlFileDto file : files) {
-                messageHelper.addAttachment(file.getFilename(), file.getFile());
-            }
+//            for (HtmlFileDto file : files) {
+//                messageHelper.addAttachment(file.getFilename(), file.getFile());
+//            }
+
+            messageHelper.addAttachment("metapack.svg", new File("/static/metapack.svg"));
+            messageHelper.addAttachment("auctane.jpg", new File("/static/auctane.jpg"));
 
             mailSender.send(message);
 
@@ -78,36 +79,50 @@ public class EmailService {
     }
 
     private String PutDataIntoHtml(String html, EmailDto emailDto) {
-
         HashMap<ProductDto, Integer> products = getProductsWithQuantity(emailDto.getProducts());
 
-        //make product list as one string
+        // Make product list as one string
         StringBuilder productsAsString = new StringBuilder();
 
         for (Map.Entry<ProductDto, Integer> productAndQuantity : products.entrySet()) {
             String mealList = getMealList(productAndQuantity.getKey());
 
             String productInfo = """
-                    <li class="list-element">
-                        <div class="list-element-container">
-                            <p class="product-info">
-                                <span class="quantity">%sx</span><span class="product-name">%s</span><span class="price">%s zł</span>
-                            </p>
-                            <p class="meal-list">%s</p>
-                        </div>
-                    </li>
-                    """;
+                <li class="list-element">
+                    <div class="list-element-container">
+                        <p class="product-info">
+                            <span class="quantity">%sx</span><span class="product-name">%s</span><span class="price">%s zł</span>
+                        </p>
+                        <p class="meal-list">%s</p>
+                    </div>
+                </li>
+                """;
 
-            //adding info to product list
-            productsAsString.append(productInfo.formatted(productAndQuantity.getValue(), productAndQuantity.getKey().getName(), productAndQuantity.getKey().getPrice(), mealList));
+            // Adding info to product list
+            productsAsString.append(String.format(productInfo, productAndQuantity.getValue(), productAndQuantity.getKey().getName(), productAndQuantity.getKey().getPrice(), mealList));
         }
 
-        double finalPrice = getFinalPrice(emailDto.getProducts());
-
-        //put all data into list
-        Object[] data = new Object[] { emailDto.getName(), emailDto.getSurname(), emailDto.getOrderId(), productsAsString.toString(), emailDto.getName(), emailDto.getSurname(), emailDto.getPhone(), emailDto.getAddress(), emailDto.getProducts().length, finalPrice};
+        Object[] data = getObjects(emailDto, productsAsString);
 
         return String.format(html, data);
+    }
+
+    private Object[] getObjects(EmailDto emailDto, StringBuilder productsAsString) {
+        double finalPrice = getFinalPrice(emailDto.getProducts());
+
+        // Put all data into list
+        return new Object[] {
+                emailDto.getName(),
+                emailDto.getSurname(),
+                emailDto.getOrderId(),
+                productsAsString.toString(),
+                emailDto.getName(),
+                emailDto.getSurname(),
+                emailDto.getPhone(),
+                emailDto.getAddress(),
+                emailDto.getProducts().length,
+                finalPrice
+        };
     }
 
     private double getFinalPrice(ProductDto[] products) {
