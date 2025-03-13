@@ -52,9 +52,7 @@ public class ProductMealController {
 
         System.out.println(product.get());
 
-        List<ProductMealsListDto> meals = productMealService.getProductMeals(product.get());
-
-
+        List<ProductMealsListDto> meals = productMealService.getProductMeals(product.get().getId());
         System.out.println(meals);
 
         if(meals.isEmpty()) return ResponseEntity.noContent().build();

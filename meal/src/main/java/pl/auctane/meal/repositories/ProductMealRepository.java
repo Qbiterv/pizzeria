@@ -7,5 +7,5 @@ import pl.auctane.meal.entities.ProductMeal;
 import java.util.List;
 
 public interface ProductMealRepository extends JpaRepository<ProductMeal, Long> {
-    List<ProductMeal> getAllByProductId(Product product);
+    List<ProductMeal> getAllByProductId(Long product_id);
 }

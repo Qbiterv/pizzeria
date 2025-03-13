@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta content="Auctane Inc." name="author">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <title>Zamówienie złożone - %s</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            align-content: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        header {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            justify-content: center;
+            align-content: center;
+            align-items: center;
+            background-color: aliceblue;
+            border-radius: 0 0 45px 45px;
+            width: 800px;
+            height: 300px;
+        }
+
+        img {
+            width: 150px;
+            height: auto;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        main {
+            margin: 0;
+            padding: 0;
+        }
+
+        .main-container {
+            width: 30rem;
+            height: auto;
+            background-color: #f5f5f5;
+            border-radius: 1.25rem;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .list-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 30px;
+            width: 95%;
+
+        }
+
+        .list-label {
+            font-size: 1.25rem;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .list-id {
+            font-size: 0.85rem;
+            font-weight: lighter;
+            text-align: right;
+        }
+        
+        .highlight {
+            background-color: lightgray;
+            font-style: italic;
+            padding: 0.25rem;
+            border-radius: 0.25rem;
+        }
+
+        .list {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            margin: 0 2.5rem 0 2.5rem;
+            font-size: large;
+        }
+
+        .product-info {
+            display: flex;
+        }
+
+        .price {
+            margin-left: auto;
+        }
+
+        .meal-list {
+            font-size: 0.85rem;
+            font-weight: lighter;
+            text-align: left;
+            font-style: italic;
+        }
+
+        .quantity {
+            font-weight: bold;
+        }
+
+        .product-name {
+            margin-left: 0.5rem;
+        }
+
+        .address {
+            font-size: 1rem;
+            font-weight: lighter;
+            text-align: left;
+        }
+
+        .address span {
+            font-style: italic;
+        }
+
+        .final {
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            align-items: center;
+            margin: 10px 20px;
+        }
+
+        .final p {
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+
+        a {
+            text-decoration: none;
+            color: black;
+        }
+
+        footer {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .footer-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 95%;
+        }
+
+        .contact-data {
+            margin: 0 2.5rem 0 2.5rem;
+        }
+
+        .footer-element {
+            opacity: 0.7;
+            transition: opacity .3s;
+        }
+
+        .footer-element-hover:hover {
+            opacity: 1;
+            transition: opacity .3s;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <img src="../static/metapack.svg" alt="MetaPack Logo">
+            <h1>Witaj, %s %s!<br>Zamówienie zostało złożone <br>i już leci do Ciebie!</h1>
+            <p>Poniżej znajdziesz wszystkie szczegóły dotyczące zamówienia, smacznego 😋</p>
+        </div>
+    </header>
+    <main>
+        <h2>Szczegóły zamówienia</h2>
+        <div class="main-container">
+            <div class="list-container">
+                <p class="list-label">Lista produktów</p>
+                <p class="list-id">Identyfikator: <span class="highlight">%s</span></p>
+            </div>
+            <ul class="list">
+                %s
+            </ul>
+        </div>
+        <div class="main-container">
+            <div class="list-container">
+                <p class="list-label">Dane kontaktowe</p>
+            </div>
+            <div class="contact-data">
+                <p class="address">Imie: <span class="highlight">%s</span> Nazwisko: <span class="highlight">%s</span></p>
+                <p class="address">Nr tel: <span class="highlight">%s</span></p>
+                <p class="address">Adres: <span class="highlight">%s</span></p>
+            </div>
+        </div>
+        <div class="main-container">
+            <div class="list-container">
+                <p class="list-label">Podsumowanie</p>
+            </div>
+            <div class="final">
+                <p>Cena <span class="highlight">%s</span> zł</p>
+                <p>Ilość produktów <span class="highlight">%s</span></p>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p class="footer-element">Wiadomość wysłana automatycznie, w razie jakichkolwiek problemów prosimy o kontakt z naszym działem obsługi klienta.</p>
+        <div class="footer-info">
+            <a href="https://auctane.com" target="_blank">
+                <img class="footer-element footer-element-hover" src="../static/auctane.jpg" alt="Auctane Inc. company's logo">
+            </a>
+            <div>
+                <p><span class="footer-element">Tel:</span> <a class="footer-element footer-element-hover" href="tel:+48684127700" target="_blank">48 68 412 77 00</a></p>
+                <p><span class="footer-element">E-mail:</span> <a class="footer-element footer-element-hover" href="mailto:praca@auctane.com" target="_blank">praca@auctane.com</a></p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
