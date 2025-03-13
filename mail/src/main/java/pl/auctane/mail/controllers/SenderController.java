@@ -22,12 +22,16 @@ public class SenderController {
 
     @Value("${spring.mail.username}")
     private String username;
-    @Value("${spring.mail.htmlFilePath}")
+    @Value("${spring.mail.html-file-path}")
     private String htmlFilePath;
-    @Value("${spring.mail.imageFilePath")
+    @Value("${spring.mail.image-file-path")
     private String imageFilePath;
-    @Value("${spring.mail.imageFileName")
+    @Value("${spring.mail.image-2-file-path")
+    private String image2FilePath;
+    @Value("${spring.mail.image-file-name")
     private String imageFileName;
+    @Value("${spring.mail.image-2-file-name")
+    private String image2FileName;
 
 
     @Autowired
@@ -50,6 +54,7 @@ public class SenderController {
 
         List<HtmlFileDto> fileDtoList = new ArrayList<>();
         fileDtoList.add(new HtmlFileDto(imageFileName, new File(imageFilePath)));
+        fileDtoList.add(new HtmlFileDto(image2FileName, new File(image2FilePath)));
 
         emailService.sendHtmlEmail(username, emailData, htmlFilePath, fileDtoList);
 
