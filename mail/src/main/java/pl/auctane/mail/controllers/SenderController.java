@@ -52,9 +52,18 @@ public class SenderController {
     @PostMapping("/send-html")
     public ResponseEntity<?> sendHtml(@RequestBody EmailDto emailData) {
 
+        File imageFile = new File(imageFilePath);
+        File image2File = new File(image2FilePath);
+
+        System.out.println(imageFile.isFile());
+        System.out.println(imageFile.exists());
+        System.out.println(imageFile.isDirectory());
+        System.out.println(imageFile.getName());
+        System.out.println(imageFile.getPath());
+
         List<HtmlFileDto> fileDtoList = new ArrayList<>();
-        fileDtoList.add(new HtmlFileDto(imageFileName, new File(imageFilePath)));
-        fileDtoList.add(new HtmlFileDto(image2FileName, new File(image2FilePath)));
+        fileDtoList.add(new HtmlFileDto(imageFileName, imageFile));
+        fileDtoList.add(new HtmlFileDto(image2FileName, image2File));
 
         emailService.sendHtmlEmail(username, emailData, htmlFilePath, fileDtoList);
 
