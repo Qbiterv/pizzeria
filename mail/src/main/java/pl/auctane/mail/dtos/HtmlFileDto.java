@@ -12,7 +12,13 @@ public class HtmlFileDto {
     private File file;
 
     public HtmlFileDto(String filename, File file) {
-        if (!file.isFile())
+
+        System.out.println(file.getAbsolutePath());
+        System.out.println(file.getAbsoluteFile());
+        System.out.println(file.canRead());
+
+
+        if (!file.exists())
             throw new IllegalArgumentException("File is not a file");
         this.filename = filename;
         this.file = file;

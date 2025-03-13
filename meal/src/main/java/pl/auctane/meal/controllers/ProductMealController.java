@@ -57,7 +57,8 @@ public class ProductMealController {
 
         if(meals.isEmpty()) return ResponseEntity.noContent().build();
 
-        return ResponseEntity.ok().body(meals);
+        JSON.set("meals", objectMapper.valueToTree(meals));
+        return ResponseEntity.ok().body(JSON);
     }
 
     @PostMapping(value = "/add/{id}/{mealId}", produces = MediaType.APPLICATION_JSON_VALUE)
