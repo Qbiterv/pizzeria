@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.auctane.mail.dtos.EmailDto;
@@ -58,16 +60,18 @@ public class SenderController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/send-html")
+    @PostMapping("/send-order")
     public ResponseEntity<?> sendHtml(@RequestBody EmailDto emailData) {
 
         List<HtmlFileDto> fileDtoList = new ArrayList<>();
         fileDtoList.add(new HtmlFileDto(imageFileName, imageFile));
         fileDtoList.add(new HtmlFileDto(image2FileName, image2File));
 
-        emailService.sendHtmlEmail(username, emailData, htmlFilePath, fileDtoList);
-
-        System.out.println("Sent email with html file");
+        try {
+            emailService.sendHtmlEmail(username, emailData, htmlFilePath, fileDtoList);
+        }catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
 
         return ResponseEntity.ok().build();
     }
