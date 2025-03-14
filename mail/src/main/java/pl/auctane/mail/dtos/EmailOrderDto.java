@@ -7,7 +7,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class EmailDto {
+public class EmailOrderDto {
     private String to;
     private String subject;
 

@@ -6,10 +6,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.auctane.mail.dtos.EmailDto;
+import pl.auctane.mail.dtos.EmailOrderDto;
+import pl.auctane.mail.dtos.EmailStatusDto;
 import pl.auctane.mail.dtos.HtmlFileDto;
 import pl.auctane.mail.services.EmailService;
 
@@ -24,8 +24,10 @@ public class SenderController {
 
     @Value("${service.mail.username}")
     private String username;
-    @Value("${service.mail.html-file-path}")
-    private String htmlFilePath;
+    @Value("${service.mail.html-order-file-path}")
+    private String orderHtmlPath;
+    @Value("${service.mail.html-status-file-path}")
+    private String statusHtmlPath;
     @Value("${service.mail.image-file-path}")
     private String imageFilePath;
     @Value("${service.mail.image-2-file-path}")
@@ -61,15 +63,32 @@ public class SenderController {
     }
 
     @PostMapping("/send-order")
-    public ResponseEntity<?> sendHtml(@RequestBody EmailDto emailData) {
+    public ResponseEntity<?> sendHtml(@RequestBody EmailOrderDto payload) {
 
         List<HtmlFileDto> fileDtoList = new ArrayList<>();
         fileDtoList.add(new HtmlFileDto(imageFileName, imageFile));
         fileDtoList.add(new HtmlFileDto(image2FileName, image2File));
 
         try {
-            emailService.sendHtmlEmail(username, emailData, htmlFilePath, fileDtoList);
+            emailService.sendOrderEmail(username, payload, orderHtmlPath, fileDtoList);
         }catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/send-status")
+    public ResponseEntity<?> sendStatus(@RequestBody EmailStatusDto payload) {
+        List<HtmlFileDto> fileDtoList = new ArrayList<>();
+        fileDtoList.add(new HtmlFileDto(imageFileName, imageFile));
+        fileDtoList.add(new HtmlFileDto(image2FileName, image2File));
+
+        try {
+            emailService.sendStatusEmail(username, payload, statusHtmlPath, fileDtoList);
+        }catch (Exception e) {
+            System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
 

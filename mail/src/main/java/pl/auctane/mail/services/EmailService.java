@@ -17,7 +17,6 @@ import pl.auctane.mail.controllers.SenderController;
 import pl.auctane.mail.dtos.*;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -41,7 +40,35 @@ public class EmailService {
         mailSender.send(message);
     }
 
-    public void sendHtmlEmail(String from, EmailDto emailDto, String htmlPath, List<HtmlFileDto> files) {
+    public void sendOrderEmail(String from, EmailOrderDto emailOrderDto, String htmlPath, List<HtmlFileDto> files) {
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper messageHelper = null;
+
+        try {
+            messageHelper = new MimeMessageHelper(message, true, StandardCharsets.UTF_8.name());
+
+            messageHelper.setFrom(from);
+            messageHelper.setTo(emailOrderDto.getTo());
+            messageHelper.setSubject(emailOrderDto.getSubject());
+
+            //read html
+            String html = getHtmlBody(htmlPath);
+            //put user info into html
+            html = putOrderDataIntoHtml(html, emailOrderDto);
+            //put html into mail
+            messageHelper.setText(html, true);
+
+            //put all attachments into mail
+            for (HtmlFileDto file : files)
+                messageHelper.addInline(file.getFilename(), file.getFile());
+
+            mailSender.send(message);
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void sendStatusEmail(String from, EmailStatusDto emailDto, String htmlPath, List<HtmlFileDto> files) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = null;
 
@@ -55,7 +82,7 @@ public class EmailService {
             //read html
             String html = getHtmlBody(htmlPath);
             //put user info into html
-            html = putDataIntoHtml(html, emailDto);
+            html = putStatusDataIntoHtml(html, emailDto);
             //put html into mail
             messageHelper.setText(html, true);
 
@@ -80,9 +107,9 @@ public class EmailService {
         }
         return html;
     }
-    private String putDataIntoHtml(String html, EmailDto emailDto) {
+    private String putOrderDataIntoHtml(String html, EmailOrderDto emailOrderDto) {
 
-        List<ProductDto> products = getProductsFromIds(emailDto.getProductIds());
+        List<ProductDto> products = getProductsFromIds(emailOrderDto.getProductIds());
 
         HashMap<ProductDto, Integer> productsWithQuantity = getProductsWithQuantity(products);
 
@@ -92,14 +119,30 @@ public class EmailService {
 
         //put data into html
         HashMap<String, String> replaceValues = new HashMap<>();
-        replaceValues.put("{name}", emailDto.getName());
-        replaceValues.put("{surname}", emailDto.getSurname());
-        replaceValues.put("{orderId}", String.valueOf(emailDto.getOrderId()));
+        replaceValues.put("{name}", emailOrderDto.getName());
+        replaceValues.put("{surname}", emailOrderDto.getSurname());
+        replaceValues.put("{orderId}", String.valueOf(emailOrderDto.getOrderId()));
         replaceValues.put("{productList}", productsAsString);
-        replaceValues.put("{phone}", emailDto.getPhone());
-        replaceValues.put("{address}", emailDto.getAddress());
+        replaceValues.put("{phone}", emailOrderDto.getPhone());
+        replaceValues.put("{address}", emailOrderDto.getAddress());
         replaceValues.put("{finalPrice}", String.format("%.2f", finalPrice));
         replaceValues.put("{productCount}", String.valueOf(products.size()));
+
+        String finalHtml = html;
+
+        for (Map.Entry<String, String> entry : replaceValues.entrySet()) {
+            html = html.replace(entry.getKey(), entry.getValue());
+        }
+
+        return html;
+    }
+    private String putStatusDataIntoHtml(String html, EmailStatusDto emailStatusDto) {
+
+        HashMap<String, String> replaceValues = new HashMap<>();
+        replaceValues.put("{name}", emailStatusDto.getName());
+        replaceValues.put("{surname}", emailStatusDto.getSurname());
+        replaceValues.put("{orderId}", String.valueOf(emailStatusDto.getOrderId()));
+        replaceValues.put("{status}", emailStatusDto.getStatus());
 
         String finalHtml = html;
 
