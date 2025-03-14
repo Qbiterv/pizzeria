@@ -16,6 +16,8 @@ import org.springframework.web.client.RestTemplate;
 import pl.auctane.mail.controllers.SenderController;
 import pl.auctane.mail.dtos.*;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -45,34 +47,21 @@ public class EmailService {
 
         try {
             messageHelper = new MimeMessageHelper(message, true, StandardCharsets.UTF_8.name());
-        } catch (MessagingException e) {
-            throw new RuntimeException(e);
-        }
-
-        try {
 
             messageHelper.setFrom(from);
             messageHelper.setTo(emailDto.getTo());
             messageHelper.setSubject(emailDto.getSubject());
 
-            try(var inputStream = SenderController.class.getResourceAsStream(htmlPath)) {
-                assert inputStream != null : "HTML file not found in: " + htmlPath;
-
-                //read html
-                String html = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
-                //put user info into html
-                html = PutDataIntoHtml(html, emailDto);
-                //put html into mail
-                messageHelper.setText(html, true);
-
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
+            //read html
+            String html = getHtmlBody(htmlPath);
+            //put user info into html
+            html = putDataIntoHtml(html, emailDto);
+            //put html into mail
+            messageHelper.setText(html, true);
 
             //put all attachments into mail
-            for (HtmlFileDto file : files) {
+            for (HtmlFileDto file : files)
                 messageHelper.addInline(file.getFilename(), file.getFile());
-            }
 
             mailSender.send(message);
 
@@ -81,61 +70,47 @@ public class EmailService {
         }
     }
 
-    private String PutDataIntoHtml(String html, EmailDto emailDto) {
-
-        HashMap<ProductDto, Integer> products = getProductsWithQuantity(emailDto.getProducts());
-
-        // Make product list as one string
-        StringBuilder productsAsString = new StringBuilder();
-
-        for (Map.Entry<ProductDto, Integer> productAndQuantity : products.entrySet()) {
-            String mealList = getMealList(productAndQuantity.getKey());
-
-            String productInfo = """
-                <li class="list-element">
-                    <div class="list-element-container">
-                        <p class="product-info">
-                            <span class="quantity">%sx</span><span class="product-name">%s</span><span class="price">%s zł</span>
-                        </p>
-                        <p class="meal-list">%s</p>
-                    </div>
-                </li>
-                """;
-
-            // Adding info to product list
-            productsAsString.append(String.format(productInfo, productAndQuantity.getValue(), productAndQuantity.getKey().getName(), productAndQuantity.getKey().getPrice(), mealList));
+    private String getHtmlBody(String htmlPath) {
+        String html = null;
+        try (var inputStream = SenderController.class.getResourceAsStream(htmlPath)) {
+            assert inputStream != null : "HTML file not found in: " + htmlPath;
+            html = new String(inputStream.readAllBytes(), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            throw new RuntimeException("Error while reading html. " + e);
         }
+        return html;
+    }
+    private String putDataIntoHtml(String html, EmailDto emailDto) {
 
+        List<ProductDto> products = getProductsFromIds(emailDto.getProductIds());
+
+        HashMap<ProductDto, Integer> productsWithQuantity = getProductsWithQuantity(products);
+
+        double finalPrice = getFinalPrice(products);
+
+        String productsAsString = getProductListAsString(productsWithQuantity);
+
+        //put data into html
         HashMap<String, String> replaceValues = new HashMap<>();
         replaceValues.put("{name}", emailDto.getName());
         replaceValues.put("{surname}", emailDto.getSurname());
         replaceValues.put("{orderId}", String.valueOf(emailDto.getOrderId()));
-        replaceValues.put("{productList}", productsAsString.toString());
+        replaceValues.put("{productList}", productsAsString);
         replaceValues.put("{phone}", emailDto.getPhone());
         replaceValues.put("{address}", emailDto.getAddress());
-        replaceValues.put("{finalPrice}", String.valueOf(getFinalPrice(emailDto.getProducts())));
-        replaceValues.put("{productCount}", String.valueOf(emailDto.getProducts().length));
-
-        System.out.println(html);
+        replaceValues.put("{finalPrice}", String.format("%.2f", finalPrice));
+        replaceValues.put("{productCount}", String.valueOf(products.size()));
 
         String finalHtml = html;
 
         for (Map.Entry<String, String> entry : replaceValues.entrySet()) {
             html = html.replace(entry.getKey(), entry.getValue());
-            System.out.println(entry.getValue());
         }
 
         return html;
     }
 
-    private double getFinalPrice(ProductDto[] products) {
-        double finalPrice = 0;
-        for (ProductDto product : products) {
-            finalPrice += product.getPrice();
-        }
-        return finalPrice;
-    }
-    private HashMap<ProductDto, Integer> getProductsWithQuantity(ProductDto[] products) {
+    private HashMap<ProductDto, Integer> getProductsWithQuantity(List<ProductDto> products) {
 
         HashMap<ProductDto, Integer> productsWithQuantity = new HashMap<>();
 
@@ -154,14 +129,43 @@ public class EmailService {
 
         return productsWithQuantity;
     }
-    private String getMealList(ProductDto product) {
+    private String getProductListAsString(HashMap<ProductDto, Integer> productsWithQuantity) {
+        StringBuilder productsAsString = new StringBuilder();
+
+        for (Map.Entry<ProductDto, Integer> productAndQuantity : productsWithQuantity.entrySet()) {
+            String mealList = getMealListForProductId(productAndQuantity.getKey().getId());
+
+            String productInfo = """
+                <li class="list-element">
+                    <div class="list-element-container">
+                        <p class="product-info">
+                            <span class="quantity">%sx</span><span class="product-name">%s</span><span class="price">%.2f zł</span>
+                        </p>
+                        <p class="meal-list">%s</p>
+                    </div>
+                </li>
+                """;
+
+            // Adding info to product list
+            productsAsString.append(String.format(productInfo, productAndQuantity.getValue(), productAndQuantity.getKey().getName(), productAndQuantity.getKey().getPrice(), mealList));
+        }
+
+        return productsAsString.toString();
+    }
+    private double getFinalPrice(List<ProductDto> products) {
+        double finalPrice = 0;
+        for (ProductDto product : products) {
+            finalPrice += product.getPrice();
+        }
+        return finalPrice;
+    }
+    private String getMealListForProductId(Long productId) {
         StringBuilder mealList = new StringBuilder();
 
         //get mealList via http
         ResponseEntity<MealListResponseDto> response = null;
 
-        String url = serviceUrl + "/product-meal/product/" + product.getId();
-
+        String url = serviceUrl + "/product-meal/product/" + productId;
 
         try {
             response = new RestTemplate().getForEntity(url, MealListResponseDto.class);
@@ -172,14 +176,13 @@ public class EmailService {
         //no meals
         if(response.getStatusCode() == HttpStatus.NO_CONTENT) return "";
 
+        if (!response.getStatusCode().is2xxSuccessful())
+            throw new RuntimeException("Error while getting meal list. Status code of response is not ok and not NO_CONTENT. Status code: " + response.getStatusCode());
+
         if(response.getBody() == null)
-            throw new RuntimeException("Error while getting meal list. Body of response is null");
+            throw new RuntimeException("Error while getting meal list. Body of response is null, but status code is ok");
 
         MealDto[] meals = response.getBody().getMeals();
-
-        if (!response.getStatusCode().is2xxSuccessful()) {
-            throw new RuntimeException("Error while getting meal list. Status code of response: " + response.getStatusCode());
-        }
 
         for(int i = 0; i < meals.length; i++) {
             if(i == 0)
@@ -188,5 +191,37 @@ public class EmailService {
         }
 
         return mealList.toString();
+    }
+    private List<ProductDto> getProductsFromIds(List<Long> ids) {
+        //get product list via http
+
+        List<ProductDto> products = new ArrayList<>();
+
+        //call get product from id for each id
+        for (Long id : ids) {
+            String url = serviceUrl + "/product/get/" + id;
+
+            ResponseEntity<ProductDto> response = new RestTemplate().getForEntity(url, ProductDto.class);
+
+            try {
+                response = new RestTemplate().getForEntity(url, ProductDto.class);;
+            } catch (HttpStatusCodeException | ResourceAccessException e) {
+                throw new RuntimeException("Error while getting product for email. ", e);
+            }
+
+            //no product
+            if (response.getStatusCode() == HttpStatus.NO_CONTENT)
+                throw new RuntimeException("Error while getting product for email. Product in order is pointing on product that doesn't exist");
+
+            if (!response.getStatusCode().is2xxSuccessful())
+                throw new RuntimeException("Error while getting product for email. Status code of response is not ok and not NO_CONTENT. Status code: " + response.getStatusCode());
+
+            if (response.getBody() == null)
+                throw new RuntimeException("Error while getting product for email. Body of response is null, but status code is ok");
+
+            products.add(response.getBody());
+        }
+
+        return products;
     }
 }

@@ -16,5 +16,5 @@ public class EmailDto {
     private String phone;
     private Long orderId;
     private String address;
-    private ProductDto[] products;
+    private List<Long> productIds;
 }
