@@ -1,17 +1,16 @@
 package pl.auctane.mail.controllers;
 
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.ResponseEntity;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.web.bind.annotation.*;
 import pl.auctane.mail.dtos.EmailDto;
 import pl.auctane.mail.dtos.HtmlFileDto;
 import pl.auctane.mail.services.EmailService;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,24 +18,34 @@ import java.util.List;
 @RequestMapping("/v1/email")
 public class SenderController {
     private final EmailService emailService;
+    private final ResourceLoader resourceLoader;
 
-    @Value("${spring.mail.username}")
+    @Value("${service.mail.username}")
     private String username;
-    @Value("${spring.mail.html-file-path}")
+    @Value("${service.mail.html-file-path}")
     private String htmlFilePath;
-    @Value("${spring.mail.image-file-path}")
+    @Value("${service.mail.image-file-path}")
     private String imageFilePath;
-    @Value("${spring.mail.image-2-file-path}")
+    @Value("${service.mail.image-2-file-path}")
     private String image2FilePath;
-    @Value("${spring.mail.image-file-name}")
+    @Value("${service.mail.image-file-name}")
     private String imageFileName;
-    @Value("${spring.mail.image-2-file-name}")
+    @Value("${service.mail.image-2-file-name}")
     private String image2FileName;
 
+    private Resource imageFile;
+    private Resource image2File;
 
     @Autowired
-    public SenderController(EmailService emailService) {
+    public SenderController(EmailService emailService, ResourceLoader resourceLoader) {
         this.emailService = emailService;
+        this.resourceLoader = resourceLoader;
+    }
+
+    @PostConstruct
+    public void init() {
+        imageFile = resourceLoader.getResource("classpath:" + imageFilePath);
+        image2File = resourceLoader.getResource("classpath:" + image2FilePath);
     }
 
     @PutMapping("/send/email={email}")
@@ -52,21 +61,11 @@ public class SenderController {
     @PostMapping("/send-html")
     public ResponseEntity<?> sendHtml(@RequestBody EmailDto emailData) {
 
-//        File imageFile = new File(imageFilePath);
-//        File image2File = new File(image2FilePath);
+        List<HtmlFileDto> fileDtoList = new ArrayList<>();
+        fileDtoList.add(new HtmlFileDto(imageFileName, imageFile));
+        fileDtoList.add(new HtmlFileDto(image2FileName, image2File));
 
-//        System.out.println(imageFile.isFile());
-//        System.out.println(imageFile.exists());
-//        System.out.println(imageFile.isDirectory());
-//        System.out.println(imageFile.getName());
-//        System.out.println(imageFile.getPath());
-
-//        List<HtmlFileDto> fileDtoList = new ArrayList<>();
-//        fileDtoList.add(new HtmlFileDto(imageFileName, imageFile));
-//        fileDtoList.add(new HtmlFileDto(image2FileName, image2File));
-
-//        emailService.sendHtmlEmail(username, emailData, htmlFilePath, fileDtoList);
-        emailService.sendHtmlEmail(username, emailData, "/email/order-created.html", new ArrayList<>());
+        emailService.sendHtmlEmail(username, emailData, htmlFilePath, fileDtoList);
 
         System.out.println("Sent email with html file");
 

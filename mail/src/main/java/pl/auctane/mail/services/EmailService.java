@@ -4,6 +4,7 @@ import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -15,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 import pl.auctane.mail.controllers.SenderController;
 import pl.auctane.mail.dtos.*;
 
-import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 
@@ -25,7 +25,7 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
 
-    @Value("${spring.service-url}")
+    @Value("${service-url}")
     String serviceUrl;
 
     public void sendEmail(String from, String to, String subject, String body) {
@@ -41,7 +41,13 @@ public class EmailService {
 
     public void sendHtmlEmail(String from, EmailDto emailDto, String htmlPath, List<HtmlFileDto> files) {
         MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper messageHelper = new MimeMessageHelper(message);
+        MimeMessageHelper messageHelper = null;
+
+        try {
+            messageHelper = new MimeMessageHelper(message, true, StandardCharsets.UTF_8.name());
+        } catch (MessagingException e) {
+            throw new RuntimeException(e);
+        }
 
         try {
 
@@ -64,12 +70,9 @@ public class EmailService {
             }
 
             //put all attachments into mail
-//            for (HtmlFileDto file : files) {
-//                messageHelper.addAttachment(file.getFilename(), file.getFile());
-//            }
-
-            messageHelper.addAttachment("metapack.svg", new File("/static/metapack.svg"));
-            messageHelper.addAttachment("auctane.jpg", new File("/static/auctane.jpg"));
+            for (HtmlFileDto file : files) {
+                messageHelper.addInline(file.getFilename(), file.getFile());
+            }
 
             mailSender.send(message);
 
@@ -79,6 +82,7 @@ public class EmailService {
     }
 
     private String PutDataIntoHtml(String html, EmailDto emailDto) {
+
         HashMap<ProductDto, Integer> products = getProductsWithQuantity(emailDto.getProducts());
 
         // Make product list as one string
@@ -102,27 +106,26 @@ public class EmailService {
             productsAsString.append(String.format(productInfo, productAndQuantity.getValue(), productAndQuantity.getKey().getName(), productAndQuantity.getKey().getPrice(), mealList));
         }
 
-        Object[] data = getObjects(emailDto, productsAsString);
+        HashMap<String, String> replaceValues = new HashMap<>();
+        replaceValues.put("{name}", emailDto.getName());
+        replaceValues.put("{surname}", emailDto.getSurname());
+        replaceValues.put("{orderId}", String.valueOf(emailDto.getOrderId()));
+        replaceValues.put("{productList}", productsAsString.toString());
+        replaceValues.put("{phone}", emailDto.getPhone());
+        replaceValues.put("{address}", emailDto.getAddress());
+        replaceValues.put("{finalPrice}", String.valueOf(getFinalPrice(emailDto.getProducts())));
+        replaceValues.put("{productCount}", String.valueOf(emailDto.getProducts().length));
 
-        return String.format(html, data);
-    }
+        System.out.println(html);
 
-    private Object[] getObjects(EmailDto emailDto, StringBuilder productsAsString) {
-        double finalPrice = getFinalPrice(emailDto.getProducts());
+        String finalHtml = html;
 
-        // Put all data into list
-        return new Object[] {
-                emailDto.getName(),
-                emailDto.getSurname(),
-                emailDto.getOrderId(),
-                productsAsString.toString(),
-                emailDto.getName(),
-                emailDto.getSurname(),
-                emailDto.getPhone(),
-                emailDto.getAddress(),
-                emailDto.getProducts().length,
-                finalPrice
-        };
+        for (Map.Entry<String, String> entry : replaceValues.entrySet()) {
+            html = html.replace(entry.getKey(), entry.getValue());
+            System.out.println(entry.getValue());
+        }
+
+        return html;
     }
 
     private double getFinalPrice(ProductDto[] products) {
@@ -159,21 +162,24 @@ public class EmailService {
 
         String url = serviceUrl + "/product-meal/product/" + product.getId();
 
+
         try {
             response = new RestTemplate().getForEntity(url, MealListResponseDto.class);
         } catch (HttpStatusCodeException | ResourceAccessException e) {
             throw new RuntimeException("Error while getting meal list. ", e);
         }
 
-        MealDto[] meals = Objects.requireNonNull(response.getBody()).getMeals();
+        //no meals
+        if(response.getStatusCode() == HttpStatus.NO_CONTENT) return "";
+
+        if(response.getBody() == null)
+            throw new RuntimeException("Error while getting meal list. Body of response is null");
+
+        MealDto[] meals = response.getBody().getMeals();
 
         if (!response.getStatusCode().is2xxSuccessful()) {
             throw new RuntimeException("Error while getting meal list. Status code of response: " + response.getStatusCode());
         }
-
-        //if no meals
-        if(meals.length == 0)
-            return "";
 
         for(int i = 0; i < meals.length; i++) {
             if(i == 0)
