@@ -5,7 +5,7 @@
     <meta content="Auctane Inc." name="author">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <title>Zamówienie złożone - %s</title>
+    <title>Zamówienie złożone - </title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -178,7 +178,7 @@
     <header>
         <div>
             <img src="cid:metapack.svg" alt="MetaPack Logo">
-            <h1>Witaj, %s %s!<br>Zamówienie zostało złożone <br>i już leci do Ciebie!</h1>
+            <h1>Witaj, {name} {surname}!<br>Zamówienie zostało złożone <br>i już leci do Ciebie!</h1>
             <p>Poniżej znajdziesz wszystkie szczegóły dotyczące zamówienia, smacznego 😋</p>
         </div>
     </header>
@@ -187,10 +187,10 @@
         <div class="main-container">
             <div class="list-container">
                 <p class="list-label">Lista produktów</p>
-                <p class="list-id">Identyfikator: <span class="highlight">%s</span></p>
+                <p class="list-id">Identyfikator: <span class="highlight">{orderId}</span></p>
             </div>
             <ul class="list">
-                %s
+                {productList}
             </ul>
         </div>
         <div class="main-container">
@@ -198,9 +198,9 @@
                 <p class="list-label">Dane kontaktowe</p>
             </div>
             <div class="contact-data">
-                <p class="address">Imie: <span class="highlight">%s</span> Nazwisko: <span class="highlight">%s</span></p>
-                <p class="address">Nr tel: <span class="highlight">%s</span></p>
-                <p class="address">Adres: <span class="highlight">%s</span></p>
+                <p class="address">Imie: <span class="highlight">{name}</span> Nazwisko: <span class="highlight">{surname}</span></p>
+                <p class="address">Nr tel: <span class="highlight">{phone}</span></p>
+                <p class="address">Adres: <span class="highlight">{address}</span></p>
             </div>
         </div>
         <div class="main-container">
@@ -208,8 +208,8 @@
                 <p class="list-label">Podsumowanie</p>
             </div>
             <div class="final">
-                <p>Cena <span class="highlight">%s</span> zł</p>
-                <p>Ilość produktów <span class="highlight">%s</span></p>
+                <p>Cena <span class="highlight">{finalPrice}</span> zł</p>
+                <p>Ilość produktów <span class="highlight">{productCount}</span></p>
             </div>
         </div>
     </main>
