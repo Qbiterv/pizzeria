@@ -6,12 +6,17 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@EqualsAndHashCode
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ProductDto {
+    @EqualsAndHashCode.Include
     private Long id;
+
     private String name;
+
     private String description;
+
     private double price;
+
     private Category category;
 
     @Getter
