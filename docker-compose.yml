@@ -33,11 +33,26 @@ services:
       context: ./meal
       dockerfile: Dockerfile
     ports:
-      - "8081:8080"
+      - "9011:9010"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
     depends_on:
       - db
+    networks:
+      - "pizzaNetwork"
+
+  gateway:
+    container_name: gateway-service
+    image: pizzeria-brandenburg:latest
+    build:
+      context: ./brandenburg
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    depends_on:
+      - meal
+      - order
+      - mail
     networks:
       - "pizzaNetwork"
 
@@ -68,6 +83,8 @@ services:
       - "8091:8090"
     environment:
       - SPRING_PROFILES_ACTIVE=secret
+    depends_on:
+      - meal
     networks:
       - "pizzaNetwork"
 

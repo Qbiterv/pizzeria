@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
+import pl.auctane.order.dtos.status.MailStatusPayloadDto;
 import pl.auctane.order.entities.Order;
 import pl.auctane.order.entities.OrderStatus;
 import pl.auctane.order.entities.Status;
@@ -35,6 +37,9 @@ public class OrderStatusController {
     @Value("${service.url}")
     private String serviceUrl;
 
+    @Value("${service.mail.url}")
+    private String mailServiceUrl;
+
     @GetMapping(value = "/get")
     public ResponseEntity<?> getAllOrderStatuses() {
         return ResponseEntity.ok().body(orderStatusService.getAllOrderStatuses());
@@ -46,7 +51,7 @@ public class OrderStatusController {
 
         //check if order exist
         if(orderService.getOrderById(orderId).isEmpty()) {
-            JSON.put("succes", false);
+            JSON.put("successa", false);
             JSON.put("message", "Order with id " + orderId + " does not exist");
             return ResponseEntity.badRequest().body(JSON);
         }
@@ -55,7 +60,7 @@ public class OrderStatusController {
         Optional<OrderStatus> orderStatus =  orderStatusService.getOrderStatus(orderId);
 
         if(orderStatus.isEmpty()) {
-            JSON.put("succes", false);
+            JSON.put("success", false);
             JSON.put("message", "!!!Bad thing happened!!! Order with id " + orderId + " does not have a status");
             return ResponseEntity.badRequest().body(JSON);
         }
@@ -71,7 +76,7 @@ public class OrderStatusController {
 
         //check if order exist
         if(order.isEmpty()) {
-            JSON.put("succes", false);
+            JSON.put("success", false);
             JSON.put("message", "Order with id " + orderId + " does not exist");
             return ResponseEntity.badRequest().body(JSON);
         }
@@ -79,7 +84,7 @@ public class OrderStatusController {
         Optional<OrderStatus> orderStatus = orderStatusService.getOrderStatus(orderId);
 
         if(orderStatus.isEmpty()) {
-            JSON.put("succes", false);
+            JSON.put("success", false);
             JSON.put("message", "!!!Bad thing happened!!! Order with id " + orderId + " does not have a status");
             return ResponseEntity.badRequest().body(JSON);
         }
@@ -89,14 +94,36 @@ public class OrderStatusController {
         int indexOfStatus  = allStatuses.indexOf(status);
 
         if(indexOfStatus == allStatuses.size() - 1) {
-            JSON.put("succes", false);
+            JSON.put("success", false);
             JSON.put("message", "Order with id " + orderId + " is on the last status");
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        orderStatusService.updateOrderStatus(orderStatus.get(), allStatuses.get(indexOfStatus + 1));
+        if(indexOfStatus == allStatuses.size() - 2) {
+            orderService.setFinalized(order.get());
+        }
 
-        JSON.put("succes", true);
+        Status nextStatus = allStatuses.get(indexOfStatus + 1);
+
+        MailStatusPayloadDto mailStatusPayloadDto = new MailStatusPayloadDto();
+        mailStatusPayloadDto.setOrderId(orderId);
+        mailStatusPayloadDto.setTo(order.get().getEmail());
+        mailStatusPayloadDto.setSurname(order.get().getSurname());
+        mailStatusPayloadDto.setName(order.get().getName());
+        mailStatusPayloadDto.setSubject("Aktualizacja statusu zamówienia " + orderId);
+        mailStatusPayloadDto.setStatus(nextStatus.getName());
+
+        try {
+            new RestTemplate().postForEntity(mailServiceUrl + "/email/send-status", mailStatusPayloadDto, ObjectNode.class);
+        } catch (Exception e) {
+            JSON.put("success", false);
+            JSON.put("message", "!!!Bad thing happened!!! Could not send email with status update");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        orderStatusService.updateOrderStatus(orderStatus.get(), nextStatus);
+
+        JSON.put("success", true);
         JSON.put("message", "Order with id " + orderId + " successfully moved to next state");
         return ResponseEntity.ok().body(JSON);
     }
@@ -109,7 +136,7 @@ public class OrderStatusController {
 
         //check if order exist
         if(order.isEmpty()) {
-            JSON.put("succes", false);
+            JSON.put("success", false);
             JSON.put("message", "Order with id " + orderId + " does not exist");
             return ResponseEntity.badRequest().body(JSON);
         }
@@ -117,7 +144,7 @@ public class OrderStatusController {
         Optional<OrderStatus> orderStatus = orderStatusService.getOrderStatus(orderId);
 
         if(orderStatus.isEmpty()) {
-            JSON.put("succes", false);
+            JSON.put("success", false);
             JSON.put("message", "!!!Bad thing happened!!! Order with id " + orderId + " does not have a status");
             return ResponseEntity.badRequest().body(JSON);
         }
@@ -127,14 +154,14 @@ public class OrderStatusController {
         int indexOfStatus  = allStatuses.indexOf(status);
 
         if(indexOfStatus == 0) {
-            JSON.put("succes", false);
+            JSON.put("success", false);
             JSON.put("message", "Order with id " + orderId + " is on the first status");
             return ResponseEntity.badRequest().body(JSON);
         }
 
         orderStatusService.updateOrderStatus(orderStatus.get(), allStatuses.get(indexOfStatus - 1));
 
-        JSON.put("succes", true);
+        JSON.put("success", true);
         JSON.put("message", "Order with id " + orderId + " successfully moved to previous state");
         return ResponseEntity.ok().body(JSON);
     }
@@ -147,7 +174,7 @@ public class OrderStatusController {
 
         //check if order exist
         if(order.isEmpty()) {
-            JSON.put("succes", false);
+            JSON.put("success", false);
             JSON.put("message", "Order with id " + orderId + " does not exist");
             return ResponseEntity.badRequest().body(JSON);
         }
@@ -155,7 +182,7 @@ public class OrderStatusController {
         Optional<OrderStatus> orderStatus = orderStatusService.getOrderStatus(orderId);
 
         if(orderStatus.isEmpty()) {
-            JSON.put("succes", false);
+            JSON.put("success", false);
             JSON.put("message", "!!!Bad thing happened!!! Order with id " + orderId + " does not have a status");
             return ResponseEntity.badRequest().body(JSON);
         }
@@ -163,19 +190,19 @@ public class OrderStatusController {
         Optional<Status> newStatus = statusService.getStatusById(statusId);
 
         if(newStatus.isEmpty()) {
-            JSON.put("succes", false);
+            JSON.put("success", false);
             JSON.put("message", "Status with id " + statusId + " doest not exist");
             return ResponseEntity.badRequest().body(JSON);
         }
 
         if(newStatus.get().equals(orderStatus.get().getStatus())) {
-            JSON.put("succes", false);
+            JSON.put("success", false);
             JSON.put("message", "Order with id " + orderId + " is already on status with id " + statusId);
         }
 
         orderStatusService.updateOrderStatus(orderStatus.get(), newStatus.get());
 
-        JSON.put("succes", true);
+        JSON.put("success", true);
         JSON.put("message", "Set status id to " + statusId + " for order with id " + orderId);
         return ResponseEntity.ok().body(JSON);
     }
