@@ -39,7 +39,6 @@ public class EmailService {
 
         mailSender.send(message);
     }
-
     public void sendOrderEmail(String from, EmailOrderDto emailOrderDto, String htmlPath, List<HtmlFileDto> files) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = null;
@@ -161,7 +160,7 @@ public class EmailService {
             //if product is in list increment quantity
             if (productsWithQuantity.containsKey(product)) {
                 productsWithQuantity.compute(product, (k, quantity) -> {
-                    if(quantity == null) throw new RuntimeException("Bad thing Integer is null, when it should not be");
+                    assert quantity != null : "!!!Bad thing happened!!! quantity of product is null";
                     return quantity + 1;
                 });
                 continue;

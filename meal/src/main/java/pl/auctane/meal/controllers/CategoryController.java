@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.auctane.meal.dtos.category.CategoryDto;
 import pl.auctane.meal.entities.Category;
 import pl.auctane.meal.services.CategoryService;
 
@@ -71,26 +72,36 @@ public class CategoryController {
     }
 
     @PatchMapping("/edit/{id}")
-    public ResponseEntity<?> editCategory(@PathVariable("id") Long id, @RequestBody String name) {
+    public ResponseEntity<?> editCategory(@PathVariable("id") Long id, @RequestBody CategoryDto categoryDto) {
         ObjectNode JSON = objectMapper.createObjectNode();
+
         Optional<Category> category = categoryService.getCategory(id);
 
         if(category.isEmpty()) {
-
             JSON.put("success", false);
             JSON.put("message", "Category with id: " + id + " doesn't exist");
-
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        if(name == null || name.isEmpty()) {
+        if(categoryDto == null) {
             JSON.put("success", false);
-            JSON.put("message", "Invalid name");
-
+            JSON.put("message", "No body");
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        category.get().setName(name);
+        if(categoryDto.getName() == null || categoryDto.getName().isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Invalid category name");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        if(categoryDto.getName().equals(category.get().getName())) {
+            JSON.put("success", false);
+            JSON.put("message", "Category with id " + id + " already has a name" + categoryDto.getName());
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        category.get().setName(categoryDto.getName());
         categoryService.updateCategory(category.get());
 
         JSON.put("success", true);
