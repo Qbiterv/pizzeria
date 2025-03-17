@@ -74,7 +74,19 @@ project(":mail") {
 project(":brandenburg") {
 	description = "Gateway module, routes all the requests"
 
+	extra["springCloudVersion"] = "2024.0.0"
+
 	dependencies {
+		implementation("org.springframework.cloud:spring-cloud-starter-gateway")
+		testImplementation("org.springframework.boot:spring-boot-starter-test")
+		testImplementation("io.projectreactor:reactor-test")
+		testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	}
+
+	dependencyManagement {
+		imports {
+			mavenBom("org.springframework.cloud:spring-cloud-dependencies:${property("springCloudVersion")}")
+		}
 	}
 }
 
@@ -86,7 +98,6 @@ tasks.register("buildAll") {
 		it.tasks.named("build")
 	})
 }
-
 
 tasks.withType<Test> {
 	useJUnitPlatform()
