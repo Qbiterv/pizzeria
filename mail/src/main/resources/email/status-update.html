@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Aktualizacja statusu</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      align-content: center;
+    }
+
+    section {
+      width: 500px;
+      height: auto;
+      background: #f5f5f5;
+      padding: 1.5rem;
+      margin: 1.5rem;
+      border-radius: 1.25rem;
+    }
+
+    .bold-text {
+      font-weight: bold;
+    }
+
+    .list-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 30px;
+      width: 95%;
+
+    }
+
+    .list-label {
+      font-size: 1.25rem;
+      font-weight: bold;
+      text-align: left;
+    }
+
+    .list-id {
+      font-size: 0.85rem;
+      font-weight: lighter;
+      text-align: right;
+    }
+
+    .highlight {
+        background-color: lightgray;
+        font-style: italic;
+        padding: 0.25rem;
+        border-radius: 0.25rem;
+    }
+
+    footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .footer-info {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 95%;
+    }
+
+    .contact-data {
+      margin: 0 2.5rem 0 2.5rem;
+    }
+
+    .footer-element {
+      opacity: 0.7;
+      transition: opacity .3s;
+    }
+
+    .footer-element-hover:hover {
+      opacity: 1;
+      transition: opacity .3s;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <header style="display: flex; align-content: center; justify-content: center; align-content: center; gap: 1rem">
+    <img src="cid:metapack.png" alt="MetaPack Logo" width="174px" height="auto">
+    <h1>Status zaktualizowany</h1>
+  </header>
+  <main>
+    <section>
+      <p>Witaj <span class="bold-text">{name} {surname}</span>,</p>
+      <p>Status Twojego zamówienia został zaktualizowany.</p>
+    </section>
+    <section>
+      <div class="list-container">
+        <p class="list-label">Nowy status</p>
+        <p class="list-id">Identyfikator: <span class="highlight">{orderId}</span></p>
+      </div>
+      <h2>{status}</h2>
+    </section>
+  </main>
+  <footer>
+    <p class="footer-element">Wiadomość wysłana automatycznie, w razie jakichkolwiek problemów prosimy o kontakt z naszym działem obsługi klienta.</p>
+    <br>
+    <div class="footer-info">
+      <a href="https://auctane.com" target="_blank">
+        <img class="footer-element footer-element-hover" src="cid:auctane.jpg" width="150px" height="auto" alt="Auctane Inc. company's logo">
+      </a>
+      <div>
+        <p><span class="footer-element">Tel:</span> <a class="footer-element footer-element-hover" href="tel:+48684127700" target="_blank">48 68 412 77 00</a></p>
+        <p><span class="footer-element">E-mail:</span> <a class="footer-element footer-element-hover" href="mailto:praca@auctane.com" target="_blank">praca@auctane.com</a></p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

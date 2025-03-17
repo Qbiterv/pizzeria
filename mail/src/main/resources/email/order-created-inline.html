@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta content="Auctane Inc." name="author">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <title>Zamówienie złożone</title>
+</head>
+
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; display: flex; flex-direction: column; align-items: center; gap: 2rem;">
+<header style="display: flex; flex-direction: column; gap: 2rem; justify-content: center; align-items: center; background-color: aliceblue; border-radius: 0 0 45px 45px; width: 800px; height: 300px;">
+    <div>
+        <img src="cid:metapack.jpg" alt="MetaPack Logo" style="width: 150px; height: auto;">
+        <h1 style="text-align: center;">Witaj, %s %s!<br>Zamówienie zostało złożone <br>i już leci do Ciebie!</h1>
+        <p style="text-align: center;">Poniżej znajdziesz wszystkie szczegóły dotyczące zamówienia, smacznego!</p>
+    </div>
+</header>
+<main style="margin: 0; padding: 0;">
+    <h2 style="text-align: center;">Szczegóły zamówienia</h2>
+    <div style="width: 30rem; height: auto; background-color: #f5f5f5; border-radius: 1.25rem; padding: 1rem; margin-bottom: 1rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; height: 30px; width: 75vw;">
+            <p style="font-size: 1.25rem; font-weight: bold; text-align: left;">Lista produktów</p>
+            <p style="font-size: 0.85rem; font-weight: lighter; text-align: right;">Identyfikator: <span style="background-color: lightgray; font-style: italic; padding: 0.25rem; border-radius: 0.25rem;">%s</span></p>
+        </div>
+        <ul style="list-style-type: none; padding: 0; display: flex; flex-direction: column; justify-content: center; margin: 0 2.5rem; font-size: large;">
+            %s
+        </ul>
+    </div>
+</main>
+<footer style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <p style="opacity: 0.7; transition: opacity .3s;">Wiadomość wysłana automatycznie, w razie jakichkolwiek problemów prosimy o kontakt z naszym działem obsługi klienta.</p>
+    <div style="display: flex; justify-content: space-between; align-items: center; width: 95vh;">
+        <a href="https://auctane.com" target="_blank">
+            <img width="150px" src="cid:auctane.jpg" alt="Auctane Inc. company's logo" style="opacity: 0.7; transition: opacity .3s; cursor: pointer;">
+        </a>
+        <div>
+            <p><span style="opacity: 0.7; transition: opacity .3s;">Tel:</span> <a href="tel:+48684127700" target="_blank" style="text-decoration: none; color: black; opacity: 0.7; transition: opacity .3s;">48 68 412 77 00</a></p>
+            <p><span style="opacity: 0.7; transition: opacity .3s;">E-mail:</span> <a href="mailto:praca@auctane.com" target="_blank" style="text-decoration: none; color: black; opacity: 0.7; transition: opacity .3s;">praca@auctane.com</a></p>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

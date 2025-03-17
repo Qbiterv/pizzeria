@@ -5,7 +5,7 @@
     <meta content="Auctane Inc." name="author">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <title>Zamówienie złożone - </title>
+    <title>Zamówienie złożone - {orderId}</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -19,17 +19,22 @@
             gap: 2rem;
         }
 
+        img[src="cid:metapack.png"] {
+            margin: 1.25rem;
+        }
+
         header {
             display: flex;
             flex-direction: column;
             gap: 2rem;
+            border-spacing: 20px;
             justify-content: center;
             align-content: center;
             align-items: center;
             background-color: aliceblue;
             border-radius: 0 0 45px 45px;
             width: 800px;
-            height: 300px;
+            height: auto;
         }
 
         img {
@@ -172,18 +177,24 @@
             transition: opacity .3s;
             cursor: pointer;
         }
+
+        .bold-text {
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <header>
         <div>
-            <img src="cid:metapack.svg" alt="MetaPack Logo">
+            <img src="cid:metapack.png" alt="MetaPack Logo">
             <h1>Witaj, {name} {surname}!<br>Zamówienie zostało złożone <br>i już leci do Ciebie!</h1>
-            <p>Poniżej znajdziesz wszystkie szczegóły dotyczące zamówienia, smacznego 😋</p>
+            <p>Poniżej znajdziesz wszystkie szczegóły dotyczące zamówienia, smacznego</p>
         </div>
     </header>
     <main>
+        <center>
         <h2>Szczegóły zamówienia</h2>
+        </center>
         <div class="main-container">
             <div class="list-container">
                 <p class="list-label">Lista produktów</p>
@@ -198,9 +209,10 @@
                 <p class="list-label">Dane kontaktowe</p>
             </div>
             <div class="contact-data">
-                <p class="address">Imie: <span class="highlight">{name}</span> Nazwisko: <span class="highlight">{surname}</span></p>
-                <p class="address">Nr tel: <span class="highlight">{phone}</span></p>
-                <p class="address">Adres: <span class="highlight">{address}</span></p>
+                <p class="address">Imie: <span class="bold-text">{name}</span></p>
+                <p class="address">Nazwisko: <span class="bold-text">{surname}</span></p>
+                <p class="address">Nr tel: <span class="bold-text">{phone}</span></p>
+                <p class="address">Adres: <span class="bold-text">{address}</span></p>
             </div>
         </div>
         <div class="main-container">
@@ -208,13 +220,14 @@
                 <p class="list-label">Podsumowanie</p>
             </div>
             <div class="final">
-                <p>Cena <span class="highlight">{finalPrice}</span> zł</p>
-                <p>Ilość produktów <span class="highlight">{productCount}</span></p>
+                <p>Cena <span class="highlight">{finalPrice}</span> zł </p>
+                <p> Ilość produktów <span class="highlight">{productCount}</span></p>
             </div>
         </div>
     </main>
     <footer>
         <p class="footer-element">Wiadomość wysłana automatycznie, w razie jakichkolwiek problemów prosimy o kontakt z naszym działem obsługi klienta.</p>
+        <br>
         <div class="footer-info">
             <a href="https://auctane.com" target="_blank">
                 <img class="footer-element footer-element-hover" src="cid:auctane.jpg" alt="Auctane Inc. company's logo">

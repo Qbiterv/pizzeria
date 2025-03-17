@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
+import pl.auctane.order.dtos.order.MailPayloadDto;
 import pl.auctane.order.dtos.order.OrderDto;
 import pl.auctane.order.dtos.order.ProductDto;
 import pl.auctane.order.entities.Order;
@@ -32,6 +33,9 @@ public class OrderController {
     private final ObjectMapper objectMapper;
     private final OrderProductService orderProductService;
     private final OrderStatusService orderStatusService;
+
+    @Value("${service.mail.url}")
+    private String mailServiceUrl;
 
     @Autowired
     public OrderController(OrderService orderService, ObjectMapper objectMapper, OrderProductService orderProductService, OrderStatusService orderStatusService) {
@@ -171,12 +175,39 @@ public class OrderController {
         // Create order
         Order order = orderService.createOrder(orderDto.getName(), orderDto.getSurname(), orderDto.getEmail(), orderDto.getPhone(), orderDto.getAddress());
 
+        List<ProductDto> productDtos = new ArrayList<>();
+
         // Connect all products with order
         for (Long product : products) {
             orderProductService.createOrderProduct(order, product);
         }
 
         orderStatusService.registerOrder(order);
+
+        ObjectNode payLoad = objectMapper.createObjectNode();
+
+        MailPayloadDto mailPayloadDto = new MailPayloadDto();
+        mailPayloadDto.setTo(orderDto.getEmail());
+        mailPayloadDto.setSubject("Zamówienie zostało złożone - nr " + order.getId());
+        mailPayloadDto.setName(orderDto.getName());
+        mailPayloadDto.setSurname(orderDto.getSurname());
+        mailPayloadDto.setPhone(orderDto.getPhone());
+        mailPayloadDto.setOrderId(order.getId());
+        mailPayloadDto.setAddress(orderDto.getAddress());
+        mailPayloadDto.setProductIds(products);
+
+//        payLoad.set("payload", objectMapper.valueToTree(mailPayloadDto));
+
+        String url = mailServiceUrl + "/email/send-order";
+
+        try {
+            new RestTemplate().postForEntity(url, mailPayloadDto, ObjectNode.class);
+        } catch (HttpStatusCodeException | ResourceAccessException e) {
+            JSON.put("success", false);
+            JSON.put("message", e.getMessage());
+
+            return ResponseEntity.badRequest().body(JSON);
+        }
 
         JSON.put("success", true);
         JSON.put("message", "Created order: " + order.getId());

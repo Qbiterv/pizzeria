@@ -71,6 +71,13 @@ project(":mail") {
 	}
 }
 
+project(":brandenburg") {
+	description = "Gateway module, routes all the requests"
+
+	dependencies {
+	}
+}
+
 tasks.register("buildAll") {
 	group = "build"
 	description = "Builds all subprojects"
