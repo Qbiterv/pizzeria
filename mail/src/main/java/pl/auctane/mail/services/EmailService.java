@@ -190,7 +190,7 @@ public class EmailService {
                 """;
 
             // Adding info to product list
-            productsAsString.append(String.format(productInfo, productAndQuantity.getValue(), productAndQuantity.getKey().getName(), productAndQuantity.getKey().getPrice(), mealList));
+            productsAsString.append(String.format(productInfo, productAndQuantity.getValue(), productAndQuantity.getKey().getName(), productAndQuantity.getKey().getPrice() * productAndQuantity.getValue(), mealList));
         }
 
         return productsAsString.toString();
