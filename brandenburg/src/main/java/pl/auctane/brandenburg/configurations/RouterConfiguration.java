@@ -9,8 +9,10 @@ public class RouterConfiguration {
     @Bean
     public RouteLocator routeLocator(RouteLocatorBuilder builder) {
         return builder.routes()
-                .route("mail", r -> r.path("/mail/**")
-                        .uri("http://localhost:8081"))
+                .route("order", r -> r.path("/v1/order/create")
+                        .and()
+                        .method("POST")
+                        .uri("http://order:9090"))
                 .route("user", r -> r.path("/user/**")
                         .uri("http://localhost:8082"))
                 .build();
