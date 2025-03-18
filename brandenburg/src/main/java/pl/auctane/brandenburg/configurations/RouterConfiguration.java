@@ -3,6 +3,7 @@ package pl.auctane.brandenburg.configurations;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
+import pl.auctane.brandenburg.components.RequestFilter;
 
 public class RouterConfiguration {
 
@@ -10,8 +11,7 @@ public class RouterConfiguration {
     public RouteLocator routeLocator(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route("order", r -> r.path("/v1/order/create")
-                        .and()
-                        .method("POST")
+                        .and().method("POST")
                         .uri("http://order:9090"))
                 .route("user", r -> r.path("/user/**")
                         .uri("http://localhost:8082"))
