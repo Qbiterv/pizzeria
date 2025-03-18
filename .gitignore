@@ -37,3 +37,4 @@ out/
 .vscode/
 
 mail/src/main/resources/application-secret.properties
+newrelic-infra.yml
