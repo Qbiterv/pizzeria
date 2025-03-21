@@ -38,3 +38,9 @@ out/
 
 mail/src/main/resources/application-secret.properties
 newrelic-infra.yml
+newrelic.yml
+/mail/newrelic.yml
+/order/newrelic.yml
+/meal/newrelic.yml
+/brandenburg/newrelic.yml
+/*/newrelic.yml

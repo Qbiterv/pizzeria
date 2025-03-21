@@ -1,0 +1,1051 @@
+2025-03-18T11:46:31,689+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T11:46:31,690+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T11:46:31,690+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T11:46:31,690+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T11:46:31,691+0000 [1 1] com.newrelic INFO: Agent Host: 6cf91ecd4a81 IP: 172.18.0.3
+2025-03-18T11:46:31,691+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T11:46:31,776+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T11:46:31,777+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T11:46:31,777+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T11:46:31,778+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T11:46:31,778+0000 [1 1] com.newrelic INFO: Agent Host: cb1b7733312e IP: 172.18.0.5
+2025-03-18T11:46:31,778+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T11:46:31,811+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T11:46:31,813+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T11:46:31,814+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T11:46:31,814+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T11:46:31,814+0000 [1 1] com.newrelic INFO: Agent Host: f522a14edb16 IP: 172.18.0.6
+2025-03-18T11:46:31,814+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T11:46:32,167+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T11:46:32,167+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T11:46:32,167+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T11:46:32,167+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T11:46:32,168+0000 [1 1] com.newrelic INFO: Agent Host: aaa9e3087b17 IP: 172.18.0.7
+2025-03-18T11:46:32,168+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T11:46:32,415+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T11:46:32,432+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T11:46:32,745+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T11:46:33,281+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T11:46:34,183+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T11:46:34,225+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T11:46:34,437+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T11:46:34,578+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T11:46:34,652+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T11:46:34,731+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T11:46:34,815+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T11:46:34,823+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T11:46:34,825+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T11:46:34,826+0000 [1 1] com.newrelic INFO: Premain startup complete in 4,410ms
+2025-03-18T11:46:34,827+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T11:46:34,828+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T11:46:34,841+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T11:46:34,842+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T11:46:34,843+0000 [1 1] com.newrelic INFO: Premain startup complete in 4,232ms
+2025-03-18T11:46:34,847+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T11:46:34,873+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T11:46:34,895+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T11:46:35,090+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T11:46:35,100+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T11:46:35,101+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T11:46:35,102+0000 [1 1] com.newrelic INFO: Premain startup complete in 4,353ms
+2025-03-18T11:46:35,107+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T11:46:35,157+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T11:46:35,333+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T11:46:35,884+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T11:46:36,379+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T11:46:36,419+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T11:46:36,420+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T11:46:36,421+0000 [1 1] com.newrelic INFO: Premain startup complete in 5,440ms
+2025-03-18T11:46:36,427+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T11:46:36,475+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T11:46:40,396+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T11:46:40,891+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T11:46:41,154+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T11:46:42,512+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T11:46:44,841+0000 [1 54] com.newrelic INFO: Host name is cb1b7733312e, display host cb1b7733312e for application order
+2025-03-18T11:46:44,843+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:46:45,100+0000 [1 54] com.newrelic INFO: Host name is f522a14edb16, display host f522a14edb16 for application order
+2025-03-18T11:46:45,102+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:46:45,304+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T11:46:45,437+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T11:46:45,489+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T11:46:45,490+0000 [1 54] com.newrelic INFO: Agent run id: BfV_jV3_8dSuAGMwlB5OUbBn2V1wAAIBACdHIQEAAAABAgQeTsuNyxt3MzEu4183zCIX9dP6KNDSKp6FPnE686nQvlD5IxADAAY4LjE5LjAADGNiMWI3NzMzMzEyZQAFb3JkZXI
+2025-03-18T11:46:45,490+0000 [1 54] com.newrelic INFO: Agent 1@cb1b7733312e/order connected to collector.eu01.nr-data.net:443
+2025-03-18T11:46:45,490+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508480397
+2025-03-18T11:46:45,492+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:46:45,492+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:46:45,492+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:46:45,493+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:46:45,494+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:46:45,494+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:46:45,598+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T11:46:45,598+0000 [1 54] com.newrelic INFO: Agent run id: BZ0Q-26QkFjhAGMwlB5OUHxn2V1wAAIBACdHIQEAAAABAgQeTsuN9SKhTtsWQSxPFvSevPmBUCSfGeP3ogxBqvNigTHRW8oDAAY4LjE5LjAADGY1MjJhMTRlZGIxNgAFb3JkZXI
+2025-03-18T11:46:45,598+0000 [1 54] com.newrelic INFO: Agent 1@f522a14edb16/order connected to collector.eu01.nr-data.net:443
+2025-03-18T11:46:45,599+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508480397
+2025-03-18T11:46:45,600+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:46:45,600+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:46:45,601+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:46:45,602+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:46:45,602+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:46:45,603+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:46:45,623+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application order. Auto instrumentation is enabled.
+2025-03-18T11:46:45,623+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:46:45,670+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application order. Auto instrumentation is enabled.
+2025-03-18T11:46:45,670+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:46:46,405+0000 [1 54] com.newrelic INFO: Host name is aaa9e3087b17, display host aaa9e3087b17 for application order
+2025-03-18T11:46:46,406+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:46:46,697+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T11:46:46,855+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T11:46:46,855+0000 [1 54] com.newrelic INFO: Agent run id: BaSOFPPp2j6qAGMwlB5OUK1n2V1wAAIBACdHIQEAAAABAgQeTsuNqqnjCHsXF77NZMChPKpwOdBAU_5oUfgWQKLHwp2zyxIDAAY4LjE5LjAADGFhYTllMzA4N2IxNwAFb3JkZXI
+2025-03-18T11:46:46,855+0000 [1 54] com.newrelic INFO: Agent 1@aaa9e3087b17/order connected to collector.eu01.nr-data.net:443
+2025-03-18T11:46:46,856+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508480397
+2025-03-18T11:46:46,858+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:46:46,858+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:46:46,858+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:46:46,859+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:46:46,860+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:46:46,860+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:46:46,986+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application order. Auto instrumentation is enabled.
+2025-03-18T11:46:46,986+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:46:49,833+0000 [1 54] com.newrelic INFO: Host name is 6cf91ecd4a81, display host 6cf91ecd4a81 for application order
+2025-03-18T11:46:49,835+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:46:50,168+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T11:46:50,323+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T11:46:50,323+0000 [1 54] com.newrelic INFO: Agent run id: BdDS1jSF4oVlAGMwlB5OUb5n2V1wAAIBACdHIQEAAAABAgQeTsuNbPkezUqB6NLXEN-qDKmf3JAvxAOo01EDPtABI-knq48DAAY4LjE5LjAADDZjZjkxZWNkNGE4MQAFb3JkZXI
+2025-03-18T11:46:50,323+0000 [1 54] com.newrelic INFO: Agent 1@6cf91ecd4a81/order connected to collector.eu01.nr-data.net:443
+2025-03-18T11:46:50,324+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508480397
+2025-03-18T11:46:50,326+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:46:50,326+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:46:50,326+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:46:50,329+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:46:50,329+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:46:50,329+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:46:50,440+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application order. Auto instrumentation is enabled.
+2025-03-18T11:46:50,441+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:53:15,666+0000 [1 77] com.newrelic INFO: Re-reading New Relic configuration file
+2025-03-18T11:53:15,682+0000 [1 77] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:15,682+0000 [1 77] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:15,682+0000 [1 77] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:15,686+0000 [1 77] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:15,686+0000 [1 77] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:15,686+0000 [1 77] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:15,690+0000 [1 77] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:15,690+0000 [1 77] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:15,690+0000 [1 77] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:15,693+0000 [1 77] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:15,693+0000 [1 77] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:15,693+0000 [1 77] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:15,740+0000 [1 80] com.newrelic INFO: Re-reading New Relic configuration file
+2025-03-18T11:53:15,755+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:15,756+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:15,756+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:15,761+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:15,761+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:15,761+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:15,765+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:15,765+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:15,765+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:15,768+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:15,768+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:15,769+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:17,032+0000 [1 79] com.newrelic INFO: Re-reading New Relic configuration file
+2025-03-18T11:53:17,048+0000 [1 79] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:17,049+0000 [1 79] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:17,049+0000 [1 79] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:17,056+0000 [1 79] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:17,056+0000 [1 79] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:17,056+0000 [1 79] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:17,059+0000 [1 79] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:17,059+0000 [1 79] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:17,059+0000 [1 79] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:17,061+0000 [1 79] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:17,061+0000 [1 79] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:17,061+0000 [1 79] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:20,582+0000 [1 80] com.newrelic INFO: Re-reading New Relic configuration file
+2025-03-18T11:53:20,596+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:20,597+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:20,597+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:20,602+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:20,602+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:20,602+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:20,605+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:20,605+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:20,605+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:53:20,606+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:53:20,607+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:53:20,607+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:13,594+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T11:59:13,767+0000 [1 59] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:59:13,768+0000 [1 59] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:59:13,768+0000 [1 59] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:13,773+0000 [1 59] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:59:13,773+0000 [1 59] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:59:13,773+0000 [1 59] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:13,774+0000 [1 59] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@1f006d4 tried to finish but ServiceManager not started
+2025-03-18T11:59:13,823+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T11:59:14,168+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T11:59:14,277+0000 [1 58] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:59:14,279+0000 [1 58] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:59:14,281+0000 [1 58] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:14,289+0000 [1 58] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:59:14,289+0000 [1 58] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:59:14,289+0000 [1 58] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:14,291+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@73ce771c tried to finish but ServiceManager not started
+2025-03-18T11:59:14,305+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T11:59:14,529+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T11:59:14,610+0000 [1 58] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:59:14,610+0000 [1 58] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:59:14,610+0000 [1 58] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:14,613+0000 [1 58] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:59:14,614+0000 [1 58] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:59:14,614+0000 [1 58] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:14,616+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@57c0ae61 tried to finish but ServiceManager not started
+2025-03-18T11:59:14,973+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T11:59:15,284+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T11:59:15,411+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T11:59:31,731+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T11:59:31,730+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T11:59:31,733+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T11:59:31,733+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T11:59:31,734+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T11:59:31,734+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T11:59:31,735+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T11:59:31,735+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T11:59:31,736+0000 [1 1] com.newrelic INFO: Agent Host: 3410009db659 IP: 172.18.0.3
+2025-03-18T11:59:31,738+0000 [1 1] com.newrelic INFO: Agent Host: 2528eb010126 IP: 172.18.0.5
+2025-03-18T11:59:31,738+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T11:59:31,738+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T11:59:31,811+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T11:59:31,819+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T11:59:31,820+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T11:59:31,820+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T11:59:31,820+0000 [1 1] com.newrelic INFO: Agent Host: f5bb9dc3725d IP: 172.18.0.6
+2025-03-18T11:59:31,820+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T11:59:32,408+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T11:59:32,411+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T11:59:32,412+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T11:59:32,412+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T11:59:32,413+0000 [1 1] com.newrelic INFO: Agent Host: b324db81b130 IP: 172.18.0.7
+2025-03-18T11:59:32,414+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T11:59:32,950+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T11:59:33,083+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T11:59:33,112+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T11:59:33,606+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T11:59:35,247+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T11:59:35,281+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T11:59:35,739+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T11:59:36,015+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T11:59:36,032+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T11:59:36,299+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T11:59:36,401+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T11:59:36,417+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T11:59:36,425+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T11:59:36,427+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T11:59:36,428+0000 [1 1] com.newrelic INFO: Premain startup complete in 6,550ms
+2025-03-18T11:59:36,430+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T11:59:36,430+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T11:59:36,473+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T11:59:36,477+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T11:59:36,477+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T11:59:36,478+0000 [1 1] com.newrelic INFO: Premain startup complete in 6,952ms
+2025-03-18T11:59:36,482+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T11:59:36,522+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T11:59:36,683+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T11:59:36,690+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T11:59:36,690+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T11:59:36,690+0000 [1 1] com.newrelic INFO: Premain startup complete in 6,641ms
+2025-03-18T11:59:36,694+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T11:59:36,731+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T11:59:36,770+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T11:59:37,193+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T11:59:37,214+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T11:59:37,215+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T11:59:37,216+0000 [1 1] com.newrelic INFO: Premain startup complete in 6,834ms
+2025-03-18T11:59:37,223+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T11:59:37,281+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T11:59:42,450+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T11:59:42,793+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T11:59:43,908+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T11:59:44,569+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T11:59:46,439+0000 [1 54] com.newrelic INFO: Host name is 2528eb010126, display host 2528eb010126 for application mail-service
+2025-03-18T11:59:46,445+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:59:47,151+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T11:59:47,217+0000 [1 54] com.newrelic INFO: Host name is b324db81b130, display host b324db81b130 for application gateway-service
+2025-03-18T11:59:47,219+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:59:47,397+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T11:59:47,398+0000 [1 54] com.newrelic INFO: Agent run id: BTuVsyfy4LCWAGMwlB5OBgVn2WB8AAIBACdHIQEAAAABAgQeTf6kJSjrAQEmO2I887Q8u-FSTQs9HVKJAvLwmLcL2hvWJ78DAAY4LjE5LjAADDI1MjhlYjAxMDEyNgAMbWFpbC1zZXJ2aWNl
+2025-03-18T11:59:47,399+0000 [1 54] com.newrelic INFO: Agent 1@2528eb010126/mail-service connected to collector.eu01.nr-data.net:443
+2025-03-18T11:59:47,400+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508427940
+2025-03-18T11:59:47,402+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:59:47,402+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:59:47,403+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:47,406+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:59:47,406+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:59:47,406+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:47,588+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T11:59:47,600+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application mail-service. Auto instrumentation is enabled.
+2025-03-18T11:59:47,601+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:59:47,764+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T11:59:47,764+0000 [1 54] com.newrelic INFO: Agent run id: Bb_QSvCPyC3EAGMwlB5N_ixn2WB8AAIBACdHIQEAAAABAgQeTf5asyTbgbEwwSmb0F-Ddu2XDONfMhFW6XnqmHUMwyKXNd4DAAY4LjE5LjAADGIzMjRkYjgxYjEzMAAPZ2F0ZXdheS1zZXJ2aWNl
+2025-03-18T11:59:47,765+0000 [1 54] com.newrelic INFO: Agent 1@b324db81b130/gateway-service connected to collector.eu01.nr-data.net:443
+2025-03-18T11:59:47,766+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508427866
+2025-03-18T11:59:47,768+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:59:47,769+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:59:47,769+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:47,772+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:59:47,772+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:59:47,772+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:47,853+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application gateway-service. Auto instrumentation is enabled.
+2025-03-18T11:59:47,854+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:59:51,490+0000 [1 54] com.newrelic INFO: Host name is 3410009db659, display host 3410009db659 for application meal-service
+2025-03-18T11:59:51,497+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:59:51,708+0000 [1 54] com.newrelic INFO: Host name is f5bb9dc3725d, display host f5bb9dc3725d for application order-service
+2025-03-18T11:59:51,712+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:59:51,858+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T11:59:52,013+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T11:59:52,013+0000 [1 54] com.newrelic INFO: Agent run id: BdIlaUOeXdk2AGMwlB5OASBn2WB8AAIBACdHIQEAAAABAgQeTf3eNBAAnbZZdYNimUqyI8iAcqks1ynA9TCax3MO2PPBXuYDAAY4LjE5LjAADDM0MTAwMDlkYjY1OQAMbWVhbC1zZXJ2aWNl
+2025-03-18T11:59:52,014+0000 [1 54] com.newrelic INFO: Agent 1@3410009db659/meal-service connected to collector.eu01.nr-data.net:443
+2025-03-18T11:59:52,014+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508427742
+2025-03-18T11:59:52,016+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:59:52,016+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:59:52,016+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:52,018+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:59:52,019+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:59:52,019+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:52,076+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T11:59:52,081+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application meal-service. Auto instrumentation is enabled.
+2025-03-18T11:59:52,082+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T11:59:52,238+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T11:59:52,238+0000 [1 54] com.newrelic INFO: Agent run id: BZLU8zmvNT7XAGMwlB5N_Xxn2WB8AAIBACdHIQEAAAABAgQeTf519budw3JdNlbCiWRU3mDZ7FJKmQHl-VfpFxJdXHBgAksDAAY4LjE5LjAADGY1YmI5ZGMzNzI1ZAANb3JkZXItc2VydmljZQ
+2025-03-18T11:59:52,239+0000 [1 54] com.newrelic INFO: Agent 1@f5bb9dc3725d/order-service connected to collector.eu01.nr-data.net:443
+2025-03-18T11:59:52,240+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508427893
+2025-03-18T11:59:52,242+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:59:52,242+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:59:52,242+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:52,245+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T11:59:52,245+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T11:59:52,245+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T11:59:52,364+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application order-service. Auto instrumentation is enabled.
+2025-03-18T11:59:52,365+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:03:15,766+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:03:15,883+0000 [1 59] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@5fc8ce26 tried to finish but ServiceManager not started
+2025-03-18T12:03:15,955+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:03:16,244+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:03:16,344+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@48af91ea tried to finish but ServiceManager not started
+2025-03-18T12:03:16,439+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:03:16,674+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:03:16,750+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@1548681 tried to finish but ServiceManager not started
+2025-03-18T12:03:16,795+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:03:17,148+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:03:17,235+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@1b08a503 tried to finish but ServiceManager not started
+2025-03-18T12:03:17,260+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:03:32,220+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:03:32,220+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:03:32,221+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:03:32,221+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:03:32,221+0000 [1 1] com.newrelic INFO: Agent Host: fb8ca7ce4300 IP: 172.18.0.3
+2025-03-18T12:03:32,222+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:03:32,221+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:03:32,225+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:03:32,226+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:03:32,226+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:03:32,226+0000 [1 1] com.newrelic INFO: Agent Host: 2bbdbd9d4e53 IP: 172.18.0.5
+2025-03-18T12:03:32,226+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:03:32,276+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:03:32,279+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:03:32,279+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:03:32,279+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:03:32,279+0000 [1 1] com.newrelic INFO: Agent Host: edcae6d99974 IP: 172.18.0.6
+2025-03-18T12:03:32,280+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:03:32,494+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:03:32,499+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:03:32,499+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:03:32,500+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:03:32,500+0000 [1 1] com.newrelic INFO: Agent Host: 88cb95c0715e IP: 172.18.0.7
+2025-03-18T12:03:32,501+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:03:33,209+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:03:33,251+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:03:33,280+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:03:33,307+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:03:35,992+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:03:36,006+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:03:36,009+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:03:36,361+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:03:36,445+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:03:36,455+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:03:36,464+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:03:36,612+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:03:36,620+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:03:36,621+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:03:36,621+0000 [1 1] com.newrelic INFO: Premain startup complete in 5,752ms
+2025-03-18T12:03:36,623+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:03:36,664+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:03:36,681+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:03:36,698+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:03:36,701+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:03:36,702+0000 [1 1] com.newrelic INFO: Premain startup complete in 5,481ms
+2025-03-18T12:03:36,704+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:03:36,743+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:03:36,750+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:03:36,756+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:03:36,757+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:03:36,759+0000 [1 1] com.newrelic INFO: Premain startup complete in 5,734ms
+2025-03-18T12:03:36,778+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:03:36,796+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:03:36,839+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:03:37,309+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:03:37,319+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:03:37,319+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:03:37,320+0000 [1 1] com.newrelic INFO: Premain startup complete in 5,895ms
+2025-03-18T12:03:37,323+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:03:37,349+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:03:44,055+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:03:44,430+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:03:44,580+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:03:44,967+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:03:46,799+0000 [1 54] com.newrelic INFO: Host name is 2bbdbd9d4e53, display host 2bbdbd9d4e53 for application mail-service
+2025-03-18T12:03:46,813+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:03:47,339+0000 [1 54] com.newrelic INFO: Host name is 88cb95c0715e, display host 88cb95c0715e for application gateway-service
+2025-03-18T12:03:47,346+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:03:47,611+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:03:47,786+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:03:47,848+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:03:47,849+0000 [1 54] com.newrelic INFO: Agent run id: BewTKM3hg7s_AGMwlB5N3eNn2WFsAAIBACdHIQEAAAABAgQeTf6kK729nU5TGhi-DOH1b101PiFzqr9kXBB9voFAzhDft3MDAAY4LjE5LjAADDJiYmRiZDlkNGU1MwAMbWFpbC1zZXJ2aWNl
+2025-03-18T12:03:47,851+0000 [1 54] com.newrelic INFO: Agent 1@2bbdbd9d4e53/mail-service connected to collector.eu01.nr-data.net:443
+2025-03-18T12:03:47,853+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508427940
+2025-03-18T12:03:47,859+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:03:47,859+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:03:47,860+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:03:47,865+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:03:47,865+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:03:47,866+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:03:47,963+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:03:47,963+0000 [1 54] com.newrelic INFO: Agent run id: BTFE_MD599bOAGMwlB5N4OJn2WFsAAIBACdHIQEAAAABAgQeTf5aiMuVwHFeWQ-eJ4EmQZLGxlZ3wt3iUVVPUHZ7MRQws8ADAAY4LjE5LjAADDg4Y2I5NWMwNzE1ZQAPZ2F0ZXdheS1zZXJ2aWNl
+2025-03-18T12:03:47,964+0000 [1 54] com.newrelic INFO: Agent 1@88cb95c0715e/gateway-service connected to collector.eu01.nr-data.net:443
+2025-03-18T12:03:47,964+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508427866
+2025-03-18T12:03:47,967+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:03:47,967+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:03:47,969+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:03:47,972+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:03:47,972+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:03:47,973+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:03:48,084+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application mail-service. Auto instrumentation is enabled.
+2025-03-18T12:03:48,085+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:03:48,106+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application gateway-service. Auto instrumentation is enabled.
+2025-03-18T12:03:48,108+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:03:51,629+0000 [1 54] com.newrelic INFO: Host name is fb8ca7ce4300, display host fb8ca7ce4300 for application meal-service
+2025-03-18T12:03:51,633+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:03:51,709+0000 [1 54] com.newrelic INFO: Host name is edcae6d99974, display host edcae6d99974 for application order-service
+2025-03-18T12:03:51,713+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:03:52,066+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:03:52,166+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:03:52,221+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:03:52,222+0000 [1 54] com.newrelic INFO: Agent run id: Baic3QLqNYgOAGMwlB5N31tn2WFsAAIBACdHIQEAAAABAgQeTf3e-4ynzkMAZY7m77QIlrWCfHFBD2R89i8gZqYUej_OXUYDAAY4LjE5LjAADGZiOGNhN2NlNDMwMAAMbWVhbC1zZXJ2aWNl
+2025-03-18T12:03:52,223+0000 [1 54] com.newrelic INFO: Agent 1@fb8ca7ce4300/meal-service connected to collector.eu01.nr-data.net:443
+2025-03-18T12:03:52,224+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508427742
+2025-03-18T12:03:52,226+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:03:52,226+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:03:52,226+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:03:52,231+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:03:52,231+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:03:52,231+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:03:52,348+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:03:52,349+0000 [1 54] com.newrelic INFO: Agent run id: BUdlV_Lejsx_AGMwlB5N3V5n2WFsAAIBACdHIQEAAAABAgQeTf517crm2Zl0sqK23rcKDTNXnnBTlFqhlM0sJFY6JEZV5ZQDAAY4LjE5LjAADGVkY2FlNmQ5OTk3NAANb3JkZXItc2VydmljZQ
+2025-03-18T12:03:52,349+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application meal-service. Auto instrumentation is enabled.
+2025-03-18T12:03:52,349+0000 [1 54] com.newrelic INFO: Agent 1@edcae6d99974/order-service connected to collector.eu01.nr-data.net:443
+2025-03-18T12:03:52,349+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:03:52,350+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508427893
+2025-03-18T12:03:52,352+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:03:52,353+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:03:52,353+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:03:52,355+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:03:52,356+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:03:52,356+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:03:52,425+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application order-service. Auto instrumentation is enabled.
+2025-03-18T12:03:52,426+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:05:28,366+0000 [1 67] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:05:28,368+0000 [1 67] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:05:28,368+0000 [1 67] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:05:28,371+0000 [1 67] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:05:28,371+0000 [1 67] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:05:28,371+0000 [1 67] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:05:28,964+0000 [1 67] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:05:28,965+0000 [1 67] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:05:28,965+0000 [1 67] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:05:28,967+0000 [1 67] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:05:28,967+0000 [1 67] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:05:28,967+0000 [1 67] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:05:29,103+0000 [1 67] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:05:29,104+0000 [1 54] com.newrelic INFO: Host name is fb8ca7ce4300, display host fb8ca7ce4300 for application application
+2025-03-18T12:05:29,105+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:05:29,325+0000 [1 67] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:05:29,327+0000 [1 54] com.newrelic INFO: Host name is edcae6d99974, display host edcae6d99974 for application application
+2025-03-18T12:05:29,328+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:05:29,495+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:05:29,699+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:05:29,699+0000 [1 54] com.newrelic INFO: Agent run id: BZqvRfut5d5mAGMwlB5N0ZZn2WHkAAIBACdHIQEAAAABAgQeTdKG-4ynzkMAZY7m77QIlrWCfHFBD2R89i8gZqYUej_OXUYDAAY4LjE5LjAADGZiOGNhN2NlNDMwMAALYXBwbGljYXRpb24
+2025-03-18T12:05:29,700+0000 [1 54] com.newrelic INFO: Agent 1@fb8ca7ce4300/application connected to collector.eu01.nr-data.net:443
+2025-03-18T12:05:29,700+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508416646
+2025-03-18T12:05:29,700+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:05:29,700+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:05:29,701+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:05:29,702+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:05:29,702+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:05:29,703+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:05:29,705+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application application. Auto instrumentation is enabled.
+2025-03-18T12:05:29,709+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:05:29,816+0000 [1 64] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:05:29,818+0000 [1 64] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:05:29,818+0000 [1 64] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:05:29,822+0000 [1 64] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:05:29,822+0000 [1 64] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:05:29,822+0000 [1 64] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:05:29,861+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:05:29,862+0000 [1 54] com.newrelic INFO: Agent run id: BZrP1r3Efd5_AGMwlB5N1Lpn2WHkAAIBACdHIQEAAAABAgQeTdKG7crm2Zl0sqK23rcKDTNXnnBTlFqhlM0sJFY6JEZV5ZQDAAY4LjE5LjAADGVkY2FlNmQ5OTk3NAALYXBwbGljYXRpb24
+2025-03-18T12:05:29,863+0000 [1 54] com.newrelic INFO: Agent 1@edcae6d99974/application connected to collector.eu01.nr-data.net:443
+2025-03-18T12:05:29,863+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508416646
+2025-03-18T12:05:29,863+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:05:29,864+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:05:29,864+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:05:29,865+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:05:29,865+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:05:29,865+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:05:29,867+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application application. Auto instrumentation is enabled.
+2025-03-18T12:05:32,209+0000 [1 64] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:05:32,210+0000 [1 54] com.newrelic INFO: Host name is 2bbdbd9d4e53, display host 2bbdbd9d4e53 for application application
+2025-03-18T12:05:32,211+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:05:32,621+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:05:32,849+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:05:32,850+0000 [1 54] com.newrelic INFO: Agent run id: BQQ3i6iw2OyiAGMwlB5Nzq9n2WHkAAIBACdHIQEAAAABAgQeTdKGK729nU5TGhi-DOH1b101PiFzqr9kXBB9voFAzhDft3MDAAY4LjE5LjAADDJiYmRiZDlkNGU1MwALYXBwbGljYXRpb24
+2025-03-18T12:05:32,852+0000 [1 54] com.newrelic INFO: Agent 1@2bbdbd9d4e53/application connected to collector.eu01.nr-data.net:443
+2025-03-18T12:05:32,857+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508416646
+2025-03-18T12:05:32,861+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:05:32,863+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:05:32,864+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:05:32,907+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:05:32,908+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:05:32,909+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:05:32,934+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application application. Auto instrumentation is enabled.
+2025-03-18T12:14:07,193+0000 [1 77] com.newrelic INFO: Re-reading New Relic configuration file
+2025-03-18T12:14:07,209+0000 [1 77] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:07,209+0000 [1 77] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:07,209+0000 [1 77] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:07,216+0000 [1 77] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:07,217+0000 [1 77] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:07,217+0000 [1 77] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:07,221+0000 [1 77] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:07,222+0000 [1 77] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:07,222+0000 [1 77] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:07,225+0000 [1 77] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:07,225+0000 [1 77] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:07,225+0000 [1 77] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:07,274+0000 [1 79] com.newrelic INFO: Re-reading New Relic configuration file
+2025-03-18T12:14:07,287+0000 [1 79] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:07,287+0000 [1 79] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:07,287+0000 [1 79] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:07,291+0000 [1 79] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:07,291+0000 [1 79] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:07,293+0000 [1 79] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:07,299+0000 [1 79] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:07,299+0000 [1 79] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:07,299+0000 [1 79] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:07,300+0000 [1 79] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:07,301+0000 [1 79] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:07,301+0000 [1 79] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:11,539+0000 [1 80] com.newrelic INFO: Re-reading New Relic configuration file
+2025-03-18T12:14:11,559+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:11,561+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:11,563+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:11,570+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:11,570+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:11,571+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:11,575+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:11,575+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:11,575+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:11,576+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:11,576+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:11,576+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:12,155+0000 [1 80] com.newrelic INFO: Re-reading New Relic configuration file
+2025-03-18T12:14:12,176+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:12,176+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:12,176+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:12,180+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:12,180+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:12,180+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:12,186+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:12,187+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:12,187+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:12,188+0000 [1 80] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:14:12,189+0000 [1 80] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:14:12,189+0000 [1 80] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:14:30,980+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:14:31,087+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:14:33,566+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:14:33,709+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@3568d6ce tried to finish but ServiceManager not started
+2025-03-18T12:14:34,059+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:14:34,311+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:14:34,386+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@33e1c984 tried to finish but ServiceManager not started
+2025-03-18T12:14:34,467+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:14:34,868+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:14:34,999+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@7342f2f3 tried to finish but ServiceManager not started
+2025-03-18T12:14:35,047+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:14:50,525+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:14:50,526+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:14:50,526+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:14:50,527+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:14:50,528+0000 [1 1] com.newrelic INFO: Agent Host: dbd42ae76a51 IP: 172.18.0.3
+2025-03-18T12:14:50,529+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:14:50,693+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:14:50,693+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:14:50,694+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:14:50,694+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:14:50,694+0000 [1 1] com.newrelic INFO: Agent Host: f462834cfd03 IP: 172.18.0.6
+2025-03-18T12:14:50,694+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:14:50,707+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:14:50,707+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:14:50,707+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:14:50,708+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:14:50,708+0000 [1 1] com.newrelic INFO: Agent Host: 2bc1cf9d214c IP: 172.18.0.5
+2025-03-18T12:14:50,708+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:14:50,932+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:14:50,933+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:14:50,933+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:14:50,933+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:14:50,934+0000 [1 1] com.newrelic INFO: Agent Host: 959d4b14977d IP: 172.18.0.7
+2025-03-18T12:14:50,934+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:14:51,476+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:14:51,531+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:14:51,756+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:14:52,120+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:14:54,611+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:14:54,616+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:14:54,666+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:14:55,125+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:14:55,131+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:14:55,155+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:14:55,219+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:14:55,320+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:14:55,327+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:14:55,327+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:14:55,329+0000 [1 1] com.newrelic INFO: Premain startup complete in 6,138ms
+2025-03-18T12:14:55,335+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:14:55,383+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:14:55,385+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:14:55,392+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:14:55,400+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:14:55,401+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:14:55,402+0000 [1 1] com.newrelic INFO: Premain startup complete in 6,605ms
+2025-03-18T12:14:55,403+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:14:55,404+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:14:55,405+0000 [1 1] com.newrelic INFO: Premain startup complete in 6,391ms
+2025-03-18T12:14:55,407+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:14:55,409+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:14:55,444+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:14:55,465+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:14:55,790+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:14:56,178+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:14:56,183+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:14:56,185+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:14:56,189+0000 [1 1] com.newrelic INFO: Premain startup complete in 6,742ms
+2025-03-18T12:14:56,198+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:14:56,278+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:15:03,050+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:15:03,334+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:15:04,118+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:15:05,423+0000 [1 54] com.newrelic INFO: Host name is 2bc1cf9d214c, display host 2bc1cf9d214c for application mail
+2025-03-18T12:15:05,464+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:05,824+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:15:06,725+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:15:06,948+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:15:06,952+0000 [1 54] com.newrelic INFO: Agent run id: Bd_2xzCEV-cCAGMwlB5NkThn2WQ8AAIBACdHIQEAAAABAgQeTZeXK8HPnSFMWm-A42IRV5XeOXvfS6oDgJiADs7m0lwXEgwDAAY4LjE5LjAADDJiYzFjZjlkMjE0YwAEbWFpbA
+2025-03-18T12:15:06,969+0000 [1 54] com.newrelic INFO: Agent 1@2bc1cf9d214c/mail connected to collector.eu01.nr-data.net:443
+2025-03-18T12:15:06,971+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508401559
+2025-03-18T12:15:06,979+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:06,982+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:06,983+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:06,987+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:06,987+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:06,988+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:07,415+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application mail. Auto instrumentation is enabled.
+2025-03-18T12:15:07,415+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:10,387+0000 [1 54] com.newrelic INFO: Host name is f462834cfd03, display host f462834cfd03 for application order
+2025-03-18T12:15:10,389+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:11,084+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:15:11,199+0000 [1 54] com.newrelic INFO: Host name is 959d4b14977d, display host 959d4b14977d for application gateway
+2025-03-18T12:15:11,206+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:11,262+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:15:11,262+0000 [1 54] com.newrelic INFO: Agent run id: BXpU94raJRvFAGMwlB5NkvZn2WQ8AAIBACdHIQEAAAABAgQeTsuN9GKDTP0D_2Xqsn9Hq620-r6gj2xtyitBxC0z04Xk09MDAAY4LjE5LjAADGY0NjI4MzRjZmQwMwAFb3JkZXI
+2025-03-18T12:15:11,263+0000 [1 54] com.newrelic INFO: Agent 1@f462834cfd03/order connected to collector.eu01.nr-data.net:443
+2025-03-18T12:15:11,263+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508480397
+2025-03-18T12:15:11,265+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:11,265+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:11,265+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:11,268+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:11,269+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:11,269+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:11,544+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application order. Auto instrumentation is enabled.
+2025-03-18T12:15:11,546+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:11,724+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:15:11,978+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:15:11,979+0000 [1 54] com.newrelic INFO: Agent run id: BZD1j4On8tHtAGMwlB5NjXBn2WQ8AAIBACdHIQEAAAABAgQeTYydlZ1LFJd9NmAyYTQ3Fe0pRYG1GLMuLuF8RaiQpxZZUicDAAY4LjE5LjAADDk1OWQ0YjE0OTc3ZAAHZ2F0ZXdheQ
+2025-03-18T12:15:11,980+0000 [1 54] com.newrelic INFO: Agent 1@959d4b14977d/gateway connected to collector.eu01.nr-data.net:443
+2025-03-18T12:15:11,982+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508398749
+2025-03-18T12:15:11,985+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:11,985+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:11,986+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:11,989+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:11,989+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:11,989+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:12,101+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application gateway. Auto instrumentation is enabled.
+2025-03-18T12:15:12,102+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:15,417+0000 [1 54] com.newrelic INFO: Host name is dbd42ae76a51, display host dbd42ae76a51 for application meal
+2025-03-18T12:15:15,422+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:15,999+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:15:16,256+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:15:16,257+0000 [1 54] com.newrelic INFO: Agent run id: BQTuGAPR9gy_AGMwlB5Njldn2WQ8AAIBACdHIQEAAAABAgQeTZIz29Qq52pRWf5ByZ5zkpXU_GRdKI8jaLhssNQna-uyFo8DAAY4LjE5LjAADGRiZDQyYWU3NmE1MQAEbWVhbA
+2025-03-18T12:15:16,257+0000 [1 54] com.newrelic INFO: Agent 1@dbd42ae76a51/meal connected to collector.eu01.nr-data.net:443
+2025-03-18T12:15:16,258+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508400179
+2025-03-18T12:15:16,260+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:16,260+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:16,260+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:16,263+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:16,263+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:16,264+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:16,508+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application meal. Auto instrumentation is enabled.
+2025-03-18T12:15:16,508+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:18,136+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:15:18,240+0000 [1 59] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@6ac155e5 tried to finish but ServiceManager not started
+2025-03-18T12:15:18,323+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:15:18,600+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:15:18,709+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@d4967d tried to finish but ServiceManager not started
+2025-03-18T12:15:18,752+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:15:18,984+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:15:19,034+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@50c10110 tried to finish but ServiceManager not started
+2025-03-18T12:15:19,387+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:15:19,672+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:15:19,741+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@25bb7d44 tried to finish but ServiceManager not started
+2025-03-18T12:15:19,779+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:15:31,540+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:15:31,540+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:15:31,540+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:15:31,540+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:15:31,540+0000 [1 1] com.newrelic INFO: Agent Host: 74388421982d IP: 172.18.0.5
+2025-03-18T12:15:31,541+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:15:31,649+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:15:31,650+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:15:31,650+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:15:31,650+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:15:31,649+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:15:31,650+0000 [1 1] com.newrelic INFO: Agent Host: f8364a537042 IP: 172.18.0.6
+2025-03-18T12:15:31,651+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:15:31,650+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:15:31,651+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:15:31,651+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:15:31,651+0000 [1 1] com.newrelic INFO: Agent Host: da447df673af IP: 172.18.0.7
+2025-03-18T12:15:31,652+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:15:31,759+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:15:31,760+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:15:31,760+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:15:31,760+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:15:31,761+0000 [1 1] com.newrelic INFO: Agent Host: 9ab297cdf875 IP: 172.18.0.8
+2025-03-18T12:15:31,761+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:15:32,286+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:15:32,390+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:15:32,449+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:15:32,513+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:15:34,566+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:15:34,567+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:15:34,779+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:15:34,882+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:15:35,126+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:15:35,186+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:15:35,301+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:15:35,319+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:15:35,405+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:15:35,411+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:15:35,411+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:15:35,412+0000 [1 1] com.newrelic INFO: Premain startup complete in 4,843ms
+2025-03-18T12:15:35,413+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:15:35,445+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:15:35,446+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:15:35,457+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:15:35,458+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:15:35,460+0000 [1 1] com.newrelic INFO: Premain startup complete in 5,136ms
+2025-03-18T12:15:35,466+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:15:35,497+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:15:35,549+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:15:35,550+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:15:35,560+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:15:35,562+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:15:35,563+0000 [1 1] com.newrelic INFO: Premain startup complete in 4,873ms
+2025-03-18T12:15:35,563+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:15:35,568+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:15:35,569+0000 [1 1] com.newrelic INFO: Premain startup complete in 4,671ms
+2025-03-18T12:15:35,571+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:15:35,571+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:15:35,605+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:15:35,608+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:15:44,695+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:15:45,577+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:15:47,196+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:15:47,524+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:15:50,506+0000 [1 54] com.newrelic INFO: Host name is f8364a537042, display host f8364a537042 for application mail
+2025-03-18T12:15:50,533+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:52,367+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:15:52,556+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:15:52,557+0000 [1 54] com.newrelic INFO: Agent run id: BW1KJc6jMLrOAGMwlB5Niyln2WQ8AAIBACdHIQEAAAABAgQeTZeX-DZKU3BC1_mqcY2hJWnoaiJU8zXK2x2n7Z1bKtbbZpYDAAY4LjE5LjAADGY4MzY0YTUzNzA0MgAEbWFpbA
+2025-03-18T12:15:52,560+0000 [1 54] com.newrelic INFO: Agent 1@f8364a537042/mail connected to collector.eu01.nr-data.net:443
+2025-03-18T12:15:52,561+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508401559
+2025-03-18T12:15:52,568+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:52,568+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:52,569+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:52,573+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:52,573+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:52,573+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:52,865+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application mail. Auto instrumentation is enabled.
+2025-03-18T12:15:52,865+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:55,528+0000 [1 54] com.newrelic INFO: Host name is 74388421982d, display host 74388421982d for application meal
+2025-03-18T12:15:55,537+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:55,572+0000 [1 54] com.newrelic INFO: Host name is da447df673af, display host da447df673af for application order
+2025-03-18T12:15:55,576+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:55,608+0000 [1 54] com.newrelic INFO: Host name is 9ab297cdf875, display host 9ab297cdf875 for application gateway
+2025-03-18T12:15:55,616+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:56,126+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:15:56,202+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:15:56,281+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:15:56,282+0000 [1 54] com.newrelic INFO: Agent run id: BWnELkqpHtriAGMwlB5Nigln2WQ8AAIBACdHIQEAAAABAgQeTZIzdDiEIZgtcteLPPFXMBWIUnBsiO427y8UnAhCLPR8B8sDAAY4LjE5LjAADDc0Mzg4NDIxOTgyZAAEbWVhbA
+2025-03-18T12:15:56,283+0000 [1 54] com.newrelic INFO: Agent 1@74388421982d/meal connected to collector.eu01.nr-data.net:443
+2025-03-18T12:15:56,285+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508400179
+2025-03-18T12:15:56,289+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:56,289+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:56,290+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:56,301+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:56,302+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:56,302+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:56,302+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:15:56,353+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:15:56,354+0000 [1 54] com.newrelic INFO: Agent run id: BbUB2Tyy-_NCAGMwlB5NilZn2WQ8AAIBACdHIQEAAAABAgQeTYydmrKXzfh1SiaCF8yr6gp3qEikYwcVLLq_iI2lUVcKW2ADAAY4LjE5LjAADDlhYjI5N2NkZjg3NQAHZ2F0ZXdheQ
+2025-03-18T12:15:56,354+0000 [1 54] com.newrelic INFO: Agent 1@9ab297cdf875/gateway connected to collector.eu01.nr-data.net:443
+2025-03-18T12:15:56,355+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508398749
+2025-03-18T12:15:56,357+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:56,357+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:56,357+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:56,360+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:56,360+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:56,360+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:56,445+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:15:56,446+0000 [1 54] com.newrelic INFO: Agent run id: BXmpYem18NLrAGMwlB5NiMln2WQ8AAIBACdHIQEAAAABAgQeTsuN2kR99nOvInz-pn60vs2J5RezQuMXvNR_rd9gbYpMcpADAAY4LjE5LjAADGRhNDQ3ZGY2NzNhZgAFb3JkZXI
+2025-03-18T12:15:56,446+0000 [1 54] com.newrelic INFO: Agent 1@da447df673af/order connected to collector.eu01.nr-data.net:443
+2025-03-18T12:15:56,447+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508480397
+2025-03-18T12:15:56,449+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:56,450+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:56,450+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:56,452+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:15:56,452+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:15:56,452+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:15:56,634+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application gateway. Auto instrumentation is enabled.
+2025-03-18T12:15:56,634+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:56,656+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application meal. Auto instrumentation is enabled.
+2025-03-18T12:15:56,656+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:15:56,686+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application order. Auto instrumentation is enabled.
+2025-03-18T12:15:56,687+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:20:59,556+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:20:59,781+0000 [1 59] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@5c6a8130 tried to finish but ServiceManager not started
+2025-03-18T12:20:59,967+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:21:00,300+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:21:00,466+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@2ec71364 tried to finish but ServiceManager not started
+2025-03-18T12:21:00,503+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:21:00,728+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:21:00,822+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@7293ffae tried to finish but ServiceManager not started
+2025-03-18T12:21:00,946+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:21:01,246+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:21:01,394+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@1d996c6c tried to finish but ServiceManager not started
+2025-03-18T12:21:01,446+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:21:16,557+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:21:16,558+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:21:16,558+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:21:16,558+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:21:16,558+0000 [1 1] com.newrelic INFO: Agent Host: ed4598b12820 IP: 172.18.0.3
+2025-03-18T12:21:16,559+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:21:16,821+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:21:16,822+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:21:16,822+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:21:16,822+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:21:16,822+0000 [1 1] com.newrelic INFO: Agent Host: 6546f409d7f6 IP: 172.18.0.5
+2025-03-18T12:21:16,822+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:21:16,838+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:21:16,838+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:21:16,839+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:21:16,839+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:21:16,840+0000 [1 1] com.newrelic INFO: Agent Host: 9ff294f5a31a IP: 172.18.0.6
+2025-03-18T12:21:16,840+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:21:17,112+0000 [1 1] com.newrelic INFO: Writing to New Relic log file: /usr/local/newrelic/logs/newrelic_agent.log
+2025-03-18T12:21:17,112+0000 [1 1] com.newrelic INFO: JRE vendor Oracle Corporation version 23
+2025-03-18T12:21:17,113+0000 [1 1] com.newrelic INFO: JVM vendor Oracle Corporation OpenJDK 64-Bit Server VM version 23+37-2369
+2025-03-18T12:21:17,113+0000 [1 1] com.newrelic INFO: OS Linux version 6.12.5-linuxkit arch aarch64
+2025-03-18T12:21:17,113+0000 [1 1] com.newrelic INFO: Agent Host: d536f56117c0 IP: 172.18.0.7
+2025-03-18T12:21:17,113+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 is initializing...
+2025-03-18T12:21:17,423+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:21:17,498+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:21:17,540+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:21:18,199+0000 [1 31] com.newrelic INFO: Instrumentation com.newrelic.instrumentation.jdbc-resultset is disabled. Skipping.
+2025-03-18T12:21:20,285+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:21:20,351+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:21:20,356+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:21:20,867+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:21:20,868+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:21:20,872+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:21:21,127+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:21:21,127+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:21:21,139+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:21:21,140+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:21:21,140+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:21:21,141+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:21:21,143+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:21:21,141+0000 [1 1] com.newrelic INFO: Premain startup complete in 5,477ms
+2025-03-18T12:21:21,144+0000 [1 1] com.newrelic INFO: Premain startup complete in 5,836ms
+2025-03-18T12:21:21,149+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:21:21,154+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:21:21,155+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:21:21,158+0000 [1 1] com.newrelic INFO: Premain startup complete in 5,617ms
+2025-03-18T12:21:21,159+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:21:21,164+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:21:21,188+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:21:21,189+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:21:21,204+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:21:21,367+0000 [1 1] com.newrelic.agent.RPMServiceManagerImpl INFO: Configured to connect to New Relic at collector.eu01.nr-data.net:443
+2025-03-18T12:21:22,081+0000 [1 1] com.newrelic INFO: Setting audit_mode to false
+2025-03-18T12:21:22,490+0000 [1 1] com.newrelic.agent.config.ConfigServiceImpl INFO: Configuration file is /usr/local/newrelic/./newrelic.yml
+2025-03-18T12:21:22,502+0000 [1 1] com.newrelic INFO: New Relic Agent v8.19.0 has started
+2025-03-18T12:21:22,502+0000 [1 1] com.newrelic INFO: Agent class loader: com.newrelic.bootstrap.BootstrapAgent$JVMAgentClassLoader@5d22bbb7
+2025-03-18T12:21:22,503+0000 [1 1] com.newrelic INFO: Premain startup complete in 6,581ms
+2025-03-18T12:21:22,507+0000 [1 1] com.newrelic INFO: New Relic Security is completely disabled by one of the user provided config `security.enabled`, `security.agent.enabled` or `high_security`. Not loading security capabilities.
+2025-03-18T12:21:22,563+0000 [1 1] com.newrelic WARN: New Relic Agent is already running! Check if more than one -javaagent switch is used on the command line.
+2025-03-18T12:21:27,942+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:21:28,063+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:21:28,778+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:21:29,874+0000 [1 1] com.newrelic INFO: Server Info: Apache Tomcat/10.1.36
+2025-03-18T12:21:31,159+0000 [1 54] com.newrelic INFO: Host name is 6546f409d7f6, display host 6546f409d7f6 for application mail
+2025-03-18T12:21:31,165+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:21:31,724+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:21:31,946+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:21:31,946+0000 [1 54] com.newrelic INFO: Agent run id: BSsGfLieORFvAGMwlB5NZpBn2WWkAAIBACdHIQEAAAABAgQeTZeXZUb0Cdf2UQ8i1Dw_oXGZOuREBQlw4hgQTXP3dWR_87cDAAY4LjE5LjAADDY1NDZmNDA5ZDdmNgAEbWFpbA
+2025-03-18T12:21:31,947+0000 [1 54] com.newrelic INFO: Agent 1@6546f409d7f6/mail connected to collector.eu01.nr-data.net:443
+2025-03-18T12:21:31,948+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508401559
+2025-03-18T12:21:31,951+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:21:31,954+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:21:31,954+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:21:31,960+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:21:31,961+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:21:31,962+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:21:32,092+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application mail. Auto instrumentation is enabled.
+2025-03-18T12:21:32,093+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:21:32,501+0000 [1 54] com.newrelic INFO: Host name is d536f56117c0, display host d536f56117c0 for application gateway
+2025-03-18T12:21:32,502+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:21:32,811+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:21:32,949+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:21:32,950+0000 [1 54] com.newrelic INFO: Agent run id: BfWm6AHwKdIAAGMwlB5NcNln2WWkAAIBACdHIQEAAAABAgQeTYyd1Tb1YRfAeQqEDMg1QbuievzsB9XLAxQqBPuoAQ9WA3QDAAY4LjE5LjAADGQ1MzZmNTYxMTdjMAAHZ2F0ZXdheQ
+2025-03-18T12:21:32,950+0000 [1 54] com.newrelic INFO: Agent 1@d536f56117c0/gateway connected to collector.eu01.nr-data.net:443
+2025-03-18T12:21:32,951+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508398749
+2025-03-18T12:21:32,952+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:21:32,953+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:21:32,953+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:21:32,955+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:21:32,955+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:21:32,955+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:21:33,016+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application gateway. Auto instrumentation is enabled.
+2025-03-18T12:21:33,016+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:21:36,170+0000 [1 54] com.newrelic INFO: Host name is 9ff294f5a31a, display host 9ff294f5a31a for application order
+2025-03-18T12:21:36,174+0000 [1 54] com.newrelic INFO: Host name is ed4598b12820, display host ed4598b12820 for application meal
+2025-03-18T12:21:36,189+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:21:36,192+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:21:36,588+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:21:36,596+0000 [1 54] com.newrelic INFO: Collector redirection to collector.eu01.nr-data.net:443
+2025-03-18T12:21:36,753+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:21:36,753+0000 [1 54] com.newrelic INFO: Agent run id: BZ_gluSXJwUaAGMwlB5NZr1n2WWkAAIBACdHIQEAAAABAgQeTsuNn_KU9aMaScjrdtrrNVjfXMefG3-_-74oW-RZyj0Q0rgDAAY4LjE5LjAADDlmZjI5NGY1YTMxYQAFb3JkZXI
+2025-03-18T12:21:36,754+0000 [1 54] com.newrelic INFO: Agent 1@9ff294f5a31a/order connected to collector.eu01.nr-data.net:443
+2025-03-18T12:21:36,754+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508480397
+2025-03-18T12:21:36,756+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:21:36,756+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:21:36,756+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:21:36,759+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:21:36,759+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:21:36,759+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:21:36,761+0000 [1 54] com.newrelic INFO: Max payload size is 1,000,000 bytes
+2025-03-18T12:21:36,761+0000 [1 54] com.newrelic INFO: Agent run id: BY0kRTjIaTkYAGMwlB5NY1pn2WWkAAIBACdHIQEAAAABAgQeTZIz7UWYsSggJjD1jk9HFKPLVopHE8pYGOmgxVi7Z-AAubQDAAY4LjE5LjAADGVkNDU5OGIxMjgyMAAEbWVhbA
+2025-03-18T12:21:36,761+0000 [1 54] com.newrelic INFO: Agent 1@ed4598b12820/meal connected to collector.eu01.nr-data.net:443
+2025-03-18T12:21:36,762+0000 [1 54] com.newrelic INFO: Reporting to: https://rpm.eu.newrelic.com/accounts/6500500/applications/508400179
+2025-03-18T12:21:36,764+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:21:36,764+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:21:36,764+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:21:36,767+0000 [1 54] com.newrelic INFO: Using region aware collector host: collector.eu01.nr-data.net
+2025-03-18T12:21:36,767+0000 [1 54] com.newrelic INFO: Using region aware metric ingest URI: https://metric-api.eu.newrelic.com/metric/v1
+2025-03-18T12:21:36,767+0000 [1 54] com.newrelic INFO: Using region aware event ingest URI: https://insights-collector.eu01.nr-data.net/v1/accounts/events
+2025-03-18T12:21:36,888+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application meal. Auto instrumentation is enabled.
+2025-03-18T12:21:36,888+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:21:36,898+0000 [1 54] com.newrelic INFO: Real user monitoring is enabled for application order. Auto instrumentation is enabled.
+2025-03-18T12:21:36,898+0000 [1 54] com.newrelic INFO: New Relic JFR Monitor is disabled: JFR config has not been enabled in the Java agent.
+2025-03-18T12:32:07,065+0000 [1 80] com.newrelic INFO: obfuscated SQL: select nextval(?)
+2025-03-18T12:32:07,068+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into orders (address,email,finalized,name,order_date,phone,surname,id) values (?,?,?,?,?,?,?,?)
+2025-03-18T12:32:07,068+0000 [1 80] com.newrelic INFO: obfuscated SQL: select nextval(?)
+2025-03-18T12:32:07,068+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:32:07,069+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:32:07,069+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:32:07,069+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:32:07,069+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:32:07,069+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:32:07,070+0000 [1 80] com.newrelic INFO: obfuscated SQL: select s1_0.id,s1_0.name,s1_0.state from status s1_0 order by s1_0.state fetch first ? rows only
+2025-03-18T12:32:07,070+0000 [1 80] com.newrelic INFO: obfuscated SQL: select nextval(?)
+2025-03-18T12:32:07,070+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_status (order_id,status_id,id) values (?,?,?)
+2025-03-18T12:32:07,148+0000 [1 80] com.newrelic INFO: obfuscated SQL: select nextval(?)
+2025-03-18T12:32:07,148+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into orders (address,email,finalized,name,order_date,phone,surname,id) values (?,?,?,?,?,?,?,?)
+2025-03-18T12:32:07,149+0000 [1 80] com.newrelic INFO: obfuscated SQL: select nextval(?)
+2025-03-18T12:32:07,149+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:32:07,149+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:32:07,149+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:32:07,149+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:32:07,149+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:32:07,150+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:32:07,150+0000 [1 80] com.newrelic INFO: obfuscated SQL: select s1_0.id,s1_0.name,s1_0.state from status s1_0 order by s1_0.state fetch first ? rows only
+2025-03-18T12:32:07,150+0000 [1 80] com.newrelic INFO: obfuscated SQL: select nextval(?)
+2025-03-18T12:32:07,150+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_status (order_id,status_id,id) values (?,?,?)
+2025-03-18T12:32:07,715+0000 [1 80] com.newrelic INFO: obfuscated SQL: select p1_0.id,p1_0.category_id,c1_0.id,c1_0.name,p1_0.description,p1_0.name,p1_0.price from product p1_0 join category c1_0 on c1_0.id=p1_0.category_id where p1_0.id=?
+2025-03-18T12:32:08,019+0000 [1 80] com.newrelic INFO: obfuscated SQL: select p1_0.id,p1_0.category_id,c1_0.id,c1_0.name,p1_0.description,p1_0.name,p1_0.price from product p1_0 join category c1_0 on c1_0.id=p1_0.category_id where p1_0.id=?
+2025-03-18T12:34:06,961+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into orders (address,email,finalized,name,order_date,phone,surname,id) values (?,?,?,?,?,?,?,?)
+2025-03-18T12:34:06,964+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:34:06,964+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:34:06,964+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:34:06,964+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:34:06,964+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:34:06,965+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:34:06,965+0000 [1 80] com.newrelic INFO: obfuscated SQL: select s1_0.id,s1_0.name,s1_0.state from status s1_0 order by s1_0.state fetch first ? rows only
+2025-03-18T12:34:06,965+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_status (order_id,status_id,id) values (?,?,?)
+2025-03-18T12:34:07,025+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into orders (address,email,finalized,name,order_date,phone,surname,id) values (?,?,?,?,?,?,?,?)
+2025-03-18T12:34:07,025+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:34:07,026+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:34:07,026+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:34:07,026+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:34:07,026+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:34:07,026+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_product (order_id,product_id,id) values (?,?,?)
+2025-03-18T12:34:07,027+0000 [1 80] com.newrelic INFO: obfuscated SQL: select s1_0.id,s1_0.name,s1_0.state from status s1_0 order by s1_0.state fetch first ? rows only
+2025-03-18T12:34:07,027+0000 [1 80] com.newrelic INFO: obfuscated SQL: insert into order_status (order_id,status_id,id) values (?,?,?)
+2025-03-18T12:34:07,485+0000 [1 80] com.newrelic INFO: obfuscated SQL: select p1_0.id,p1_0.category_id,c1_0.id,c1_0.name,p1_0.description,p1_0.name,p1_0.price from product p1_0 join category c1_0 on c1_0.id=p1_0.category_id where p1_0.id=?
+2025-03-18T12:34:07,798+0000 [1 80] com.newrelic INFO: obfuscated SQL: select p1_0.id,p1_0.category_id,c1_0.id,c1_0.name,p1_0.description,p1_0.name,p1_0.price from product p1_0 join category c1_0 on c1_0.id=p1_0.category_id where p1_0.id=?
+2025-03-18T12:47:02,102+0000 [1 77] com.newrelic INFO: Re-reading New Relic configuration file
+2025-03-18T12:47:02,109+0000 [1 77] com.newrelic.agent.config.ConfigServiceImpl WARN: Unexpected exception checking for config file changes: java.io.FileNotFoundException: /usr/local/newrelic/./newrelic.yml (No such file or directory)
+2025-03-18T12:47:03,111+0000 [1 79] com.newrelic INFO: Re-reading New Relic configuration file
+2025-03-18T12:47:03,125+0000 [1 79] com.newrelic.agent.config.ConfigServiceImpl WARN: Unexpected exception checking for config file changes: java.io.FileNotFoundException: /usr/local/newrelic/./newrelic.yml (No such file or directory)
+2025-03-18T12:47:06,923+0000 [1 80] com.newrelic INFO: Re-reading New Relic configuration file
+2025-03-18T12:47:06,926+0000 [1 80] com.newrelic.agent.config.ConfigServiceImpl WARN: Unexpected exception checking for config file changes: java.io.FileNotFoundException: /usr/local/newrelic/./newrelic.yml (No such file or directory)
+2025-03-18T12:47:07,373+0000 [1 80] com.newrelic INFO: Re-reading New Relic configuration file
+2025-03-18T12:47:07,377+0000 [1 80] com.newrelic.agent.config.ConfigServiceImpl WARN: Unexpected exception checking for config file changes: java.io.FileNotFoundException: /usr/local/newrelic/./newrelic.yml (No such file or directory)
+2025-03-18T12:48:58,254+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:48:58,376+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:49:00,892+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:49:00,991+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:49:01,315+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:49:01,398+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@774f2cb2 tried to finish but ServiceManager not started
+2025-03-18T12:49:01,414+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
+2025-03-18T12:49:01,867+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: JVM is shutting down
+2025-03-18T12:49:02,041+0000 [1 58] com.newrelic INFO: Transaction com.newrelic.agent.Transaction@71e72842 tried to finish but ServiceManager not started
+2025-03-18T12:49:02,274+0000 [1 26] com.newrelic.agent.core.CoreServiceImpl INFO: New Relic Agent has shutdown
