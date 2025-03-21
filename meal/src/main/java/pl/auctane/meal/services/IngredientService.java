@@ -31,6 +31,9 @@ public class IngredientService {
 
         ingredientRepository.save(ingredient);
     }
+    public void createIngredient(Ingredient ingredient) {
+        ingredientRepository.save(ingredient);
+    }
 
     public void updateIngredient(Ingredient ingredient) {
         ingredientRepository.save(ingredient);

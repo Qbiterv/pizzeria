@@ -2,6 +2,7 @@ package pl.auctane.order.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.auctane.order.dtos.status.StatusCreateDto;
 import pl.auctane.order.entities.Status;
 import pl.auctane.order.repositories.StatusRepository;
 
@@ -35,10 +36,15 @@ public class StatusService {
         return statusRepository.getStatusByState(state);
     }
 
-    public void createStatus(int state, String name) {
+    public void deleteStatusById(Long id) {
+        statusRepository.deleteById(id);
+    }
+
+    public void createStatus(StatusCreateDto statusCreateDto) {
         Status status = new Status();
-        status.setState(state);
-        status.setName(name);
+        status.setState(statusCreateDto.getState());
+        status.setName(statusCreateDto.getName());
+        status.setType(statusCreateDto.getType());
 
         statusRepository.save(status);
     }

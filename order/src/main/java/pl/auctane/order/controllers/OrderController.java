@@ -182,7 +182,12 @@ public class OrderController {
             orderProductService.createOrderProduct(order, product);
         }
 
-        orderStatusService.registerOrder(order);
+        //register order and check if any status exist
+        if(!orderStatusService.registerOrder(order))
+        {
+            JSON.put("success", false);
+            JSON.put("message", "Cannot register order, because no status has been found");
+        }
 
         ObjectNode payLoad = objectMapper.createObjectNode();
 

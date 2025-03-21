@@ -4,19 +4,19 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
 @Table
-public class Category {
+@Getter
+@Setter
+public class MealCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    public Category() {}
-    public Category(String name) {
+    public MealCategory() {}
+    public MealCategory(String name) {
         this.name = name;
     }
 }

@@ -43,28 +43,17 @@ public class ProductController {
     }
 
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createProduct(@RequestBody ProductCreateDto product) {
+    public ResponseEntity<?> createProduct(@RequestBody Product product) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         if(product == null) return ResponseEntity.badRequest().build();
 
         if(product.getName() == null || product.getName().isEmpty()) return ResponseEntity.badRequest().build();
         if(product.getPrice() < 0) return ResponseEntity.badRequest().build();
-        if(product.getCategoryId() < 0) return ResponseEntity.badRequest().build();
         if(product.getDescription() == null) product.setDescription("");
-
-        Optional<Category> category = categoryService.getCategory(product.getCategoryId());
-
-        if(category.isEmpty()) {
-            JSON.put("success", false);
-            JSON.put("message", "Category with id: " + product.getCategoryId() + " doesn't exist");
-
-            return ResponseEntity.badRequest().body(JSON);
-        }
 
         Product newProduct = new Product();
         newProduct.setName(product.getName());
-        newProduct.setCategory(category.get());
         newProduct.setPrice(product.getPrice());
         newProduct.setDescription(product.getDescription());
 
@@ -86,18 +75,6 @@ public class ProductController {
         if(product.getName() != null && !product.getName().isEmpty()) productOptional.get().setName(product.getName());
         if(product.getDescription() != null) productOptional.get().setDescription(product.getDescription());
         if(product.getPrice() > 0 && product.getPrice() != productOptional.get().getPrice()) productOptional.get().setPrice(product.getPrice());
-
-        if(product.getCategoryId() > 0 && productOptional.get().getCategory().getId() != product.getCategoryId()) {
-            Optional<Category> category = categoryService.getCategory(product.getCategoryId());
-            if(category.isEmpty()) {
-                JSON.put("success", false);
-                JSON.put("message", "Category with id: " + product.getCategoryId() + " doesn't exist");
-
-                return ResponseEntity.badRequest().body(JSON);
-            }
-
-            productOptional.get().setCategory(category.get());
-        }
 
         productService.updateProduct(productOptional.get());
 

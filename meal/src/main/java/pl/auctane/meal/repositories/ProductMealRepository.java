@@ -1,11 +1,12 @@
 package pl.auctane.meal.repositories;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
-import pl.auctane.meal.entities.Product;
 import pl.auctane.meal.entities.ProductMeal;
 
 import java.util.List;
 
 public interface ProductMealRepository extends JpaRepository<ProductMeal, Long> {
-    List<ProductMeal> getAllByProductId(Long product_id);
+
+    List<ProductMeal> findAllByProduct_Id(Long productId, Sort sort);
 }

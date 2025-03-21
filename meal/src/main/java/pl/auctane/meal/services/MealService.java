@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.auctane.meal.entities.Meal;
+import pl.auctane.meal.entities.MealCategory;
 import pl.auctane.meal.entities.Product;
 import pl.auctane.meal.repositories.MealRepository;
 
@@ -27,11 +28,11 @@ public class MealService {
         return mealRepository.findById(id);
     }
 
-    public void createMeal(String name, String description) {
+    public void createMeal(String name, String description, MealCategory category) {
         Meal meal = new Meal();
         meal.setName(name);
         meal.setDescription(description);
-
+        meal.setCategory(category);
         mealRepository.save(meal);
     }
 

@@ -5,15 +5,14 @@ import lombok.Setter;
 import pl.auctane.meal.entities.Meal;
 
 import java.util.List;
-import java.util.stream.Collector;
 
 @Getter
 @Setter
-public class ProductMealsListDto {
+public class MealToSendDto {
     private Long id;
     private Meal meal;
 
-    public ProductMealsListDto(Long id, Meal meal) {
+    public MealToSendDto(Long id, Meal meal) {
         this.id = id;
         this.meal = meal;
     }

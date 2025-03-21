@@ -4,26 +4,25 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter
-@Setter
 @Entity
 @Table
-public class Meal {
+@Getter
+@Setter
+public class ProductCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String name;
-    private String description;
-
+    @ManyToOne
+    @JoinColumn(name = "product_id")
+    private Product product;
     @ManyToOne
     @JoinColumn(name = "category_id")
-    private MealCategory category;
+    private Category category;
 
-    public Meal() {}
-    public Meal(String name, String description, MealCategory category) {
-        this.name = name;
-        this.description = description;
+    public ProductCategory() {}
+    public ProductCategory(Product product, Category category) {
+        this.product = product;
         this.category = category;
     }
 }
