@@ -10,12 +10,4 @@ public class ProductDto {
     private String name;
     private String description;
     private double price;
-    private Category category;
-
-    @Getter
-    @Setter
-    public static class Category {
-        private Long id;
-        private String name;
-    }
 }

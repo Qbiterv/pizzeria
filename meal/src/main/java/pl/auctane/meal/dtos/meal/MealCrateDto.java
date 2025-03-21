@@ -8,4 +8,5 @@ import lombok.Setter;
 public class MealCrateDto {
     private String name;
     private String description;
+    private Long categoryId;
 }

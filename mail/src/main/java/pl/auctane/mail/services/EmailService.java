@@ -106,15 +106,17 @@ public class EmailService {
         }
         return html;
     }
+
     private String putOrderDataIntoHtml(String html, EmailOrderDto emailOrderDto) {
 
-        List<ProductDto> products = getProductsFromIds(emailOrderDto.getProductIds());
+        List<EmailProductData> productsWithData = getProductsWithDataFromIdsWithQuantity(getProductIdsWithQuantity(emailOrderDto.getProductIds()));
 
-        HashMap<ProductDto, Integer> productsWithQuantity = getProductsWithQuantity(products);
+        orderList(productsWithData);
 
-        double finalPrice = getFinalPrice(products);
+        double fullPrice = getFullPrice(productsWithData);
+        int productCount = getProductCount(productsWithData);
 
-        String productsAsString = getProductListAsString(productsWithQuantity);
+        String productsAsString = getProductListAsString(productsWithData);
 
         //put data into html
         HashMap<String, String> replaceValues = new HashMap<>();
@@ -124,8 +126,8 @@ public class EmailService {
         replaceValues.put("{productList}", productsAsString);
         replaceValues.put("{phone}", emailOrderDto.getPhone());
         replaceValues.put("{address}", emailOrderDto.getAddress());
-        replaceValues.put("{finalPrice}", String.format("%.2f", finalPrice));
-        replaceValues.put("{productCount}", String.valueOf(products.size()));
+        replaceValues.put("{finalPrice}", String.format("%.2f", fullPrice));
+        replaceValues.put("{productCount}", String.valueOf(productCount));
 
         String finalHtml = html;
 
@@ -152,58 +154,86 @@ public class EmailService {
         return html;
     }
 
-    private HashMap<ProductDto, Integer> getProductsWithQuantity(List<ProductDto> products) {
-
-        HashMap<ProductDto, Integer> productsWithQuantity = new HashMap<>();
-
-        for (ProductDto product : products) {
-            //if product is in list increment quantity
-            if (productsWithQuantity.containsKey(product)) {
-                productsWithQuantity.compute(product, (k, quantity) -> {
-                    assert quantity != null : "!!!Bad thing happened!!! quantity of product is null";
-                    return quantity + 1;
-                });
-                continue;
-            }
-            //add product
-            productsWithQuantity.put(product, 1);
-        }
-
-        return productsWithQuantity;
-    }
-    private String getProductListAsString(HashMap<ProductDto, Integer> productsWithQuantity) {
+    private String getProductListAsString(List<EmailProductData> productsData) {
         StringBuilder productsAsString = new StringBuilder();
 
-        for (Map.Entry<ProductDto, Integer> productAndQuantity : productsWithQuantity.entrySet()) {
-            String mealList = getMealListForProductId(productAndQuantity.getKey().getId());
+        for (EmailProductData productData : productsData) {
 
             String productInfo = """
                 <li class="list-element">
                     <div class="list-element-container">
                         <p class="product-info">
-                            <span class="quantity">%sx</span><span class="product-name">%s</span><span class="price">%.2f zł</span>
+                            <span class="quantity">%dx</span><span class="product-name">%s</span><span class="price">%.2f zł</span>
                         </p>
                         <p class="meal-list">%s</p>
                     </div>
                 </li>
                 """;
 
-            // Adding info to product list
-            productsAsString.append(String.format(productInfo, productAndQuantity.getValue(), productAndQuantity.getKey().getName(), productAndQuantity.getKey().getPrice() * productAndQuantity.getValue(), mealList));
+            productsAsString.append(String.format(productInfo, productData.getQuantity(), productData.getProduct().getName(), productData.getPrice(), productData.getMeals()));
         }
 
         return productsAsString.toString();
     }
-    private double getFinalPrice(List<ProductDto> products) {
+    private void orderList(List<EmailProductData> productsWithData){
+        //if only one product in list return
+        if (productsWithData.size() == 1) return;
+
+        for (int i = 1; i < productsWithData.size(); i++) {
+            EmailProductData current = productsWithData.get(i);
+            int j =  i - 1;
+
+            while (j >= 0 && shouldProductBeLower(current, productsWithData.get(j))) {
+                productsWithData.set(j + 1, productsWithData.get(j));
+                j--;
+            }
+
+            productsWithData.set(j + 1, current);
+        }
+    }
+    private boolean shouldProductBeLower(EmailProductData current, EmailProductData target) {
+        //if product is a kit and current is not move || if product is more expensive than current move
+        return !current.getMeals().isEmpty() && target.getMeals().isEmpty() || current.getPrice() > target.getPrice();
+    }
+    private double getFullPrice(List<EmailProductData> productsData) {
         double finalPrice = 0;
-        for (ProductDto product : products) {
-            finalPrice += product.getPrice();
+        for (EmailProductData productData : productsData) {
+            finalPrice += productData.getPrice();
         }
         return finalPrice;
     }
-    private String getMealListForProductId(Long productId) {
-        StringBuilder mealList = new StringBuilder();
+    private int getProductCount(List<EmailProductData> productsData) {
+        int productCount = 0;
+        for (EmailProductData productData : productsData) {
+            productCount += productData.getQuantity();
+        }
+        return productCount;
+    }
+    private HashMap<Long, Integer> getProductIdsWithQuantity(List<Long> list){
+        HashMap<Long, Integer> productAndQuantity = new HashMap<>();
 
+        for (Long id : list) {
+            if(productAndQuantity.containsKey(id)) {
+                productAndQuantity.put(id, productAndQuantity.get(id) + 1);
+                continue;
+            }
+            productAndQuantity.put(id, 1);
+        }
+
+        return productAndQuantity;
+    }
+    private List<EmailProductData> getProductsWithDataFromIdsWithQuantity(HashMap<Long, Integer> idsWithQuantity) {
+
+        List<EmailProductData> productsAndData = new ArrayList<>();
+
+        for (Map.Entry<Long, Integer> productIdWithQuantity : idsWithQuantity.entrySet()) {
+            ProductDto product = getProductById(productIdWithQuantity.getKey());
+            productsAndData.add(new EmailProductData(product, productIdWithQuantity.getValue(), product.getPrice() * productIdWithQuantity.getValue(), getMealListForProductId(product.getId())));
+        }
+
+        return productsAndData;
+    }
+    private String getMealListForProductId(Long productId) {
         //get mealList via http
         ResponseEntity<MealListResponseDto> response = null;
 
@@ -224,46 +254,65 @@ public class EmailService {
         if(response.getBody() == null)
             throw new RuntimeException("Error while getting meal list. Body of response is null, but status code is ok");
 
-        MealDto[] meals = response.getBody().getMeals();
+        List<MealDto> meals = response.getBody().getMeals();
 
-        for(int i = 0; i < meals.length; i++) {
-            if(i == 0)
-                mealList.append(meals[i].getMeal().getName());
-            else mealList.append(", ").append(meals[i].getMeal().getName());
+        if(meals.size() == 1) return "";
+
+        return makeMealList(meals);
+    }
+    private String makeMealList(List<MealDto> meals) {
+        StringBuilder mealList = new StringBuilder();
+
+        HashMap<MealDto, Integer> mealsAndQuantity = getMealsWithQuantity(meals);
+
+        for (Map.Entry<MealDto, Integer> mealAndQuantity : mealsAndQuantity.entrySet()) {
+            int quantity = mealAndQuantity.getValue();
+
+            if(quantity > 1)
+                mealList.append(mealAndQuantity.getValue()).append("x ").append(mealAndQuantity.getKey().getName()).append(", ");
+            else
+                mealList.append(mealAndQuantity.getKey().getName()).append(", ");
         }
+
+        //delete last comma
+        mealList.setLength(mealList.length() - 2);
 
         return mealList.toString();
     }
-    private List<ProductDto> getProductsFromIds(List<Long> ids) {
-        //get product list via http
+    private HashMap<MealDto, Integer> getMealsWithQuantity(List<MealDto> meals) {
+        LinkedHashMap<MealDto, Integer> mealsAndQuantity = new LinkedHashMap<>();
 
-        List<ProductDto> products = new ArrayList<>();
-
-        //call get product from id for each id
-        for (Long id : ids) {
-            String url = serviceUrl + "/product/get/" + id;
-
-            ResponseEntity<ProductDto> response = new RestTemplate().getForEntity(url, ProductDto.class);
-
-            try {
-                response = new RestTemplate().getForEntity(url, ProductDto.class);;
-            } catch (HttpStatusCodeException | ResourceAccessException e) {
-                throw new RuntimeException("Error while getting product for email. ", e);
+        for (MealDto meal : meals) {
+            if (mealsAndQuantity.containsKey(meal)){
+                mealsAndQuantity.put(meal, mealsAndQuantity.get(meal) + 1);
+                continue;
             }
-
-            //no product
-            if (response.getStatusCode() == HttpStatus.NO_CONTENT)
-                throw new RuntimeException("Error while getting product for email. Product in order is pointing on product that doesn't exist");
-
-            if (!response.getStatusCode().is2xxSuccessful())
-                throw new RuntimeException("Error while getting product for email. Status code of response is not ok and not NO_CONTENT. Status code: " + response.getStatusCode());
-
-            if (response.getBody() == null)
-                throw new RuntimeException("Error while getting product for email. Body of response is null, but status code is ok");
-
-            products.add(response.getBody());
+            mealsAndQuantity.put(meal, 1);
         }
 
-        return products;
+        return mealsAndQuantity;
+    }
+    private ProductDto getProductById(Long productId) {
+        String url = serviceUrl + "/product/get/" + productId;
+
+        ResponseEntity<ProductDto> response = new RestTemplate().getForEntity(url, ProductDto.class);
+
+        try {
+            response = new RestTemplate().getForEntity(url, ProductDto.class);;
+        } catch (HttpStatusCodeException | ResourceAccessException e) {
+            throw new RuntimeException("Error while getting product for email. ", e);
+        }
+
+        //no product
+        if (response.getStatusCode() == HttpStatus.NO_CONTENT)
+            throw new RuntimeException("Error while getting product for email. Product in order is pointing on product that doesn't exist");
+
+        if (!response.getStatusCode().is2xxSuccessful())
+            throw new RuntimeException("Error while getting product for email. Status code of response is not ok and not NO_CONTENT. Status code: " + response.getStatusCode());
+
+        if (response.getBody() == null)
+            throw new RuntimeException("Error while getting product for email. Body of response is null, but status code is ok");
+
+        return response.getBody();
     }
 }

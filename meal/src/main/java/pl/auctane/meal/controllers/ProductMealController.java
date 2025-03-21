@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.auctane.meal.dtos.productMeal.ProductMealsListDto;
+import pl.auctane.meal.dtos.productMeal.MealToSendDto;
 import pl.auctane.meal.entities.Meal;
 import pl.auctane.meal.entities.Product;
 import pl.auctane.meal.entities.ProductMeal;
@@ -46,14 +46,14 @@ public class ProductMealController {
         if (product.isEmpty()) {
             JSON.put("success", false);
             JSON.put("message", "Product with id: " + id + " doesn't exist");
-
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        System.out.println(product.get());
+        List<Meal> meals = productMealService.getProductMeals(id);
 
-        List<ProductMealsListDto> meals = productMealService.getProductMeals(product.get().getId());
-        System.out.println(meals);
+        for (Meal meal : meals) {
+            System.out.println(meal.getName());
+        }
 
         if(meals.isEmpty()) return ResponseEntity.noContent().build();
 
@@ -86,7 +86,7 @@ public class ProductMealController {
         productMeal.setProduct(product.get());
         productMeal.setMeal(meal.get());
 
-        productMealService.save(productMeal);
+        productMealService.create(productMeal);
 
         JSON.put("success", true);
         JSON.put("message", "Successfully added meal: " + meal.get().getName() + " for product: " + product.get().getName());

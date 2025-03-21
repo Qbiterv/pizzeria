@@ -1,8 +1,9 @@
 package pl.auctane.meal.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import pl.auctane.meal.dtos.productMeal.ProductMealsListDto;
+import pl.auctane.meal.dtos.productMeal.MealToSendDto;
 import pl.auctane.meal.entities.Meal;
 import pl.auctane.meal.entities.Product;
 import pl.auctane.meal.entities.ProductMeal;
@@ -21,15 +22,17 @@ public class ProductMealService {
         this.productMealRepository = productMealRepository;
     }
 
-    public List<ProductMealsListDto> getProductMeals(Long product) {
-        return productMealRepository.getAllByProductId(product).stream()
-                .map(productMeal -> new ProductMealsListDto(productMeal.getId(),
-                        new Meal(productMeal.getMeal().getId(), productMeal.getMeal().getName(),
-                                productMeal.getMeal().getDescription())))
-                .collect(Collectors.toList());
+    public List<Meal> getProductMeals(Long product) {
+        return productMealRepository.findAllByProduct_Id(product, Sort.by(Sort.Direction.ASC,"meal.category")).stream().map(ProductMeal::getMeal).collect(Collectors.toList());
     }
 
-    public void save(ProductMeal productMeal) {
+    public void create(ProductMeal productMeal) {
+        productMealRepository.save(productMeal);
+    }
+    public void create(Product product, Meal meal) {
+        ProductMeal productMeal = new ProductMeal();
+        productMeal.setProduct(product);
+        productMeal.setMeal(meal);
         productMealRepository.save(productMeal);
     }
 

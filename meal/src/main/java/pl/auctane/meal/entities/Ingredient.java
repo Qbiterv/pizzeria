@@ -10,8 +10,13 @@ import lombok.Setter;
 @Table
 public class Ingredient {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
+
+    public Ingredient() {}
+    public Ingredient(String name) {
+        this.name = name;
+    }
 }

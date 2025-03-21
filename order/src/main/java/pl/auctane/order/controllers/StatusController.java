@@ -68,6 +68,25 @@ public class StatusController {
         return ResponseEntity.ok().body(objectMapper.convertValue(status, Status.class));
     }
 
+    @DeleteMapping(value = "/delete/{id}")
+    public ResponseEntity<?> deleteStatus(@PathVariable("id") Long id) {
+        ObjectNode JSON = objectMapper.createObjectNode();
+
+        Optional<Status> status = statusService.getStatusById(id);
+
+        if(status.isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Status with id " + id + " does not exist");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        statusService.deleteStatusById(id);
+
+        JSON.put("success", true);
+        JSON.put("message", "Status with id " + id + " successfully deleted");
+        return ResponseEntity.ok().body(JSON);
+    }
+
     @PostMapping(value = "/create", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createStatus(@Valid @RequestBody StatusCreateDto statusCreateDto, BindingResult bindingResult) {
         ObjectNode JSON = objectMapper.createObjectNode();
@@ -87,7 +106,9 @@ public class StatusController {
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        statusService.createStatus(statusCreateDto.getState(), statusCreateDto.getName());
+        System.out.println(statusCreateDto.getType());
+
+        statusService.createStatus(statusCreateDto);
 
         JSON.put("success", true);
         JSON.put("message", "Status " + statusCreateDto.getName() + " created successfully | Priority: " + statusCreateDto.getState());
@@ -103,7 +124,6 @@ public class StatusController {
         if(status.isEmpty()) {
             JSON.put("success", false);
             JSON.put("message", "Status with id: " + id + " does not exist");
-
             return ResponseEntity.badRequest().body(JSON);
         }
 
@@ -119,9 +139,13 @@ public class StatusController {
             status.get().setState(statusPatchDto.getState());
         }
 
-        if(statusPatchDto.getName() != null && !statusPatchDto.getName().isEmpty()) {
+        //update name
+        if(statusPatchDto.getName() != null && !statusPatchDto.getName().isEmpty())
             status.get().setName(statusPatchDto.getName());
-        }
+
+        //update status
+        if(statusPatchDto.getType() != null)
+            status.get().setType(statusPatchDto.getType());
 
         statusService.updateStatus(status.get());
 

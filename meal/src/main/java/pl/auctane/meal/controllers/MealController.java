@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.auctane.meal.dtos.meal.MealCrateDto;
 import pl.auctane.meal.dtos.meal.MealEditDto;
 import pl.auctane.meal.entities.Meal;
+import pl.auctane.meal.entities.MealCategory;
+import pl.auctane.meal.services.MealCategoryService;
 import pl.auctane.meal.services.MealService;
 
 import java.util.List;
@@ -20,11 +22,13 @@ import java.util.Optional;
 public class MealController {
 
     private final MealService mealService;
+    private final MealCategoryService mealCategoryService;
     private final ObjectMapper objectMapper;
 
     @Autowired
-    public MealController(MealService mealService, ObjectMapper objectMapper) {
+    public MealController(MealService mealService, MealCategoryService mealCategoryService, ObjectMapper objectMapper) {
         this.mealService = mealService;
+        this.mealCategoryService = mealCategoryService;
         this.objectMapper = objectMapper;
     }
 
@@ -50,21 +54,36 @@ public class MealController {
 
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addMeal(@RequestBody MealCrateDto meal) {
-        String name = meal.getName();
-        String description = meal.getDescription();
-
-        System.out.println(name);
-        System.out.println(description);
-
-        if(name == null || name.isEmpty()) return ResponseEntity.badRequest().build();
-        if(description == null || description.isEmpty()) description = "";
-
         ObjectNode JSON = objectMapper.createObjectNode();
 
-        mealService.createMeal(name, description);
+        if(meal.getName() == null || meal.getName().isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Name is mandatory");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+        if(meal.getDescription() == null || meal.getDescription().isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Description is mandatory");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+        if(meal.getCategoryId() == null || meal.getCategoryId() <= 0) {
+            JSON.put("success", false);
+            JSON.put("message", "Category id is invalid");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        //check if category exists
+        Optional<MealCategory> mealCategory = mealCategoryService.findById(meal.getCategoryId());
+        if(mealCategory.isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Category with id: " + meal.getCategoryId() + " doesn't exist");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        mealService.createMeal(meal.getName(), meal.getDescription(), mealCategory.get());
 
         JSON.put("success", true);
-        JSON.put("message", "Created meal: " + name + " with description: " + description);
+        JSON.put("message", "Created meal: " + meal.getName() + " with description: " + meal.getDescription());
         return ResponseEntity.ok().body(JSON);
     }
 

@@ -10,7 +10,7 @@ import lombok.Setter;
 @Table
 public class MealIngredient {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne
@@ -20,4 +20,10 @@ public class MealIngredient {
     @ManyToOne
     @JoinColumn(name = "ingredient_id", nullable = false)
     private Ingredient ingredient;
+
+    public MealIngredient() {}
+    public MealIngredient(Meal meal, Ingredient ingredient) {
+        this.meal = meal;
+        this.ingredient = ingredient;
+    }
 }

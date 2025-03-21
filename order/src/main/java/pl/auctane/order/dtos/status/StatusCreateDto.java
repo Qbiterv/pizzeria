@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Getter;
 import lombok.Setter;
+import pl.auctane.order.enums.StatusType;
 
 @Getter
 @Setter
@@ -15,4 +16,7 @@ public class StatusCreateDto {
 
     @NotEmpty(message = "Name is mandatory")
     private String name;
+
+    @NotNull(message = "Type is mandatory (PRODUCTION / DELIVERY / COMPLETED)")
+    private StatusType type;
 }

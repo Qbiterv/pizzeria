@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import pl.auctane.order.entities.Order;
 import pl.auctane.order.entities.OrderStatus;
 import pl.auctane.order.entities.Status;
+import pl.auctane.order.enums.StatusType;
 import pl.auctane.order.repositories.OrderStatusRepository;
 
 import java.util.Optional;
@@ -25,12 +26,12 @@ public class OrderStatusService {
         return orderStatusRepository.findByOrder_Id(orderId);
     }
 
-    public void registerOrder(Order order) {
+    public boolean registerOrder(Order order) {
         Optional<Status> status = statusService.getFirst();
 
         if(status.isEmpty()) {
-            statusService.createStatus(1, "New order");
-            status = statusService.getFirst();
+            System.out.println("tried to register order but no status has been found");
+            return false;
         }
 
         OrderStatus orderStatus = new OrderStatus();
@@ -38,6 +39,7 @@ public class OrderStatusService {
         orderStatus.setStatus(status.get());
 
         orderStatusRepository.save(orderStatus);
+        return true;
     }
 
     public void updateOrderStatus(OrderStatus orderStatus, Status status) {
