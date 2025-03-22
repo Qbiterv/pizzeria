@@ -1,3 +1,4 @@
+
 INSERT INTO meal_category (name) VALUES ('pizza'), ('makaron'), ('napój');
 
 INSERT INTO meal (name, description, category_id) VALUES ('Margherita', '', (SELECT id FROM meal_category WHERE name = 'pizza'));

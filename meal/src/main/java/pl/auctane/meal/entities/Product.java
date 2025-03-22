@@ -16,11 +16,13 @@ public class Product {
     private String name;
     private String description;
     private Double price;
+    private String imageUrl;
 
     public Product(){}
-    public Product(String name, String description, Double price) {
+    public Product(String name, String description, Double price, String imageUrl) {
         this.name = name;
         this.description = description;
         this.price = price;
+        this.imageUrl = imageUrl;
     }
 }
