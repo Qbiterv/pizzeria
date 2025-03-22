@@ -34,7 +34,7 @@ public class ProductCategoryController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> getProductCategory() {
+    public ResponseEntity<?> getProductCategories() {
         List<ProductCategory> productCategories = productCategoryService.findAll();
         if(productCategories.isEmpty()) return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(productCategories);
@@ -45,6 +45,19 @@ public class ProductCategoryController {
         ProductCategory productCategory = productCategoryService.findById(id);
         if(productCategory == null) return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(productCategory);
+    }
+
+    @GetMapping(value = "/products-from-category/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getProductsFromCategoryId(@PathVariable Long id) {
+        List<Product> products = productCategoryService.getProductsFromCategoryId(id);
+        if(products.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(products);
+    }
+    @GetMapping(value = "/categories-from-product/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getCategoriesFromProductId(@PathVariable Long id) {
+        List<Category> categories = productCategoryService.getCategoriesFromProductId(id);
+        if(categories.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(categories);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

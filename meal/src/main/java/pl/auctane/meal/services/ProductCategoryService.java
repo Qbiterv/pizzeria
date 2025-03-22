@@ -2,10 +2,13 @@ package pl.auctane.meal.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.auctane.meal.entities.Category;
+import pl.auctane.meal.entities.Product;
 import pl.auctane.meal.entities.ProductCategory;
 import pl.auctane.meal.repositories.ProductCategoryRepository;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductCategoryService {
@@ -30,5 +33,13 @@ public class ProductCategoryService {
 
     public void deleteById(Long id) {
         productCategoryRepository.deleteById(id);
+    }
+
+    public List<Product> getProductsFromCategoryId(Long id) {
+        return productCategoryRepository.findAllByCategory_Id(id).stream().map(ProductCategory::getProduct).collect(Collectors.toList());
+    }
+
+    public List<Category> getCategoriesFromProductId(Long id) {
+        return productCategoryRepository.findAllByProduct_Id(id).stream().map(ProductCategory::getCategory).collect(Collectors.toList());
     }
 }
