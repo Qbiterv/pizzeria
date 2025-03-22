@@ -6,7 +6,6 @@ services:
       - "127.0.0.1:4566:4566"            # LocalStack Gateway
       - "127.0.0.1:4510-4559:4510-4559"  # external services port range
     environment:
-      # LocalStack configuration: https://docs.localstack.cloud/references/configuration/
       - DEBUG=${DEBUG:-0}
     volumes:
       - "${LOCALSTACK_VOLUME_DIR:-./volume}:/var/lib/localstack"
@@ -31,12 +30,16 @@ services:
     container_name: meal-service
     image: pizzeria-meal:latest
     build:
-      context: ./meal
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: meal/Dockerfile
     ports:
       - "9011:9010"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - JAVA_TOOL_OPTIONS=-javaagent:/usr/local/newrelic/newrelic.jar
+      - NEW_RELIC_APP_NAME=meal-service  # Change this to the name you want in New Relic
+    #    volumes:
+    #      - ./newrelic:/usr/local/newrelic
     depends_on:
       - db
     networks:
@@ -46,10 +49,15 @@ services:
     container_name: gateway-service
     image: pizzeria-brandenburg:latest
     build:
-      context: ./brandenburg
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: brandenburg/Dockerfile
     ports:
       - "8081:8080"
+    environment:
+      - JAVA_TOOL_OPTIONS=-javaagent:/usr/local/newrelic/newrelic.jar
+      - NEW_RELIC_APP_NAME=gateway-service  # Change this to the name you want in New Relic
+    #    volumes:
+    #      - ./newrelic:/usr/local/newrelic
     depends_on:
       - meal
       - order
@@ -61,12 +69,16 @@ services:
     container_name: order-service
     image: pizzeria-order:latest
     build:
-      context: ./order
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: order/Dockerfile
     ports:
       - "9091:9090"
     environment:
       - SPRING_PROFILES_ACTIVE=docker
+      - JAVA_TOOL_OPTIONS=-javaagent:/usr/local/newrelic/newrelic.jar
+      - NEW_RELIC_APP_NAME=order-service  # Change this to the name you want in New Relic
+    #    volumes:
+    #      - ./newrelic:/usr/local/newrelic
     depends_on:
       - db
       - mail
@@ -78,12 +90,16 @@ services:
     container_name: mail-service
     image: pizzeria-mail:latest
     build:
-      context: ./mail
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: mail/Dockerfile
     ports:
       - "8091:8090"
     environment:
       - SPRING_PROFILES_ACTIVE=secret
+      - JAVA_TOOL_OPTIONS=-javaagent:/usr/local/newrelic/newrelic.jar
+      - NEW_RELIC_APP_NAME=mail  # Change this to the name you want in New Relic
+    #    volumes:
+    #      - ./newrelic:/usr/local/newrelic
     depends_on:
       - meal
     networks:
@@ -101,28 +117,21 @@ services:
     networks:
       - "pizzaNetwork"
 
-#  agent:
-#    container_name: newrelic-infra
-#    build:
-#      context: .
-#      dockerfile: newrelic-infra.dockerfile
-#    cap_add:
-#      - SYS_PTRACE
-#    pid: host
-#    privileged: true
-#    volumes:
-#      - "/:/host:ro"
-#      - "/var/run/docker.sock:/var/run/docker.sock"
-#    restart: unless-stopped
-#    depends_on:
-#      - mail
-#      - meal
-#      - order
-#      - rabbitmq
-#      - db
-#      - gateway
-#    networks:
-#      - pizzaNetwork
+  agent:
+    container_name: newrelic-infra
+    build:
+      context: .
+      dockerfile: newrelic-infra.dockerfile
+    cap_add:
+      - SYS_PTRACE
+    pid: host
+    privileged: true
+    volumes:
+      - "/:/host:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    restart: unless-stopped
+    networks:
+      - pizzaNetwork
 
 networks:
   pizzaNetwork:
