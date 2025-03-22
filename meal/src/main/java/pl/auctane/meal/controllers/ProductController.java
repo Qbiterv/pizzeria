@@ -6,31 +6,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.auctane.meal.dtos.product.ProductCreateDto;
-import pl.auctane.meal.entities.Category;
+import pl.auctane.meal.dtos.ProductCategory.ProductWithCategories;
 import pl.auctane.meal.entities.Product;
-import pl.auctane.meal.services.CategoryService;
+import pl.auctane.meal.services.ProductCategoryService;
 import pl.auctane.meal.services.ProductService;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/v1/product")
 public class ProductController {
     private final ProductService productService;
-    private final CategoryService categoryService;
+    private final ProductCategoryService productCategoryService;
     private final ObjectMapper objectMapper;
 
     @Autowired
-    public ProductController(ProductService productService, ObjectMapper objectMapper, CategoryService categoryService) {
+    public ProductController(ProductService productService, ProductCategoryService productCategoryService, ObjectMapper objectMapper) {
         this.productService = productService;
+        this.productCategoryService = productCategoryService;
         this.objectMapper = objectMapper;
-        this.categoryService = categoryService;
     }
 
     @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getProducts() {
         return ResponseEntity.ok().body(productService.getProducts());
+    }
+
+    @GetMapping(value = "/get-with-categories", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getProductsAndCategories() {
+        List<ProductWithCategories> productsAndCategories = productService.getProducts().stream().map(product -> new ProductWithCategories(product, productCategoryService.getCategoriesFromProductId(product.getId()))).collect(Collectors.toList());
+        return ResponseEntity.ok().body(productsAndCategories);
     }
 
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -51,11 +58,9 @@ public class ProductController {
         if(product.getName() == null || product.getName().isEmpty()) return ResponseEntity.badRequest().build();
         if(product.getPrice() < 0) return ResponseEntity.badRequest().build();
         if(product.getDescription() == null) product.setDescription("");
+        if(product.getImageUrl() == null) product.setImageUrl("");
 
-        Product newProduct = new Product();
-        newProduct.setName(product.getName());
-        newProduct.setPrice(product.getPrice());
-        newProduct.setDescription(product.getDescription());
+        Product newProduct = new Product(product.getName(), product.getDescription(), product.getPrice(), product.getImageUrl());
 
         productService.createProduct(newProduct);
 
@@ -66,7 +71,7 @@ public class ProductController {
     }
 
     @PatchMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> editProduct(@PathVariable("id") Long id, @RequestBody ProductCreateDto product) {
+    public ResponseEntity<?> editProduct(@PathVariable("id") Long id, @RequestBody Product product) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         Optional<Product> productOptional = productService.getProduct(id);
@@ -74,7 +79,8 @@ public class ProductController {
 
         if(product.getName() != null && !product.getName().isEmpty()) productOptional.get().setName(product.getName());
         if(product.getDescription() != null) productOptional.get().setDescription(product.getDescription());
-        if(product.getPrice() > 0 && product.getPrice() != productOptional.get().getPrice()) productOptional.get().setPrice(product.getPrice());
+        if(product.getPrice() > 0 && !product.getPrice().equals(productOptional.get().getPrice())) productOptional.get().setPrice(product.getPrice());
+        if(product.getImageUrl() != null) productOptional.get().setImageUrl(product.getImageUrl());
 
         productService.updateProduct(productOptional.get());
 
