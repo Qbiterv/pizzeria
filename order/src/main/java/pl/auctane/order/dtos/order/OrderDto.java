@@ -26,5 +26,5 @@ public class OrderDto {
     private String address;
 
     @NotEmpty(message = "Products list cannot be empty")
-    private List<@NotNull(message = "Product ID must be greater than 0") Long> products;
+    private List<ProductIdWithQuantityDto> products;
 }

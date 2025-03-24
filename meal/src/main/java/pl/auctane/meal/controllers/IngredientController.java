@@ -13,6 +13,8 @@ import pl.auctane.meal.services.IngredientService;
 import java.util.List;
 import java.util.Optional;
 
+//passed sefel check
+
 @RestController
 @RequestMapping("v1/ingredient")
 public class IngredientController {
@@ -28,32 +30,31 @@ public class IngredientController {
     @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getIngredients() {
         List<Ingredient> ingredients = ingredientService.getAllIngredients();
-
         if(ingredients.isEmpty()) return ResponseEntity.noContent().build();
-
         return ResponseEntity.ok().body(ingredients);
     }
 
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getIngredient(@PathVariable("id") Long id) {
         Optional<Ingredient> ingredient = ingredientService.getIngredient(id);
-
         if(ingredient.isEmpty()) return ResponseEntity.noContent().build();
-
         return ResponseEntity.ok().body(ingredient.get());
     }
 
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addIngredient(@RequestBody IngredientDto ingredientDto) {
-        if(ingredientDto.getName() == null || ingredientDto.getName().isEmpty()) return ResponseEntity.noContent().build();
-
         ObjectNode JSON = objectMapper.createObjectNode();
+
+        if(ingredientDto.getName() == null || ingredientDto.getName().isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Name is Mandatory");
+            return ResponseEntity.badRequest().body(JSON);
+        }
 
         ingredientService.createIngredient(ingredientDto.getName());
 
         JSON.put("success", true);
         JSON.put("message", "Created ingredient: " + ingredientDto.getName());
-
         return ResponseEntity.ok().body(JSON);
     }
 
@@ -61,16 +62,18 @@ public class IngredientController {
     public ResponseEntity<?> deleteMeal(@PathVariable("id") Long id) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
-        if(ingredientService.deleteIngredient(id)) {
-            JSON.put("success", true);
-            JSON.put("message", "Deleted ingredient with id: " + id);
+        Optional<Ingredient> ingredient = ingredientService.getIngredient(id);
 
-            return ResponseEntity.ok().body(JSON);
+        if(ingredient.isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Ingredient with id: " + id + " doesn't exist");
+            return ResponseEntity.badRequest().body(JSON);
         }
 
-        JSON.put("success", false);
-        JSON.put("message", "Couldn't delete ingredient with id: " + id);
+        ingredientService.deleteIngredient(id);
 
+        JSON.put("success", true);
+        JSON.put("message", "deleted ingredient with id: " + id);
         return ResponseEntity.badRequest().body(JSON);
     }
 
@@ -83,23 +86,21 @@ public class IngredientController {
         if(ingredient.isEmpty()) {
             JSON.put("success", false);
             JSON.put("message", "Ingredient with id: " + id + " doesn't exist");
-
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        if(ingredientDto.getName() != null && !ingredientDto.getName().isEmpty()) {
-            ingredient.get().setName(ingredientDto.getName());
-        } else {
+        if(ingredientDto.getName() == null || ingredientDto.getName().isEmpty()) {
             JSON.put("success", false);
             JSON.put("message", "Invalid name");
             return ResponseEntity.badRequest().body(JSON);
         }
 
+        ingredient.get().setName(ingredientDto.getName());
+
         ingredientService.updateIngredient(ingredient.get());
 
         JSON.put("success", true);
         JSON.put("message", "Updated ingredient with id: " + id);
-
         return ResponseEntity.ok().body(JSON);
     }
 }

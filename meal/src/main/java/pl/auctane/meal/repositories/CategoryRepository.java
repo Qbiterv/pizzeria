@@ -5,8 +5,11 @@ import org.springframework.stereotype.Repository;
 import pl.auctane.meal.entities.Category;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface CategoryRepository extends JpaRepository<Category, Long> {
     List<Category> findAllByName(String name);
+
+    Optional<Category> findFirstByName(String name);
 }

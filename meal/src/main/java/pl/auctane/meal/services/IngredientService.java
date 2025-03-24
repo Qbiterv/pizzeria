@@ -39,10 +39,7 @@ public class IngredientService {
         ingredientRepository.save(ingredient);
     }
 
-    public boolean deleteIngredient(Long id) {
-        if(getIngredient(id).isEmpty()) return false;
-
+    public void deleteIngredient(Long id) {
         ingredientRepository.deleteById(id);
-        return true;
     }
 }

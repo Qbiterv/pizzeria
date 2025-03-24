@@ -71,6 +71,14 @@ project(":mail") {
 	}
 }
 
+project(":order") {
+	description = "Order module"
+
+	dependencies {
+		implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+	}
+}
+
 project(":brandenburg") {
 	description = "Gateway module, routes all the requests"
 

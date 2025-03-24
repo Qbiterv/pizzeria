@@ -40,10 +40,7 @@ public class MealService {
         mealRepository.save(meal);
     }
 
-    public boolean deleteMeal(Long id) {
-        if(getMeal(id).isEmpty()) return false;
-
+    public void deleteMeal(Long id) {
         mealRepository.deleteById(id);
-        return true;
     }
 }

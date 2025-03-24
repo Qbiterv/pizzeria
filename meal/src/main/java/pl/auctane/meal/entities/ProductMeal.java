@@ -20,4 +20,10 @@ public class ProductMeal {
     @ManyToOne
     @JoinColumn(name = "meal_id")
     private Meal meal;
+
+    public ProductMeal() {}
+    public ProductMeal(Product product, Meal meal) {
+        this.product = product;
+        this.meal = meal;
+    }
 }

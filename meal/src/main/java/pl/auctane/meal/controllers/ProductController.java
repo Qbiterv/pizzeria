@@ -15,6 +15,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+//passed sefel check
+
 @RestController
 @RequestMapping("/v1/product")
 public class ProductController {
@@ -31,6 +33,8 @@ public class ProductController {
 
     @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getProducts() {
+        List<Product> products = productService.getProducts();
+        if (products.isEmpty()) return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(productService.getProducts());
     }
 
@@ -43,9 +47,7 @@ public class ProductController {
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getProductById(@PathVariable("id") Long id) {
         Optional<Product> product = productService.getProduct(id);
-
         if(product.isEmpty()) return ResponseEntity.noContent().build();
-
         return ResponseEntity.ok().body(product.get());
     }
 
@@ -53,20 +55,29 @@ public class ProductController {
     public ResponseEntity<?> createProduct(@RequestBody Product product) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
-        if(product == null) return ResponseEntity.badRequest().build();
-
-        if(product.getName() == null || product.getName().isEmpty()) return ResponseEntity.badRequest().build();
-        if(product.getPrice() < 0) return ResponseEntity.badRequest().build();
+        if(product == null) {
+            JSON.put("success", false);
+            JSON.put("message", "Body is null");
+            return ResponseEntity.badRequest().build();
+        }
+        if(product.getName() == null || product.getName().isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Name is mandatory");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+        if(product.getPrice() < 0) {
+            JSON.put("success", false);
+            JSON.put("message", "Price must be greater than 0");
+            return ResponseEntity.badRequest().body(JSON);
+        }
         if(product.getDescription() == null) product.setDescription("");
         if(product.getImageUrl() == null) product.setImageUrl("");
 
         Product newProduct = new Product(product.getName(), product.getDescription(), product.getPrice(), product.getImageUrl());
-
         productService.createProduct(newProduct);
 
         JSON.put("success", true);
         JSON.put("message", "Created product: " + product.getName());
-
         return ResponseEntity.ok().body(JSON);
     }
 
@@ -98,8 +109,7 @@ public class ProductController {
 
         if(product.isEmpty()) {
             JSON.put("success", false);
-            JSON.put("message", "Product with id: " + id + " doesn't exist");
-
+            JSON.put("message", "Product with id: " + id + " does not exist");
             return ResponseEntity.badRequest().body(JSON);
         }
 
@@ -107,7 +117,6 @@ public class ProductController {
 
         JSON.put("success", true);
         JSON.put("message", "Deleted product with id: " + id);
-
         return ResponseEntity.ok().body(JSON);
     }
 }

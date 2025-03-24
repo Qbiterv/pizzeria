@@ -17,6 +17,8 @@ import pl.auctane.meal.services.ProductService;
 import java.util.List;
 import java.util.Optional;
 
+//passed sefel check
+
 @RestController
 @RequestMapping("/v1/product-meal")
 public class ProductMealController {
@@ -35,12 +37,15 @@ public class ProductMealController {
 
     @GetMapping("/get")
     public ResponseEntity<?> getProductMeals() {
-        return ResponseEntity.ok().body(productMealService.getAll());
+        List<ProductMeal> productMeals = productMealService.getAll();
+        if (productMeals.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(productMeals);
     }
 
     @GetMapping("/product/{id}")
     public ResponseEntity<?> getProductMeals(@PathVariable("id") Long id) {
         ObjectNode JSON = objectMapper.createObjectNode();
+
         Optional<Product> product = productService.getProduct(id);
 
         if (product.isEmpty()) {
@@ -51,10 +56,6 @@ public class ProductMealController {
 
         List<Meal> meals = productMealService.getProductMeals(id);
 
-        for (Meal meal : meals) {
-            System.out.println(meal.getName());
-        }
-
         if(meals.isEmpty()) return ResponseEntity.noContent().build();
 
         JSON.set("meals", objectMapper.valueToTree(meals));
@@ -64,12 +65,12 @@ public class ProductMealController {
     @PostMapping(value = "/add/{id}/{mealId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addProductMeal(@PathVariable("id") Long id, @PathVariable("mealId") Long mealId) {
         ObjectNode JSON = objectMapper.createObjectNode();
+
         Optional<Product> product = productService.getProduct(id);
 
         if (product.isEmpty()) {
             JSON.put("success", false);
             JSON.put("message", "Product with id: " + id + " doesn't exist");
-
             return ResponseEntity.badRequest().body(JSON);
         }
 
@@ -78,19 +79,14 @@ public class ProductMealController {
         if (meal.isEmpty()) {
             JSON.put("success", false);
             JSON.put("message", "Meal with id: " + mealId + " doesn't exist");
-
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        ProductMeal productMeal = new ProductMeal();
-        productMeal.setProduct(product.get());
-        productMeal.setMeal(meal.get());
-
+        ProductMeal productMeal = new ProductMeal(product.get(), meal.get());
         productMealService.create(productMeal);
 
         JSON.put("success", true);
         JSON.put("message", "Successfully added meal: " + meal.get().getName() + " for product: " + product.get().getName());
-
         return ResponseEntity.ok().body(JSON);
     }
 
@@ -103,7 +99,6 @@ public class ProductMealController {
         if (productMeal.isEmpty()) {
             JSON.put("success", false);
             JSON.put("message", "There is not product - meal relation with id: " + id);
-
             return ResponseEntity.badRequest().body(JSON);
         }
 
@@ -111,7 +106,6 @@ public class ProductMealController {
 
         JSON.put("success", true);
         JSON.put("message", "Deleted product - meal relation with id: " + id);
-
         return ResponseEntity.ok().body(JSON);
     }
 }

@@ -21,8 +21,8 @@ public class CategoryService {
         return categoryRepository.findAll();
     }
 
-    public List<Category> getCategories(String name) {
-        return categoryRepository.findAllByName(name);
+    public Optional<Category> getCategoryByName(String name) {
+        return categoryRepository.findFirstByName(name);
     }
 
     public Optional<Category> getCategory(Long id) {
