@@ -168,7 +168,7 @@ public class OrderController {
             mailPayloadDto.setPhone(orderDto.getPhone());
             mailPayloadDto.setOrderId(order.getId());
             mailPayloadDto.setAddress(orderDto.getAddress());
-            mailPayloadDto.setProductIds(products);
+            mailPayloadDto.setProductsWithQuantity(products);
 
             sendOrderEmail(mailPayloadDto);
         } catch (Exception e) {
@@ -189,6 +189,9 @@ public class OrderController {
         // Check if all products exist and add them to list
         for (ProductIdWithQuantityDto productIdWithQuantity : productIds) {
 
+            if (productIdWithQuantity.getProductId() == null || productIdWithQuantity.getProductId() < 1 || productIdWithQuantity.getQuantity() < 1)
+                throw new IllegalArgumentException("Product id or quantity is invalid");
+
             Optional<ProductDto> product = getProductFromId(productIdWithQuantity.getProductId());
 
             if (product.isEmpty()) {
@@ -201,12 +204,12 @@ public class OrderController {
 
         return productsWithQuantity;
     }
+
     private void sendOrderEmail(MailPayloadDto mailPayloadDto) throws Exception {
         String url = mailServiceUrl + "/email/send-order";
 
         new RestTemplate().postForEntity(url, mailPayloadDto, ObjectNode.class);
     }
-
     private Optional<ProductDto> getProductFromId(Long product) {
         String url = serviceUrl + "/product/get/" + product;
 
