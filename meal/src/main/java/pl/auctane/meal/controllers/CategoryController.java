@@ -10,7 +10,10 @@ import pl.auctane.meal.dtos.category.CategoryDto;
 import pl.auctane.meal.entities.Category;
 import pl.auctane.meal.services.CategoryService;
 
+import java.util.List;
 import java.util.Optional;
+
+//Passed sefel check
 
 @RestController
 @RequestMapping("/v1/category")
@@ -26,40 +29,53 @@ public class CategoryController {
 
     @GetMapping("/get")
     public ResponseEntity<?> getCategories() {
-        return ResponseEntity.ok().body(categoryService.getCategories());
+        List<Category> categories = categoryService.getCategories();
+        if (categories.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(categories);
     }
 
     @GetMapping("/get/name={name}")
     public ResponseEntity<?> getCategoryByName(@PathVariable("name") String name) {
-        return ResponseEntity.ok().body(categoryService.getCategories(name));
+        Optional<Category> category = categoryService.getCategoryByName(name);
+        if (category.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(category.get());
     }
 
     @GetMapping("/get/id={id}")
     public ResponseEntity<?> getCategoryById(@PathVariable("id") Long id) {
-        return ResponseEntity.ok().body(categoryService.getCategory(id));
+        Optional<Category> category = categoryService.getCategory(id);
+        if (category.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(category.get());
     }
 
-
-    //todo parse PLAIN TEXT from json to string value
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> createCategory(@RequestBody String name) {
-        Category newCategory = new Category();
-        newCategory.setName(name);
-        categoryService.createCategory(newCategory);
+    public ResponseEntity<?> createCategory(@RequestBody CategoryDto category) {
+        ObjectNode JSON = objectMapper.createObjectNode();
 
-        return ResponseEntity.ok().build();
+        Optional<Category> categoryWithSameName = categoryService.getCategoryByName(category.getName());
+
+        if(categoryWithSameName.isPresent()) {
+            JSON.put("success", false);
+            JSON.put("message", "Category with name: " + category.getName() + " already exists");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        categoryService.createCategory(category.getName());
+
+        JSON.put("success", true);
+        JSON.put("message", "Created category: " + category.getName());
+        return ResponseEntity.ok().body(JSON);
     }
 
     @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> deleteCategory(@PathVariable("id") Long id) {
-        Optional<Category> category = categoryService.getCategory(id);
-
         ObjectNode JSON = objectMapper.createObjectNode();
+
+        Optional<Category> category = categoryService.getCategory(id);
 
         if(category.isEmpty()) {
             JSON.put("success", false);
-            JSON.put("message", "Category with id: " + id + " doesn't exist");
-
+            JSON.put("message", "Category with id: " + id + " does not exist");
             return ResponseEntity.badRequest().body(JSON);
         }
 
@@ -67,7 +83,6 @@ public class CategoryController {
 
         JSON.put("success", true);
         JSON.put("message", "Deleted category with id: " + id);
-
         return ResponseEntity.ok().body(JSON);
     }
 
@@ -91,7 +106,7 @@ public class CategoryController {
 
         if(categoryDto.getName() == null || categoryDto.getName().isEmpty()) {
             JSON.put("success", false);
-            JSON.put("message", "Invalid category name");
+            JSON.put("message", "Name is mandatory");
             return ResponseEntity.badRequest().body(JSON);
         }
 
@@ -106,7 +121,6 @@ public class CategoryController {
 
         JSON.put("success", true);
         JSON.put("message", "Updated category with id: " + id);
-
         return ResponseEntity.ok().body(JSON);
     }
 }

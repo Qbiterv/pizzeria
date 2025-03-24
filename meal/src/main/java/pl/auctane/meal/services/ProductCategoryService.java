@@ -8,6 +8,7 @@ import pl.auctane.meal.entities.ProductCategory;
 import pl.auctane.meal.repositories.ProductCategoryRepository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -23,8 +24,8 @@ public class ProductCategoryService {
         return productCategoryRepository.findAll();
     }
 
-    public ProductCategory findById(Long id) {
-        return productCategoryRepository.findById(id).orElse(null);
+    public Optional<ProductCategory> findById(Long id) {
+        return productCategoryRepository.findById(id);
     }
 
     public void save(ProductCategory productCategory) {

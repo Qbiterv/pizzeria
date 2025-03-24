@@ -26,20 +26,16 @@ public class OrderStatusService {
         return orderStatusRepository.findByOrder_Id(orderId);
     }
 
-    public boolean registerOrder(Order order) {
+    public void registerOrder(Order order) throws IllegalStateException{
         Optional<Status> status = statusService.getFirst();
 
-        if(status.isEmpty()) {
-            System.out.println("tried to register order but no status has been found");
-            return false;
-        }
+        if(status.isEmpty()) throw new IllegalStateException("There are no statuses in the database");
 
         OrderStatus orderStatus = new OrderStatus();
         orderStatus.setOrder(order);
         orderStatus.setStatus(status.get());
 
         orderStatusRepository.save(orderStatus);
-        return true;
     }
 
     public void updateOrderStatus(OrderStatus orderStatus, Status status) {

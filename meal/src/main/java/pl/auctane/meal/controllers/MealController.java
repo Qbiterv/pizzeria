@@ -2,9 +2,12 @@ package pl.auctane.meal.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import pl.auctane.meal.dtos.meal.MealCrateDto;
 import pl.auctane.meal.dtos.meal.MealEditDto;
@@ -15,8 +18,10 @@ import pl.auctane.meal.services.MealService;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
-// Registering API REST controller on path /v1/meal/get
+//passed sefel check
+
 @RestController
 @RequestMapping("/v1/meal")
 public class MealController {
@@ -32,48 +37,34 @@ public class MealController {
         this.objectMapper = objectMapper;
     }
 
-    // RECEIVING ALL MEALS
     @GetMapping("/get")
     public ResponseEntity<?> getMeals() {
         List<Meal> meals = mealService.getMeals();
-
         if(meals.isEmpty()) return ResponseEntity.noContent().build();
-
         return ResponseEntity.ok().body(meals);
     }
 
-    // GETTING SINGLE MEAL BY ID
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getMeal(@PathVariable("id") Long id) {
         Optional<Meal> meal = mealService.getMeal(id);
-
         if(meal.isEmpty()) return ResponseEntity.noContent().build();
-
         return ResponseEntity.ok().body(meal.get());
     }
 
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<?> addMeal(@RequestBody MealCrateDto meal) {
+    public ResponseEntity<?> addMeal(@Valid @RequestBody MealCrateDto meal, BindingResult bindingResult) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
-        if(meal.getName() == null || meal.getName().isEmpty()) {
+        // Bean validation
+        if (bindingResult.hasErrors()) {
             JSON.put("success", false);
-            JSON.put("message", "Name is mandatory");
-            return ResponseEntity.badRequest().body(JSON);
-        }
-        if(meal.getDescription() == null || meal.getDescription().isEmpty()) {
-            JSON.put("success", false);
-            JSON.put("message", "Description is mandatory");
-            return ResponseEntity.badRequest().body(JSON);
-        }
-        if(meal.getCategoryId() == null || meal.getCategoryId() <= 0) {
-            JSON.put("success", false);
-            JSON.put("message", "Category id is invalid");
+            JSON.put("message", bindingResult.getAllErrors().stream().map(e -> ((FieldError) e).getField() + " " + e.getDefaultMessage()).collect(Collectors.joining(", ")));
             return ResponseEntity.badRequest().body(JSON);
         }
 
         //check if category exists
         Optional<MealCategory> mealCategory = mealCategoryService.findById(meal.getCategoryId());
+
         if(mealCategory.isEmpty()) {
             JSON.put("success", false);
             JSON.put("message", "Category with id: " + meal.getCategoryId() + " doesn't exist");
@@ -91,16 +82,18 @@ public class MealController {
     public ResponseEntity<?> deleteMeal(@PathVariable("id") Long id) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
-        if(mealService.deleteMeal(id)) {
-            JSON.put("success", true);
-            JSON.put("message", "Deleted meal with id: " + id);
+        Optional<Meal> meal = mealService.getMeal(id);
 
-            return ResponseEntity.ok().body(JSON);
+        if(meal.isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Meal with id: " + id + " does not exist");
+            return ResponseEntity.badRequest().body(JSON);
         }
 
-        JSON.put("success", false);
-        JSON.put("message", "There is no meal with id: " + id);
+        mealService.deleteMeal(id);
 
+        JSON.put("success", true);
+        JSON.put("message", "Deleted meal with id: " + id);
         return ResponseEntity.badRequest().body(JSON);
     }
 
@@ -112,22 +105,20 @@ public class MealController {
 
         if(meal.isEmpty()) {
             JSON.put("success", false);
-            JSON.put("message", "Meal with id: " + id + " doesn't exist");
-
+            JSON.put("message", "Meal with id: " + id + " does not exist");
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        System.out.println(patch.getName());
-        System.out.println(patch.getDescription());
-
         if(patch.getName() != null && !patch.getName().isEmpty()) meal.get().setName(patch.getName());
         if(patch.getDescription() != null && !patch.getDescription().isEmpty()) meal.get().setDescription(patch.getDescription());
-
-        // verify if two values are null, then do nothing.
-        if(patch.getName() == null && patch.getDescription() == null) {
-            JSON.put("success", false);
-            JSON.put("message", "Invalid name and description");
-            return ResponseEntity.badRequest().body(JSON);
+        if(patch.getCategoryId() != null) {
+            Optional<MealCategory> mealCategory = mealCategoryService.findById(patch.getCategoryId());
+            if (mealCategory.isEmpty()) {
+                JSON.put("success", false);
+                JSON.put("message", "Category with id: " + patch.getCategoryId() + " does not exist");
+                return ResponseEntity.badRequest().body(JSON);
+            }
+            meal.get().setCategory(mealCategory.get());
         }
 
         mealService.updateMeal(meal.get());

@@ -15,7 +15,8 @@ import pl.auctane.meal.services.MealIngredientService;
 import pl.auctane.meal.services.MealService;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
+
+//passed sefel check
 
 @RestController
 @RequestMapping("v1/mealIngredient")
@@ -36,9 +37,7 @@ public class MealIngredientController {
     @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getMealIngredients() {
         List<MealIngredient> mealIngredients = mealIngredientService.getAllMealIngredients();
-
         if(mealIngredients.isEmpty()) return ResponseEntity.noContent().build();
-
         return ResponseEntity.ok().body(mealIngredients);
     }
 
@@ -54,13 +53,12 @@ public class MealIngredientController {
         }
 
         List<Ingredient> ingredients =  mealIngredientService.getAllIngredientsForMeal(mealId);
-
+        if(ingredients.isEmpty()) return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(ingredients);
     }
 
     @PostMapping(value = "/create", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addMealIngredient(@RequestBody MealIngredientDto mealIngredientDto) {
-
         ObjectNode JSON = objectMapper.createObjectNode();
 
         //check if meal and ingredient exist
@@ -81,7 +79,6 @@ public class MealIngredientController {
 
         JSON.put("success", true);
         JSON.put("message", "Connected ingredient: " + ingredient.get().getName() + " with meal: " + meal.get().getName());
-
         return ResponseEntity.ok().body(JSON);
     }
 
@@ -89,54 +86,60 @@ public class MealIngredientController {
     public ResponseEntity<?> deleteMeal(@PathVariable("id") Long id) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
-        if(mealIngredientService.deleteMealIngredient(id)) {
-            JSON.put("success", true);
-            JSON.put("message", "Deleted meal ingredient with id: " + id);
+        Optional<MealIngredient> mealIngredient = mealIngredientService.getMealIngredient(id);
 
-            return ResponseEntity.ok().body(JSON);
+        if(mealIngredient.isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Meal-ingredient with id: " + id + " does not exist");
+            return ResponseEntity.badRequest().body(JSON);
         }
 
-        JSON.put("success", false);
-        JSON.put("message", "Couldn't delete ingredient meal with id: " + id);
+        mealIngredientService.deleteMealIngredient(id);
 
-        return ResponseEntity.badRequest().body(JSON);
+        JSON.put("success", true);
+        JSON.put("message", "Deleted meal ingredient with id: " + id);
+        return ResponseEntity.ok().body(JSON);
     }
 
     @PatchMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> editMeal(@PathVariable("id") Long id, @RequestBody MealIngredientDto mealIngredientDto) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
-        //check if mealIngredient exist
         Optional<MealIngredient> mealIngredient = mealIngredientService.getMealIngredient(id);
+
+        //check if relation exist
         if(mealIngredient.isEmpty()) {
             JSON.put("success", false);
-            JSON.put("message", "Meal ingredient with id: " + id + " does not exist");
+            JSON.put("message", "Meal-ingredient with id: " + id + " does not exist");
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        //check if there is something to patch
-        if(mealIngredientDto.getIngredientId() == 0 && mealIngredientDto.getMealId() == 0)
-            return ResponseEntity.noContent().build();
-
-        //there is something to change inside
-        if(mealIngredientDto.getMealId() != 0) {
-            //check if meal exist and update
+        //change values
+        if(mealIngredientDto.getMealId() != null && mealIngredientDto.getMealId() != 0) {
+            //check if new meal exist
             Optional<Meal> meal = mealService.getMeal(mealIngredientDto.getMealId());
-            if(!meal.isEmpty())
-                mealIngredient.get().setMeal(meal.get());
+            if(meal.isEmpty()) {
+                JSON.put("success", false);
+                JSON.put("message", "Meal with id: " + mealIngredientDto.getMealId() + " does not exist");
+                return ResponseEntity.badRequest().body(JSON);
+            }
+            mealIngredient.get().setMeal(meal.get());
         }
-        if(mealIngredientDto.getIngredientId() != 0) {
-            //check if ingredient exist and update
+        if(mealIngredientDto.getIngredientId() != null && mealIngredientDto.getIngredientId() != 0) {
+            //check if new ingredient exist
             Optional<Ingredient> ingredient = ingredientService.getIngredient(mealIngredientDto.getIngredientId());
-            if(!ingredient.isEmpty())
-                mealIngredient.get().setIngredient(ingredient.get());
+            if(ingredient.isEmpty()){
+                JSON.put("success", false);
+                JSON.put("message", "Ingredient with id: " + mealIngredientDto.getIngredientId() + " does not exist");
+                return ResponseEntity.badRequest().body(JSON);
+            }
+            mealIngredient.get().setIngredient(ingredient.get());
         }
 
         mealIngredientService.updateMealIngredient(mealIngredient.get());
 
         JSON.put("success", true);
         JSON.put("message", "Updated meal with id: " + id);
-
         return ResponseEntity.ok().body(JSON);
     }
 }

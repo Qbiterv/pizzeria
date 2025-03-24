@@ -10,10 +10,13 @@ import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import pl.auctane.order.dtos.order.ProductDto;
+import pl.auctane.order.dtos.order.ProductWithQuantityDto;
+import pl.auctane.order.entities.OrderProduct;
 import pl.auctane.order.services.OrderProductService;
 import pl.auctane.order.services.OrderService;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/order-product")
@@ -34,7 +37,9 @@ public class OrderProductController {
 
     @GetMapping(value = "/get")
     public ResponseEntity<?> getOrderProducts() {
-        return ResponseEntity.ok().body(orderProductService.getAllOrderProducts());
+        List<OrderProduct> orderProducts = orderProductService.getAllOrderProducts();
+        if(orderProducts.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(orderProducts);
     }
 
     @GetMapping(value = "/get/{orderId}")
@@ -48,40 +53,36 @@ public class OrderProductController {
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        //get list of product ids
-        List<Long> productIds =  orderProductService.getAllProductIdsForOrder(orderId);
+        //get all products with quantity for order
+        List<ProductWithQuantityDto> productsWithQuantity = getProductsWithQuantityForOrder(orderId);
 
-        List<ProductDto> products = new ArrayList<>();
+        return ResponseEntity.ok().body(productsWithQuantity);
+    }
 
-        //get product for each id
-        for (Long productId : productIds) {
-            ResponseEntity<ProductDto> response = null;
-            String url = serviceUrl + "/product/get/" + productId;
-            try {
-                response = new RestTemplate().getForEntity(url, ProductDto.class);
-                System.out.println(response.getBody());
-            } catch (HttpStatusCodeException | ResourceAccessException e) {
-                JSON.put("success", false);
-                JSON.put("message", e.getMessage());
-                return  ResponseEntity.badRequest().body(JSON);
-            }
+    private List<ProductWithQuantityDto> getProductsWithQuantityForOrder(Long orderId) {
+        //get list of relations
+        List<OrderProduct> orderProducts = orderProductService.getAllOrderProductsForOrder(orderId);
+        //initialize list of products
+        List<ProductWithQuantityDto> productsWithQuantity = new ArrayList<>();
 
-            ProductDto productDto = response.getBody();
-
-            if (productDto == null) {
-                JSON.put("success", false);
-                JSON.put("message", "Request failed");
-                return ResponseEntity.badRequest().body(JSON);
-            }
-
-            if (response.getStatusCode().isSameCodeAs(HttpStatus.NO_CONTENT)) {
-                JSON.put("success", false);
-                JSON.put("message", "Product with id " + productId + " does not exist");
-                return ResponseEntity.badRequest().body(JSON);
-            }
-            products.add(productDto);
+        //get product with quantity for each relation
+        for (OrderProduct orderProduct : orderProducts) {
+            getProductFromId(orderProduct.getProductId()).ifPresent(product -> productsWithQuantity.add(new ProductWithQuantityDto(product, orderProduct.getQuantity())));
         }
 
-        return ResponseEntity.ok().body(products);
+        return productsWithQuantity;
+    }
+    private Optional<ProductDto> getProductFromId(Long product) {
+        String url = serviceUrl + "/product/get/" + product;
+
+        ResponseEntity<ProductDto> response = null;
+
+        try {
+            response = new RestTemplate().getForEntity(url, ProductDto.class);
+        } catch (HttpStatusCodeException | ResourceAccessException e) {
+            return Optional.empty();
+        }
+
+        return Optional.ofNullable(response.getBody());
     }
 }

@@ -1,19 +1,18 @@
 package pl.auctane.meal.controllers;
 
-
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.auctane.meal.entities.Meal;
 import pl.auctane.meal.entities.MealCategory;
 import pl.auctane.meal.services.MealCategoryService;
 
 import java.util.List;
 import java.util.Optional;
+
+//passed sefel check
 
 @RestController
 @RequestMapping("v1/meal-category")
@@ -63,9 +62,10 @@ public class MealCategoryController {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         Optional<MealCategory> mealCategory = mealCategoryService.findById(id);
+
         if(mealCategory.isEmpty()) {
             JSON.put("success", false);
-            JSON.put("message", "Meal category not found");
+            JSON.put("message", "Meal category with id " + id + " does not exist");
             return ResponseEntity.badRequest().body(JSON);
         }
 
@@ -81,6 +81,7 @@ public class MealCategoryController {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         Optional<MealCategory> mealCategoryToUpdate = mealCategoryService.findById(id);
+
         if(mealCategoryToUpdate.isEmpty()) {
             JSON.put("success", false);
             JSON.put("message", "Meal category with id " + mealCategory.getId() + " does not exist");

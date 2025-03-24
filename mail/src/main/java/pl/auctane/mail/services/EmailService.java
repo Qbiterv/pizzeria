@@ -109,7 +109,7 @@ public class EmailService {
 
     private String putOrderDataIntoHtml(String html, EmailOrderDto emailOrderDto) {
 
-        List<EmailProductData> productsWithData = getProductsWithDataFromIdsWithQuantity(getProductIdsWithQuantity(emailOrderDto.getProductIds()));
+        List<EmailProductData> productsWithData = getProductsWithDataFromProductsWithQuantity(emailOrderDto.getProductsWithQuantity());
 
         orderList(productsWithData);
 
@@ -209,26 +209,12 @@ public class EmailService {
         }
         return productCount;
     }
-    private HashMap<Long, Integer> getProductIdsWithQuantity(List<Long> list){
-        HashMap<Long, Integer> productAndQuantity = new HashMap<>();
-
-        for (Long id : list) {
-            if(productAndQuantity.containsKey(id)) {
-                productAndQuantity.put(id, productAndQuantity.get(id) + 1);
-                continue;
-            }
-            productAndQuantity.put(id, 1);
-        }
-
-        return productAndQuantity;
-    }
-    private List<EmailProductData> getProductsWithDataFromIdsWithQuantity(HashMap<Long, Integer> idsWithQuantity) {
+    private List<EmailProductData> getProductsWithDataFromProductsWithQuantity(List<ProductWithQuantityDto> productsWithQuantity) {
 
         List<EmailProductData> productsAndData = new ArrayList<>();
 
-        for (Map.Entry<Long, Integer> productIdWithQuantity : idsWithQuantity.entrySet()) {
-            ProductDto product = getProductById(productIdWithQuantity.getKey());
-            productsAndData.add(new EmailProductData(product, productIdWithQuantity.getValue(), product.getPrice() * productIdWithQuantity.getValue(), getMealListForProductId(product.getId())));
+        for (ProductWithQuantityDto product : productsWithQuantity) {
+            productsAndData.add(new EmailProductData(product.getProduct(), product.getQuantity(), product.getProduct().getPrice() * product.getQuantity(), getMealListForProductId(product.getProduct().getId())));
         }
 
         return productsAndData;
@@ -291,28 +277,5 @@ public class EmailService {
         }
 
         return mealsAndQuantity;
-    }
-    private ProductDto getProductById(Long productId) {
-        String url = serviceUrl + "/product/get/" + productId;
-
-        ResponseEntity<ProductDto> response = new RestTemplate().getForEntity(url, ProductDto.class);
-
-        try {
-            response = new RestTemplate().getForEntity(url, ProductDto.class);;
-        } catch (HttpStatusCodeException | ResourceAccessException e) {
-            throw new RuntimeException("Error while getting product for email. ", e);
-        }
-
-        //no product
-        if (response.getStatusCode() == HttpStatus.NO_CONTENT)
-            throw new RuntimeException("Error while getting product for email. Product in order is pointing on product that doesn't exist");
-
-        if (!response.getStatusCode().is2xxSuccessful())
-            throw new RuntimeException("Error while getting product for email. Status code of response is not ok and not NO_CONTENT. Status code: " + response.getStatusCode());
-
-        if (response.getBody() == null)
-            throw new RuntimeException("Error while getting product for email. Body of response is null, but status code is ok");
-
-        return response.getBody();
     }
 }

@@ -26,4 +26,7 @@ public class OrderProduct {
 
     @Column(nullable = false, name = "product_id")
     private Long productId;
+
+    @Column(nullable = false)
+    private int quantity;
 }

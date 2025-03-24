@@ -17,6 +17,8 @@ import pl.auctane.meal.services.ProductService;
 import java.util.List;
 import java.util.Optional;
 
+//passed sefel check
+
 @RestController
 @RequestMapping("v1/product-category")
 public class ProductCategoryController {
@@ -42,8 +44,8 @@ public class ProductCategoryController {
 
     @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getProductCategoryById(@PathVariable Long id) {
-        ProductCategory productCategory = productCategoryService.findById(id);
-        if(productCategory == null) return ResponseEntity.noContent().build();
+        Optional<ProductCategory> productCategory = productCategoryService.findById(id);
+        if(productCategory.isEmpty()) return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(productCategory);
     }
 
@@ -53,6 +55,7 @@ public class ProductCategoryController {
         if(products.isEmpty()) return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(products);
     }
+
     @GetMapping(value = "/categories-from-product/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getCategoriesFromProductId(@PathVariable Long id) {
         List<Category> categories = productCategoryService.getCategoriesFromProductId(id);
@@ -91,17 +94,18 @@ public class ProductCategoryController {
     public ResponseEntity<?> deleteProductCategory(@PathVariable("id") Long id) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
-        ProductCategory productCategory = productCategoryService.findById(id);
-        if(productCategory == null){
+        Optional<ProductCategory> productCategory = productCategoryService.findById(id);
+
+        if(productCategory.isEmpty()){
             JSON.put("success", false);
-            JSON.put("message", "Product category with id: " + id + " does not exist");
+            JSON.put("message", "Product-category with id: " + id + " does not exist");
             return ResponseEntity.badRequest().body(JSON);
         }
 
         productCategoryService.deleteById(id);
 
         JSON.put("success", true);
-        JSON.put("message", "Deleted product category: " + productCategory.getId());
+        JSON.put("message", "Deleted product category: " + id);
         return ResponseEntity.ok().body(JSON);
     }
 
@@ -109,38 +113,37 @@ public class ProductCategoryController {
     public ResponseEntity<?> updateProductCategory(@PathVariable("id") Long id, @RequestBody ProductCategoryCreateDto productCategory) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
-        System.out.println(productCategory.getProductId());
+        Optional<ProductCategory> productCategoryToUpdate = productCategoryService.findById(id);
 
-        ProductCategory productCategoryToUpdate = productCategoryService.findById(id);
-        if (productCategoryToUpdate == null) {
+        if (productCategoryToUpdate.isEmpty()) {
             JSON.put("success", false);
             JSON.put("message", "Product category with id: " + id + " does not exist");
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        if(productCategory.getProductId() != null) {
+        //change values
+        if(productCategory.getProductId() != null && productCategory.getProductId() > 0) {
             Optional<Product> product = productService.getProduct(productCategory.getProductId());
             if (product.isEmpty()) {
                 JSON.put("success", false);
                 JSON.put("message", "Product with id: " + productCategory.getProductId() + " does not exist");
                 return ResponseEntity.badRequest().body(JSON);
             }
-
-            productCategoryToUpdate.setProduct(product.get());
+            productCategoryToUpdate.get().setProduct(product.get());
         }
 
-        if(productCategory.getCategoryId() != null) {
+        if(productCategory.getCategoryId() != null && productCategory.getCategoryId() > 0) {
             Optional<Category> category = categoryService.getCategory(productCategory.getCategoryId());
             if (category.isEmpty()) {
                 JSON.put("success", false);
                 JSON.put("message", "Category with id: " + productCategory.getCategoryId() + " does not exist");
                 return ResponseEntity.badRequest().body(JSON);
             }
-
-            productCategoryToUpdate.setCategory(category.get());
+            productCategoryToUpdate.get().setCategory(category.get());
         }
 
-        productCategoryService.save(productCategoryToUpdate);
+        productCategoryService.save(productCategoryToUpdate.get());
+
         JSON.put("success", true);
         JSON.put("message", "Updated product category");
         return ResponseEntity.ok().body(JSON);

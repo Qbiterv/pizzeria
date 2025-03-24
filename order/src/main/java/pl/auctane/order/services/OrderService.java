@@ -2,6 +2,7 @@ package pl.auctane.order.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.auctane.order.dtos.order.OrderDto;
 import pl.auctane.order.entities.Order;
 import pl.auctane.order.repositories.OrderRepository;
 
@@ -45,18 +46,12 @@ public class OrderService {
         return orderRepository.save(order);
     }
 
-    public Order createOrder(String name, String surname, String email, String phone, String address) {
-        Order order = new Order();
-        order.setName(name);
-        order.setSurname(surname);
-        order.setEmail(email);
-        order.setPhone(phone);
-        order.setAddress(address);
-
+    public Order createOrder(OrderDto orderDto) {
+        Order order = new Order(orderDto);
         return orderRepository.save(order);
     }
 
-    public void removeOrder(Order order ) {
+    public void deleteOrder(Order order) {
         orderRepository.delete(order);
     }
 
