@@ -15,7 +15,7 @@ import pl.auctane.order.enums.StatusType;
 @Table
 public class Status {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private int state; // 0 - new, 1 - in progress, 2 - completed

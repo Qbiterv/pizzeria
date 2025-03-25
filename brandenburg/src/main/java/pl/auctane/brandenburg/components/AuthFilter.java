@@ -34,20 +34,25 @@ public class AuthFilter implements GatewayFilter {
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        if(!authenticationEnabled) {
+        ServerHttpRequest request = exchange.getRequest();
+
+        // Allow preflight requests to pass through
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod().name())) {
+            return chain.filter(exchange);
+        }
+
+        if (!authenticationEnabled) {
             System.out.println("Authentication is disabled. To enable it, make \"authentication.enabled\" property as true");
             return chain.filter(exchange);
         }
 
-        ServerHttpRequest request = exchange.getRequest();
-
-        if(!hasAllCredentials(request)){
-            return sendBack(exchange,"Credentials missing");
+        if (!hasAllCredentials(request)) {
+            return sendBack(exchange, "Credentials missing");
         }
 
-        //check token
-        if(!Objects.equals(request.getHeaders().getFirst("Token"), token)){
-            return sendBack(exchange,"Invalid token");
+        // check token
+        if (!Objects.equals(request.getHeaders().getFirst("Token"), token)) {
+            return sendBack(exchange, "Invalid token");
         }
 
         return chain.filter(exchange);
@@ -62,6 +67,12 @@ public class AuthFilter implements GatewayFilter {
         ObjectNode JSON = objectMapper.createObjectNode();
         response.setStatusCode(HttpStatus.UNAUTHORIZED);
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, "application/json");
+
+        // Add CORS headers
+        response.getHeaders().add(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
+        response.getHeaders().add(HttpHeaders.ACCESS_CONTROL_ALLOW_HEADERS, "Origin, X-Requested-With, Content-Type, Accept, Token, Role");
+        response.getHeaders().add(HttpHeaders.ACCESS_CONTROL_ALLOW_METHODS, "GET, POST, PUT, DELETE, OPTIONS");
+        response.getHeaders().add(HttpHeaders.ACCESS_CONTROL_ALLOW_CREDENTIALS, "true");
 
         JSON.put("success", false);
         JSON.put("message", message);
