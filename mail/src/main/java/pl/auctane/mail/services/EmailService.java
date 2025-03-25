@@ -3,16 +3,10 @@ package pl.auctane.mail.services;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.client.ResourceAccessException;
-import org.springframework.web.client.RestTemplate;
 import pl.auctane.mail.controllers.SenderController;
 import pl.auctane.mail.dtos.*;
 
@@ -25,9 +19,6 @@ public class EmailService {
 
     @Autowired
     private JavaMailSender mailSender;
-
-    @Value("${service-url}")
-    String serviceUrl;
 
     public void sendEmail(String from, String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
@@ -209,73 +200,35 @@ public class EmailService {
         }
         return productCount;
     }
-    private List<EmailProductData> getProductsWithDataFromProductsWithQuantity(List<ProductWithQuantityDto> productsWithQuantity) {
+    private List<EmailProductData> getProductsWithDataFromProductsWithQuantity(List<ProductWithQuantityAndMealsDto> productsWithQuantity) {
 
         List<EmailProductData> productsAndData = new ArrayList<>();
 
-        for (ProductWithQuantityDto product : productsWithQuantity) {
-            productsAndData.add(new EmailProductData(product.getProduct(), product.getQuantity(), product.getProduct().getPrice() * product.getQuantity(), getMealListForProductId(product.getProduct().getId())));
+        for (ProductWithQuantityAndMealsDto product : productsWithQuantity) {
+            productsAndData.add(new EmailProductData(product.getProduct(), product.getQuantity(), product.getProduct().getPrice() * product.getQuantity(), makeMealList(product.getMeals())));
         }
 
         return productsAndData;
     }
-    private String getMealListForProductId(Long productId) {
-        //get mealList via http
-        ResponseEntity<MealListResponseDto> response = null;
+    private String makeMealList(List<MealWithQuantityDto> meals) {
 
-        String url = serviceUrl + "/product-meal/product/" + productId;
+        //only one meal
+        if (meals.isEmpty()) return "";
 
-        try {
-            response = new RestTemplate().getForEntity(url, MealListResponseDto.class);
-        } catch (HttpStatusCodeException | ResourceAccessException e) {
-            throw new RuntimeException("Error while getting meal list. ", e);
-        }
-
-        //no meals
-        if(response.getStatusCode() == HttpStatus.NO_CONTENT) return "";
-
-        if (!response.getStatusCode().is2xxSuccessful())
-            throw new RuntimeException("Error while getting meal list. Status code of response is not ok and not NO_CONTENT. Status code: " + response.getStatusCode());
-
-        if(response.getBody() == null)
-            throw new RuntimeException("Error while getting meal list. Body of response is null, but status code is ok");
-
-        List<MealDto> meals = response.getBody().getMeals();
-
-        if(meals.size() == 1) return "";
-
-        return makeMealList(meals);
-    }
-    private String makeMealList(List<MealDto> meals) {
         StringBuilder mealList = new StringBuilder();
 
-        HashMap<MealDto, Integer> mealsAndQuantity = getMealsWithQuantity(meals);
-
-        for (Map.Entry<MealDto, Integer> mealAndQuantity : mealsAndQuantity.entrySet()) {
-            int quantity = mealAndQuantity.getValue();
+        for (MealWithQuantityDto mealAndQuantity : meals) {
+            int quantity = mealAndQuantity.getQuantity();
 
             if(quantity > 1)
-                mealList.append(mealAndQuantity.getValue()).append("x ").append(mealAndQuantity.getKey().getName()).append(", ");
+                mealList.append(quantity).append("x ").append(mealAndQuantity.getMeal().getName()).append(", ");
             else
-                mealList.append(mealAndQuantity.getKey().getName()).append(", ");
+                mealList.append(mealAndQuantity.getMeal().getName()).append(", ");
         }
 
         //delete last comma
         mealList.setLength(mealList.length() - 2);
 
         return mealList.toString();
-    }
-    private HashMap<MealDto, Integer> getMealsWithQuantity(List<MealDto> meals) {
-        LinkedHashMap<MealDto, Integer> mealsAndQuantity = new LinkedHashMap<>();
-
-        for (MealDto meal : meals) {
-            if (mealsAndQuantity.containsKey(meal)){
-                mealsAndQuantity.put(meal, mealsAndQuantity.get(meal) + 1);
-                continue;
-            }
-            mealsAndQuantity.put(meal, 1);
-        }
-
-        return mealsAndQuantity;
     }
 }

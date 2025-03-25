@@ -15,13 +15,12 @@ import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 import pl.auctane.order.dtos.order.*;
 import pl.auctane.order.entities.Order;
+import pl.auctane.order.services.MealModuleService;
 import pl.auctane.order.services.OrderProductService;
 import pl.auctane.order.services.OrderService;
 import pl.auctane.order.services.OrderStatusService;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -31,16 +30,21 @@ public class OrderController {
     private final ObjectMapper objectMapper;
     private final OrderProductService orderProductService;
     private final OrderStatusService orderStatusService;
+    private final MealModuleService mealModuleService;
 
     @Value("${service.mail.url}")
     private String mailServiceUrl;
 
+    @Value("${service.url}")
+    private String mealServiceUrl;
+
     @Autowired
-    public OrderController(OrderService orderService, ObjectMapper objectMapper, OrderProductService orderProductService, OrderStatusService orderStatusService) {
+    public OrderController(OrderService orderService, ObjectMapper objectMapper, OrderProductService orderProductService, OrderStatusService orderStatusService, MealModuleService mealModuleService) {
         this.orderService = orderService;
         this.objectMapper = objectMapper;
         this.orderProductService = orderProductService;
         this.orderStatusService = orderStatusService;
+        this.mealModuleService = mealModuleService;
     }
 
     @GetMapping(value = "/get")
@@ -110,10 +114,6 @@ public class OrderController {
         return ResponseEntity.ok().body(order.get());
     }
 
-    // Initialize service url from application.properties
-    @Value("${service.url}")
-    private String serviceUrl;
-
     @PostMapping(value = "/create", consumes =  {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> createOrder(@Valid @RequestBody OrderDto orderDto, BindingResult bindingResult) {
         ObjectNode JSON = objectMapper.createObjectNode();
@@ -125,10 +125,10 @@ public class OrderController {
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        List<ProductWithQuantityDto> products;
+        List<ProductWithQuantityAndMealsDto> products;
 
         try {
-            products = getValidProductList(orderDto.getProducts());
+            products = mealModuleService.getValidProductList(orderDto.getProducts());
         } catch (IllegalArgumentException e) {
             //product with given id does not exist
             JSON.put("success", false);
@@ -154,28 +154,21 @@ public class OrderController {
         }
 
         // Connect all products with order
-        for (ProductWithQuantityDto productWithQuantity : products)
+        for (ProductWithQuantityAndMealsDto productWithQuantity : products)
             orderProductService.createOrderProduct(order, productWithQuantity);
 
-
         //send email
-        try {
-            MailPayloadDto mailPayloadDto = new MailPayloadDto();
-            mailPayloadDto.setTo(orderDto.getEmail());
-            mailPayloadDto.setSubject("Zamówienie zostało złożone - nr " + order.getId());
-            mailPayloadDto.setName(orderDto.getName());
-            mailPayloadDto.setSurname(orderDto.getSurname());
-            mailPayloadDto.setPhone(orderDto.getPhone());
-            mailPayloadDto.setOrderId(order.getId());
-            mailPayloadDto.setAddress(orderDto.getAddress());
-            mailPayloadDto.setProductsWithQuantity(products);
+        MailPayloadDto mailPayloadDto = new MailPayloadDto();
+        mailPayloadDto.setTo(orderDto.getEmail());
+        mailPayloadDto.setSubject("Zamówienie zostało złożone - nr " + order.getId());
+        mailPayloadDto.setName(orderDto.getName());
+        mailPayloadDto.setSurname(orderDto.getSurname());
+        mailPayloadDto.setPhone(orderDto.getPhone());
+        mailPayloadDto.setOrderId(order.getId());
+        mailPayloadDto.setAddress(orderDto.getAddress());
+        mailPayloadDto.setProductsWithQuantity(products);
+        sendOrderEmail(mailPayloadDto);
 
-            sendOrderEmail(mailPayloadDto);
-        } catch (Exception e) {
-            JSON.put("success", false);
-            JSON.put("message", "Failed to send email, error: " + e.getMessage());
-            return ResponseEntity.badRequest().body(JSON);
-        }
 
         //order created successfully
         JSON.put("success", true);
@@ -183,44 +176,9 @@ public class OrderController {
         return ResponseEntity.ok().body(JSON);
     }
 
-    private List<ProductWithQuantityDto> getValidProductList(List<ProductIdWithQuantityDto> productIds) throws IllegalArgumentException{
-        List<ProductWithQuantityDto> productsWithQuantity = new ArrayList<>();
-
-        // Check if all products exist and add them to list
-        for (ProductIdWithQuantityDto productIdWithQuantity : productIds) {
-
-            if (productIdWithQuantity.getProductId() == null || productIdWithQuantity.getProductId() < 1 || productIdWithQuantity.getQuantity() < 1)
-                throw new IllegalArgumentException("Product id or quantity is invalid");
-
-            Optional<ProductDto> product = getProductFromId(productIdWithQuantity.getProductId());
-
-            if (product.isEmpty()) {
-                throw new IllegalArgumentException("Product with id " + productIdWithQuantity.getProductId() + " does not exist");
-            }
-
-            //add product to list
-            productsWithQuantity.add(productIdWithQuantity.toProductWithQuantityDto(product.get()));
-        }
-
-        return productsWithQuantity;
-    }
-
-    private void sendOrderEmail(MailPayloadDto mailPayloadDto) throws Exception {
+    private void sendOrderEmail(MailPayloadDto mailPayloadDto) {
         String url = mailServiceUrl + "/email/send-order";
 
         new RestTemplate().postForEntity(url, mailPayloadDto, ObjectNode.class);
-    }
-    private Optional<ProductDto> getProductFromId(Long product) {
-        String url = serviceUrl + "/product/get/" + product;
-
-        ResponseEntity<ProductDto> response = null;
-
-        try {
-            response = new RestTemplate().getForEntity(url, ProductDto.class);
-        } catch (HttpStatusCodeException | ResourceAccessException e) {
-            return Optional.empty();
-        }
-
-        return Optional.ofNullable(response.getBody());
     }
 }

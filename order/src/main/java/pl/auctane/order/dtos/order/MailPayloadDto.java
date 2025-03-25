@@ -15,5 +15,5 @@ public class MailPayloadDto {
     private String phone;
     private Long orderId;
     private String address;
-    private List<ProductWithQuantityDto> productsWithQuantity;
+    private List<ProductWithQuantityAndMealsDto> productsWithQuantity;
 }

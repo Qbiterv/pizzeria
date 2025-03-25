@@ -2,6 +2,7 @@ package pl.auctane.order.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pl.auctane.order.dtos.order.ProductWithQuantityAndMealsDto;
 import pl.auctane.order.dtos.order.ProductWithQuantityDto;
 import pl.auctane.order.entities.Order;
 import pl.auctane.order.entities.OrderProduct;
@@ -33,7 +34,7 @@ public class OrderProductService {
         orderProductRepository.save(orderProduct);
     }
 
-    public void createOrderProduct(Order order, ProductWithQuantityDto productWithQuantity) {
+    public void createOrderProduct(Order order, ProductWithQuantityAndMealsDto productWithQuantity) {
         OrderProduct orderProduct = new OrderProduct();
         orderProduct.setOrder(order);
         orderProduct.setProductId(productWithQuantity.getProduct().getId());
