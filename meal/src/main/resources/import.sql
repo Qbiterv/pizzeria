@@ -50,3 +50,5 @@ INSERT INTO product_meal (product_id, meal_id) VALUES ((SELECT id FROM product W
 INSERT INTO product_meal (product_id, meal_id) VALUES ((SELECT id FROM product WHERE name = 'zestaw marka'), (SELECT id FROM meal WHERE name = 'Capriciosa'));
 INSERT INTO product_meal (product_id, meal_id) VALUES ((SELECT id FROM product WHERE name = 'zestaw marka'), (SELECT id FROM meal WHERE name = 'Carbonara'));
 INSERT INTO product_meal (product_id, meal_id) VALUES ((SELECT id FROM product WHERE name = 'zestaw marka'), (SELECT id FROM meal WHERE name = 'Capriciosa'));
+
+SELECT * FROM meal;
