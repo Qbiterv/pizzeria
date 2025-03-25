@@ -3,11 +3,12 @@ package pl.auctane.order.dtos.order;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 public class ProductIdWithQuantityDto {
     Long productId;
-
     int quantity;
 
     public ProductIdWithQuantityDto() {}
@@ -15,7 +16,7 @@ public class ProductIdWithQuantityDto {
         this.productId = productId;
         this.quantity = quantity;
     }
-    public ProductWithQuantityDto toProductWithQuantityDto(ProductDto productDto) {
-        return new ProductWithQuantityDto(productDto, quantity);
+    public ProductWithQuantityAndMealsDto toProductWithQuantityAndMeals(ProductDto productDto, List<MealWithQuantityDto> meals) {
+        return new ProductWithQuantityAndMealsDto(productDto, meals, quantity);
     }
 }

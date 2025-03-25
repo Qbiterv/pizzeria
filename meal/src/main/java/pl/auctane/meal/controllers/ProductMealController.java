@@ -43,7 +43,7 @@ public class ProductMealController {
     }
 
     @GetMapping("/product/{id}")
-    public ResponseEntity<?> getProductMeals(@PathVariable("id") Long id) {
+    public ResponseEntity<?> getAllMealsForProduct(@PathVariable("id") Long id) {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         Optional<Product> product = productService.getProduct(id);
