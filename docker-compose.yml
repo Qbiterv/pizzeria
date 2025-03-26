@@ -97,7 +97,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=secret
       - JAVA_TOOL_OPTIONS=-javaagent:/usr/local/newrelic/newrelic.jar
-      - NEW_RELIC_APP_NAME=mail  # Change this to the name you want in New Relic
+      - NEW_RELIC_APP_NAME=mail-service  # Change this to the name you want in New Relic
     #    volumes:
     #      - ./newrelic:/usr/local/newrelic
     depends_on:

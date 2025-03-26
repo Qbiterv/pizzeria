@@ -17,7 +17,7 @@ import pl.auctane.order.enums.StatusType;
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Status {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @EqualsAndHashCode.Include
     private Long id;
 

@@ -177,7 +177,7 @@ public class OrderController {
 
         //order created successfully
         JSON.put("success", true);
-        JSON.put("message", "Created order: " + order.getId());
+        JSON.put("message", order.getId());
         return ResponseEntity.ok().body(JSON);
     }
 
