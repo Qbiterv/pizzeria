@@ -42,6 +42,7 @@ public class OrderStatusController {
 
     @GetMapping(value = "/get")
     public ResponseEntity<?> getAllOrderStatuses() {
+        //get all order statuses
         return ResponseEntity.ok().body(orderStatusService.getAllOrderStatuses());
     }
 
