@@ -17,6 +17,6 @@ public class StatusCreateDto {
     @NotEmpty(message = "Name is mandatory")
     private String name;
 
-    @NotNull(message = "Type is mandatory (PRODUCTION / DELIVERY / COMPLETED)")
+    @NotNull(message = "Type is mandatory (CREATED / PRODUCTION / DELIVERY / COMPLETED)")
     private StatusType type;
 }

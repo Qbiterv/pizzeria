@@ -1,9 +1,8 @@
-package pl.auctane.mail.dtos;
+package pl.auctane.mail.dtos.email;
 
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.List;
+import pl.auctane.mail.dtos.product.ProductDto;
 
 @Getter
 @Setter

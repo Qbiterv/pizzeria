@@ -8,7 +8,15 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import pl.auctane.mail.controllers.SenderController;
-import pl.auctane.mail.dtos.*;
+import pl.auctane.mail.dtos.email.EmailOrderDataDto;
+import pl.auctane.mail.dtos.email.EmailProductData;
+import pl.auctane.mail.dtos.email.EmailStatusDto;
+import pl.auctane.mail.dtos.email.HtmlFileDto;
+import pl.auctane.mail.dtos.meal.MealWithQuantityDto;
+import pl.auctane.mail.dtos.order.OrderDto;
+import pl.auctane.mail.dtos.order.OrderProductsDataDto;
+import pl.auctane.mail.dtos.order.OrderStatusDto;
+import pl.auctane.mail.dtos.product.ProductWithQuantityAndMealsDto;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -17,9 +25,16 @@ import java.util.*;
 @Service
 public class EmailService {
 
-    @Autowired
-    private JavaMailSender mailSender;
+    private final OrderModuleService orderModuleService;
+    private final JavaMailSender mailSender;
 
+    @Autowired
+    public EmailService(OrderModuleService orderModuleService, JavaMailSender mailSender) {
+        this.orderModuleService = orderModuleService;
+        this.mailSender = mailSender;
+    }
+
+    //main methods
     public void sendEmail(String from, String to, String subject, String body) {
         SimpleMailMessage message = new SimpleMailMessage();
 
@@ -30,12 +45,14 @@ public class EmailService {
 
         mailSender.send(message);
     }
-    public void sendOrderEmail(String from, EmailOrderDto emailOrderDto, String htmlPath, List<HtmlFileDto> files) {
+    public void sendOrderEmail(String from, Long orderId, String htmlPath, List<HtmlFileDto> files) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = null;
 
         try {
             messageHelper = new MimeMessageHelper(message, true, StandardCharsets.UTF_8.name());
+
+            EmailOrderDataDto emailOrderDto = getEmailOrderDataDto(orderId);
 
             messageHelper.setFrom(from);
             messageHelper.setTo(emailOrderDto.getTo());
@@ -58,12 +75,14 @@ public class EmailService {
             throw new RuntimeException(e);
         }
     }
-    public void sendStatusEmail(String from, EmailStatusDto emailDto, String htmlPath, List<HtmlFileDto> files) {
+    public void sendStatusEmail(String from, Long orderId, String htmlPath, List<HtmlFileDto> files) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = null;
 
         try {
             messageHelper = new MimeMessageHelper(message, true, StandardCharsets.UTF_8.name());
+
+            EmailStatusDto emailDto = getEmailStatusDataDto(orderId);
 
             messageHelper.setFrom(from);
             messageHelper.setTo(emailDto.getTo());
@@ -98,9 +117,9 @@ public class EmailService {
         return html;
     }
 
-    private String putOrderDataIntoHtml(String html, EmailOrderDto emailOrderDto) {
+    private String putOrderDataIntoHtml(String html, EmailOrderDataDto emailOrderDataDto) {
 
-        List<EmailProductData> productsWithData = getProductsWithDataFromProductsWithQuantity(emailOrderDto.getProductsWithQuantity());
+        List<EmailProductData> productsWithData = getProductsWithDataFromProductsWithQuantity(emailOrderDataDto.getProductsWithQuantity());
 
         orderList(productsWithData);
 
@@ -111,12 +130,12 @@ public class EmailService {
 
         //put data into html
         HashMap<String, String> replaceValues = new HashMap<>();
-        replaceValues.put("{name}", emailOrderDto.getName());
-        replaceValues.put("{surname}", emailOrderDto.getSurname());
-        replaceValues.put("{orderId}", String.valueOf(emailOrderDto.getOrderId()));
+        replaceValues.put("{name}", emailOrderDataDto.getName());
+        replaceValues.put("{surname}", emailOrderDataDto.getSurname());
+        replaceValues.put("{orderId}", String.valueOf(emailOrderDataDto.getOrderId()));
         replaceValues.put("{productList}", productsAsString);
-        replaceValues.put("{phone}", emailOrderDto.getPhone());
-        replaceValues.put("{address}", emailOrderDto.getAddress());
+        replaceValues.put("{phone}", emailOrderDataDto.getPhone());
+        replaceValues.put("{address}", emailOrderDataDto.getAddress());
         replaceValues.put("{finalPrice}", String.format("%.2f", fullPrice));
         replaceValues.put("{productCount}", String.valueOf(productCount));
 
@@ -145,6 +164,61 @@ public class EmailService {
         return html;
     }
 
+    private EmailOrderDataDto getEmailOrderDataDto(Long orderId){
+        EmailOrderDataDto emailOrderDataDto = new EmailOrderDataDto();
+
+        //check if order exist
+        Optional<OrderDto> otionalOrder = orderModuleService.getOrderById(orderId);
+        if (otionalOrder.isEmpty())
+            throw new IllegalArgumentException("Order with id " + orderId + " does not exist");
+
+
+        OrderDto order = otionalOrder.get();
+
+        emailOrderDataDto.setOrderId(orderId);
+        emailOrderDataDto.setName(order.getName());
+        emailOrderDataDto.setSurname(order.getSurname());
+        emailOrderDataDto.setPhone(order.getPhone());
+        emailOrderDataDto.setAddress(order.getAddress());
+        emailOrderDataDto.setTo(order.getEmail());
+        emailOrderDataDto.setSubject("Zamówienie zostało złożone - nr " + orderId);
+
+        //get products with quantity
+        Optional<OrderProductsDataDto> orderProductsData = orderModuleService.getOrderProductsData(orderId);
+        if (orderProductsData.isEmpty())
+            throw new IllegalArgumentException("Order with id " + orderId + " does not have any product data");
+
+        emailOrderDataDto.setProductsWithQuantity(orderProductsData.get().getProductsWithQuantity());
+
+        return emailOrderDataDto;
+    }
+    private EmailStatusDto getEmailStatusDataDto(Long orderId) {
+        EmailStatusDto emailStatusDto = new EmailStatusDto();
+
+        //check if order exist
+        Optional<OrderDto> otionalOrder = orderModuleService.getOrderById(orderId);
+        if (otionalOrder.isEmpty())
+            throw new IllegalArgumentException("Order with id " + orderId + " does not exist");
+
+        OrderDto order = otionalOrder.get();
+
+        emailStatusDto.setOrderId(orderId);
+        emailStatusDto.setName(order.getName());
+        emailStatusDto.setSurname(order.getSurname());
+        emailStatusDto.setTo(order.getEmail());
+        emailStatusDto.setSubject("Zamówienie nr " + orderId + " zmieniło status");
+
+        //get order status
+        Optional<OrderStatusDto> orderStatus = orderModuleService.getOrderStatus(orderId);
+        if (orderStatus.isEmpty())
+            throw new IllegalArgumentException("Order with id " + orderId + " does not have status");
+
+        emailStatusDto.setStatus(orderStatus.get().getName());
+
+        return emailStatusDto;
+    }
+
+    //methods used in putOrderDataIntoHtml
     private String getProductListAsString(List<EmailProductData> productsData) {
         StringBuilder productsAsString = new StringBuilder();
 

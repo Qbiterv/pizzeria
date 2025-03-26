@@ -2,13 +2,11 @@ package pl.auctane.order.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.auctane.order.dtos.order.ProductWithQuantityAndMealsDto;
-import pl.auctane.order.dtos.order.ProductWithQuantityDto;
+import pl.auctane.order.dtos.product.ProductWithQuantityAndMealsDto;
 import pl.auctane.order.entities.Order;
 import pl.auctane.order.entities.OrderProduct;
 import pl.auctane.order.repositories.OrderProductRepository;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -40,5 +38,9 @@ public class OrderProductService {
         orderProduct.setProductId(productWithQuantity.getProduct().getId());
         orderProduct.setQuantity(productWithQuantity.getQuantity());
         orderProductRepository.save(orderProduct);
+    }
+
+    public void deleteAllOrderProductsForOrderId(Long orderId) {
+        orderProductRepository.deleteAll(orderProductRepository.findAllByOrder_Id(orderId));
     }
 }

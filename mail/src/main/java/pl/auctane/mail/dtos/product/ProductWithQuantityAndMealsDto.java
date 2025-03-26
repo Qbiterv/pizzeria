@@ -1,7 +1,8 @@
-package pl.auctane.mail.dtos;
+package pl.auctane.mail.dtos.product;
 
 import lombok.Getter;
 import lombok.Setter;
+import pl.auctane.mail.dtos.meal.MealWithQuantityDto;
 
 import java.util.List;
 

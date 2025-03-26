@@ -1,9 +1,11 @@
 package pl.auctane.order.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import pl.auctane.order.dtos.status.StatusCreateDto;
 import pl.auctane.order.entities.Status;
+import pl.auctane.order.enums.StatusType;
 import pl.auctane.order.repositories.StatusRepository;
 
 import java.util.List;
@@ -21,7 +23,12 @@ public class StatusService {
     }
 
     public List<Status> getAllStatuses() {
-        return statusRepository.findAll();
+        return statusRepository.findAll(Sort.by(Sort.Direction.ASC, "state"));
+
+    }
+
+    public List<Status> getAllStatusesWithoutCanceled() {
+        return statusRepository.findAllByTypeNot(StatusType.CANCELED, Sort.by(Sort.Direction.ASC, "state"));
     }
 
     public Optional<Status> getStatusById(Long id) {
@@ -53,7 +60,15 @@ public class StatusService {
         statusRepository.save(status);
     }
 
-    public Optional<Status> getFirst() {
-        return statusRepository.findFirstByOrderByStateAsc();
+    public Optional<Status> getFirstStatusOfType(StatusType type) {
+        return statusRepository.findFirstByTypeOrderByStateAsc(type);
+    }
+
+    public Optional<Status> getCanceledStatus() {
+        return statusRepository.getFirstByType(StatusType.CANCELED);
+    }
+
+    public List<String> getAllStatusesNamesWithoutCanceled() {
+        return statusRepository.findAllByTypeNot(StatusType.CANCELED, Sort.by(Sort.Direction.ASC, "state")).stream().map(Status::getName).toList();
     }
 }

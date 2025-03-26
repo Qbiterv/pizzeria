@@ -3,6 +3,7 @@ package pl.auctane.order.dtos.order;
 import jakarta.validation.constraints.*;
 import lombok.Getter;
 import lombok.Setter;
+import pl.auctane.order.dtos.product.ProductIdWithQuantityDto;
 
 import java.util.List;
 
