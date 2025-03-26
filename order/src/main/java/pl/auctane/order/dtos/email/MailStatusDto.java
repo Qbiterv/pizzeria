@@ -1,12 +1,11 @@
-package pl.auctane.mail.dtos;
-
+package pl.auctane.order.dtos.email;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class EmailStatusDto {
+public class MailStatusDto {
     private String to;
     private String subject;
 

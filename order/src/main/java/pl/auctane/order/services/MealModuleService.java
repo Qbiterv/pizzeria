@@ -6,14 +6,20 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
-import pl.auctane.order.dtos.order.*;
+import pl.auctane.order.dtos.meal.MealDto;
+import pl.auctane.order.dtos.meal.MealListResponseDto;
+import pl.auctane.order.dtos.meal.MealWithQuantityDto;
+import pl.auctane.order.dtos.product.ProductDto;
+import pl.auctane.order.dtos.product.ProductIdWithQuantityDto;
+import pl.auctane.order.dtos.product.ProductWithQuantityAndMealsDto;
+import pl.auctane.order.dtos.product.ProductWithQuantityDto;
 
 import java.util.*;
 
 @Service
 public class MealModuleService {
 
-    @Value("${service.url}")
+    @Value("${service.meal.url}")
     private String mealServiceUrl;
 
     public List<ProductWithQuantityAndMealsDto> getValidProductList(List<ProductIdWithQuantityDto> productIds) throws IllegalArgumentException{

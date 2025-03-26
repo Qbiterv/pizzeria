@@ -10,15 +10,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.HttpStatusCodeException;
-import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
+import pl.auctane.order.dtos.email.MailPayloadDto;
+import pl.auctane.order.dtos.email.MailStatusDto;
 import pl.auctane.order.dtos.order.*;
+import pl.auctane.order.dtos.product.ProductWithQuantityAndMealsDto;
 import pl.auctane.order.entities.Order;
-import pl.auctane.order.services.MealModuleService;
-import pl.auctane.order.services.OrderProductService;
-import pl.auctane.order.services.OrderService;
-import pl.auctane.order.services.OrderStatusService;
+import pl.auctane.order.entities.OrderStatus;
+import pl.auctane.order.entities.Status;
+import pl.auctane.order.enums.StatusType;
+import pl.auctane.order.services.*;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -31,20 +32,22 @@ public class OrderController {
     private final OrderProductService orderProductService;
     private final OrderStatusService orderStatusService;
     private final MealModuleService mealModuleService;
+    private final StatusService statusService;
 
     @Value("${service.mail.url}")
     private String mailServiceUrl;
 
-    @Value("${service.url}")
+    @Value("${service.meal.url}")
     private String mealServiceUrl;
 
     @Autowired
-    public OrderController(OrderService orderService, ObjectMapper objectMapper, OrderProductService orderProductService, OrderStatusService orderStatusService, MealModuleService mealModuleService) {
+    public OrderController(OrderService orderService, ObjectMapper objectMapper, OrderProductService orderProductService, OrderStatusService orderStatusService, MealModuleService mealModuleService, StatusService statusService) {
         this.orderService = orderService;
         this.objectMapper = objectMapper;
         this.orderProductService = orderProductService;
         this.orderStatusService = orderStatusService;
         this.mealModuleService = mealModuleService;
+        this.statusService = statusService;
     }
 
     @GetMapping(value = "/get")
@@ -167,7 +170,9 @@ public class OrderController {
         mailPayloadDto.setOrderId(order.getId());
         mailPayloadDto.setAddress(orderDto.getAddress());
         mailPayloadDto.setProductsWithQuantity(products);
-        sendOrderEmail(mailPayloadDto);
+
+        //send email
+        sendOrderEmail(order.getId());
 
 
         //order created successfully
@@ -176,9 +181,68 @@ public class OrderController {
         return ResponseEntity.ok().body(JSON);
     }
 
-    private void sendOrderEmail(MailPayloadDto mailPayloadDto) {
-        String url = mailServiceUrl + "/email/send-order";
+    @DeleteMapping(value = "/cancel-order/{id}")
+    public ResponseEntity<?> cancelOrder(@PathVariable("id") Long id) {
+        ObjectNode JSON = objectMapper.createObjectNode();
 
-        new RestTemplate().postForEntity(url, mailPayloadDto, ObjectNode.class);
+        //check if order exist
+        Optional<Order> order = orderService.getOrderById(id);
+        if(order.isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Order with id " + id + " does not exist");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        //check if order status exist
+        Optional<OrderStatus> orderStatus = orderStatusService.getOrderStatus(id);
+        if(orderStatus.isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Order with id " + id + " does not have status");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        //check if order is on status CREATED
+        try {
+            if (orderStatus.get().getStatus().getType() != StatusType.CREATED) {
+                JSON.put("success", false);
+                JSON.put("message", "Order with id " + id + " is not on status CREATED");
+                return ResponseEntity.badRequest().body(JSON);
+            }
+        } catch (IllegalStateException e) {
+            JSON.put("success", false);
+            JSON.put("message", e.getMessage());
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        //get status with type CANCELED
+        Optional<Status> canceledStatus = statusService.getCanceledStatus();
+
+        //check if status CANCELED exist
+        if(canceledStatus.isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "There is no status with type CANCELED in the database");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        //delete current orderStatus relation and create new one with status CANCELED
+        orderStatusService.updateOrderStatus(orderStatus.get(), canceledStatus.get());
+
+        //send email
+        sendStatusEmail(id);
+
+        JSON.put("success", true);
+        JSON.put("message", "Order with id " + id + " has been canceled");
+        return ResponseEntity.ok().body(JSON);
+    }
+
+    private void sendOrderEmail(Long id) {
+        String url = mailServiceUrl + "/email/send-order/" + id;
+
+        new RestTemplate().put(url, null);
+    }
+    private void sendStatusEmail(Long orderId){
+        String url = mailServiceUrl + "/email/send-status/" + orderId;
+
+        new RestTemplate().put(url, null);
     }
 }

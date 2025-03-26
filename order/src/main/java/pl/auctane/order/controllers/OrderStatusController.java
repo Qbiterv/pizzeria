@@ -34,7 +34,7 @@ public class OrderStatusController {
         this.objectMapper = objectMapper;
     }
 
-    @Value("${service.url}")
+    @Value("${service.meal.url}")
     private String serviceUrl;
 
     @Value("${service.mail.url}")
@@ -42,6 +42,7 @@ public class OrderStatusController {
 
     @GetMapping(value = "/get")
     public ResponseEntity<?> getAllOrderStatuses() {
+        //get all order statuses
         return ResponseEntity.ok().body(orderStatusService.getAllOrderStatuses());
     }
 
@@ -68,6 +69,35 @@ public class OrderStatusController {
         return ResponseEntity.ok().body(orderStatus.get().getStatus());
     }
 
+    @GetMapping("/status-index/{orderId}")
+    public ResponseEntity<?> getOrderStatusIndex(@PathVariable("orderId") Long orderId) {
+        ObjectNode JSON = objectMapper.createObjectNode();
+
+        //check if order exist
+        if(orderService.getOrderById(orderId).isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Order with id " + orderId + " does not exist");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        //get order status
+        Optional<OrderStatus> orderStatus =  orderStatusService.getOrderStatus(orderId);
+
+        if(orderStatus.isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "!!!Bad thing happened!!! Order with id " + orderId + " does not have a status");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        List<Status> allStatuses = statusService.getAllStatusesWithoutCanceled();
+        Status status = orderStatus.get().getStatus();
+        int indexOfStatus  = allStatuses.indexOf(status);
+
+        JSON.put("success", true);
+        JSON.put("message", indexOfStatus);
+        return ResponseEntity.ok().body(JSON);
+    }
+
     @PutMapping(value = "/move-to-next-state/{orderId}")
     public ResponseEntity<?> moveToNextState(@PathVariable("orderId") Long orderId) {
         ObjectNode JSON = objectMapper.createObjectNode();
@@ -89,7 +119,8 @@ public class OrderStatusController {
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        List<Status> allStatuses = statusService.getAllStatuses();
+        List<Status> allStatuses = statusService.getAllStatusesWithoutCanceled();
+
         Status status = orderStatus.get().getStatus();
         int indexOfStatus  = allStatuses.indexOf(status);
 
@@ -105,23 +136,9 @@ public class OrderStatusController {
 
         Status nextStatus = allStatuses.get(indexOfStatus + 1);
 
-        MailStatusPayloadDto mailStatusPayloadDto = new MailStatusPayloadDto();
-        mailStatusPayloadDto.setOrderId(orderId);
-        mailStatusPayloadDto.setTo(order.get().getEmail());
-        mailStatusPayloadDto.setSurname(order.get().getSurname());
-        mailStatusPayloadDto.setName(order.get().getName());
-        mailStatusPayloadDto.setSubject("Aktualizacja statusu zamówienia " + orderId);
-        mailStatusPayloadDto.setStatus(nextStatus.getName());
-
-        try {
-            new RestTemplate().postForEntity(mailServiceUrl + "/email/send-status", mailStatusPayloadDto, ObjectNode.class);
-        } catch (Exception e) {
-            JSON.put("success", false);
-            JSON.put("message", "!!!Bad thing happened!!! Could not send email with status update");
-            return ResponseEntity.badRequest().body(JSON);
-        }
-
         orderStatusService.updateOrderStatus(orderStatus.get(), nextStatus);
+
+        sendEmail(orderId);
 
         JSON.put("success", true);
         JSON.put("message", "Order with id " + orderId + " successfully moved to next state");
@@ -149,7 +166,7 @@ public class OrderStatusController {
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        List<Status> allStatuses = statusService.getAllStatuses();
+        List<Status> allStatuses = statusService.getAllStatusesWithoutCanceled();
         Status status = orderStatus.get().getStatus();
         int indexOfStatus  = allStatuses.indexOf(status);
 
@@ -160,6 +177,8 @@ public class OrderStatusController {
         }
 
         orderStatusService.updateOrderStatus(orderStatus.get(), allStatuses.get(indexOfStatus - 1));
+
+        sendEmail(orderId);
 
         JSON.put("success", true);
         JSON.put("message", "Order with id " + orderId + " successfully moved to previous state");
@@ -202,8 +221,18 @@ public class OrderStatusController {
 
         orderStatusService.updateOrderStatus(orderStatus.get(), newStatus.get());
 
+        sendEmail(orderId);
+
         JSON.put("success", true);
         JSON.put("message", "Set status id to " + statusId + " for order with id " + orderId);
         return ResponseEntity.ok().body(JSON);
+    }
+
+    private void sendEmail(Long orderId) {
+        try {
+            new RestTemplate().put(mailServiceUrl + "/email/send-status/" + orderId, null);
+        } catch (Exception e) {
+            System.out.println("!!!Bad thing happened!!! Could not send email with status update. Message: " + e.getMessage());
+        }
     }
 }

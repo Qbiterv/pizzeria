@@ -1,4 +1,4 @@
-package pl.auctane.order.dtos.order;
+package pl.auctane.mail.dtos.meal;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,11 +12,6 @@ public class MealDto {
     private Long id;
 
     private String name;
-    private String description;
 
-    public MealDto(Long id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-    }
+    private String description;
 }

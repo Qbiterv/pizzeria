@@ -1,4 +1,4 @@
-package pl.auctane.mail.dtos;
+package pl.auctane.order.dtos.meal;
 
 import lombok.Getter;
 import lombok.Setter;

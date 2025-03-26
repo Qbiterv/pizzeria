@@ -35,6 +35,11 @@ public class StatusController {
         return ResponseEntity.ok().body(statusService.getAllStatuses());
     }
 
+    @GetMapping("/statuses-names")
+    public ResponseEntity<?> getAllStatusesNames() {
+        return ResponseEntity.ok().body(statusService.getAllStatusesNamesWithoutCanceled());
+    }
+
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getStatusById(@PathVariable("id") Long id) {
         Optional<Status> status = statusService.getStatusById(id);

@@ -1,9 +1,8 @@
-package pl.auctane.order.dtos;
+package pl.auctane.order.dtos.order;
 
 import lombok.Getter;
 import lombok.Setter;
-import pl.auctane.order.dtos.order.ProductWithQuantityAndMealsDto;
-import pl.auctane.order.entities.OrderProduct;
+import pl.auctane.order.dtos.product.ProductWithQuantityAndMealsDto;
 
 import java.util.List;
 

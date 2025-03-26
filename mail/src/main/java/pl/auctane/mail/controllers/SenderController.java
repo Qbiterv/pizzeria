@@ -8,9 +8,7 @@ import org.springframework.core.io.ResourceLoader;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.auctane.mail.dtos.EmailOrderDto;
-import pl.auctane.mail.dtos.EmailStatusDto;
-import pl.auctane.mail.dtos.HtmlFileDto;
+import pl.auctane.mail.dtos.email.HtmlFileDto;
 import pl.auctane.mail.services.EmailService;
 
 import java.util.ArrayList;
@@ -62,15 +60,15 @@ public class SenderController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/send-order")
-    public ResponseEntity<?> sendHtml(@RequestBody EmailOrderDto payload) {
+    @PutMapping("/send-order/{id}")
+    public ResponseEntity<?> sendHtml(@PathVariable("id") Long orderId) {
 
         List<HtmlFileDto> fileDtoList = new ArrayList<>();
         fileDtoList.add(new HtmlFileDto(imageFileName, imageFile));
         fileDtoList.add(new HtmlFileDto(image2FileName, image2File));
 
         try {
-            emailService.sendOrderEmail(username, payload, orderHtmlPath, fileDtoList);
+            emailService.sendOrderEmail(username, orderId, orderHtmlPath, fileDtoList);
         }catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -79,14 +77,15 @@ public class SenderController {
         return ResponseEntity.ok().build();
     }
 
-    @PostMapping("/send-status")
-    public ResponseEntity<?> sendStatus(@RequestBody EmailStatusDto payload) {
+    @PutMapping("/send-status/{id}")
+    public ResponseEntity<?> sendStatus(@PathVariable("id") Long orderId) {
+
         List<HtmlFileDto> fileDtoList = new ArrayList<>();
         fileDtoList.add(new HtmlFileDto(imageFileName, imageFile));
         fileDtoList.add(new HtmlFileDto(image2FileName, image2File));
 
         try {
-            emailService.sendStatusEmail(username, payload, statusHtmlPath, fileDtoList);
+            emailService.sendStatusEmail(username, orderId, statusHtmlPath, fileDtoList);
         }catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

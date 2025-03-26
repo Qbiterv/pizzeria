@@ -1,4 +1,4 @@
-package pl.auctane.order.dtos.orderProduct;
+package pl.auctane.order.dtos.order;
 
 import lombok.Getter;
 import lombok.Setter;

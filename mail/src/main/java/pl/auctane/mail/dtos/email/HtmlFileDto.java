@@ -1,10 +1,8 @@
-package pl.auctane.mail.dtos;
+package pl.auctane.mail.dtos.email;
 
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.core.io.Resource;
-
-import java.io.File;
 
 @Getter
 @Setter

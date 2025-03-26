@@ -27,9 +27,9 @@ public class OrderStatusService {
     }
 
     public void registerOrder(Order order) throws IllegalStateException{
-        Optional<Status> status = statusService.getFirst();
+        Optional<Status> status = statusService.getFirstStatusOfType(StatusType.CREATED);
 
-        if(status.isEmpty()) throw new IllegalStateException("There are no statuses in the database");
+        if(status.isEmpty()) throw new IllegalStateException("There are not any statuses of type CREATED in the database");
 
         OrderStatus orderStatus = new OrderStatus();
         orderStatus.setOrder(order);
