@@ -11,8 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
-import pl.auctane.order.dtos.email.MailPayloadDto;
-import pl.auctane.order.dtos.email.MailStatusDto;
+import pl.auctane.order.dtos.email.MailDto;
 import pl.auctane.order.dtos.order.*;
 import pl.auctane.order.dtos.product.ProductWithQuantityAndMealsDto;
 import pl.auctane.order.entities.Order;
@@ -33,6 +32,7 @@ public class OrderController {
     private final OrderStatusService orderStatusService;
     private final MealModuleService mealModuleService;
     private final StatusService statusService;
+    private final RabbitSenderService rabbitSenderService;
 
     @Value("${service.mail.url}")
     private String mailServiceUrl;
@@ -41,60 +41,59 @@ public class OrderController {
     private String mealServiceUrl;
 
     @Autowired
-    public OrderController(OrderService orderService, ObjectMapper objectMapper, OrderProductService orderProductService, OrderStatusService orderStatusService, MealModuleService mealModuleService, StatusService statusService) {
+    public OrderController(OrderService orderService, ObjectMapper objectMapper, OrderProductService orderProductService, OrderStatusService orderStatusService, MealModuleService mealModuleService, StatusService statusService, RabbitSenderService rabbitSenderService) {
         this.orderService = orderService;
         this.objectMapper = objectMapper;
         this.orderProductService = orderProductService;
         this.orderStatusService = orderStatusService;
         this.mealModuleService = mealModuleService;
         this.statusService = statusService;
+        this.rabbitSenderService = rabbitSenderService;
     }
 
     @GetMapping(value = "/get")
     public ResponseEntity<?> getOrders() {
-        return ResponseEntity.ok().body(orderService.getOrdersSorted());
+        List<Order> orders = orderService.getOrders();
+        if (orders.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(orders);
+    }
+
+    @GetMapping(value = "/get/{id}")
+    public ResponseEntity<?> getOrder(@PathVariable Long id) {
+        Optional<Order> order = orderService.getOrderById(id);
+        if(order.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(order.get());
     }
 
     @GetMapping("/get/finalized={finalized}")
     public ResponseEntity<?> getOrdersByStatus(@PathVariable("finalized") boolean finalized) {
-        if(finalized) {
-            return ResponseEntity.ok().body(orderService.getFinalizedOrders());
-        }
-
-        if (!finalized) {
-            return ResponseEntity.ok().body(orderService.getNotFinalizedOrders());
-        }
-
-        return ResponseEntity.badRequest().build();
+        List<Order> orders = orderService.getOrdersByStatus(finalized);
+        if (orders.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(orders);
     }
 
     @GetMapping("/get/email={email}")
     public ResponseEntity<?> getOrdersByEmail(@PathVariable("email") String email) {
         List<Order> orders = orderService.getOrdersByEmail(email);
-
-        if (orders.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-
+        if (orders.isEmpty()) return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(orders);
     }
 
     @PutMapping("/set-finalized/{id}")
     public ResponseEntity<?> setFinalized(@PathVariable("id") Long id) {
         ObjectNode JSON = objectMapper.createObjectNode();
+
         Optional<Order> order = orderService.getOrderById(id);
 
         if(order.isEmpty()) {
             JSON.put("success", false);
             JSON.put("message", "Order with id " + id + " does not exist");
-
             return ResponseEntity.badRequest().body(JSON);
         }
 
         if(order.get().isFinalized()) {
             JSON.put("success", false);
             JSON.put("message", "Order with id " + id + " is already finalized");
-
             return ResponseEntity.badRequest().body(JSON);
         }
 
@@ -102,19 +101,7 @@ public class OrderController {
 
         JSON.put("success", true);
         JSON.put("message", "Order with id " + id + " has been finalized");
-
         return ResponseEntity.ok().body(JSON);
-    }
-
-    @GetMapping(value = "/get/{id}")
-    public ResponseEntity<?> getOrder(@PathVariable Long id) {
-        Optional<Order> order = orderService.getOrderById(id);
-
-        if(order.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-
-        return ResponseEntity.ok().body(order.get());
     }
 
     @PostMapping(value = "/create", consumes =  {MediaType.APPLICATION_JSON_VALUE}, produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -161,19 +148,7 @@ public class OrderController {
             orderProductService.createOrderProduct(order, productWithQuantity);
 
         //send email
-        MailPayloadDto mailPayloadDto = new MailPayloadDto();
-        mailPayloadDto.setTo(orderDto.getEmail());
-        mailPayloadDto.setSubject("Zamówienie zostało złożone - nr " + order.getId());
-        mailPayloadDto.setName(orderDto.getName());
-        mailPayloadDto.setSurname(orderDto.getSurname());
-        mailPayloadDto.setPhone(orderDto.getPhone());
-        mailPayloadDto.setOrderId(order.getId());
-        mailPayloadDto.setAddress(orderDto.getAddress());
-        mailPayloadDto.setProductsWithQuantity(products);
-
-        //send email
         sendOrderEmail(order.getId());
-
 
         //order created successfully
         JSON.put("success", true);
@@ -235,14 +210,15 @@ public class OrderController {
         return ResponseEntity.ok().body(JSON);
     }
 
-    private void sendOrderEmail(Long id) {
-        String url = mailServiceUrl + "/email/send-order/" + id;
+    private void sendOrderEmail(Long orderId) {
 
-        new RestTemplate().put(url, null);
+        //rabitMQ sender
+        rabbitSenderService.sendEmail(new MailDto(orderId, "order"));
+
     }
     private void sendStatusEmail(Long orderId){
-        String url = mailServiceUrl + "/email/send-status/" + orderId;
 
-        new RestTemplate().put(url, null);
+        rabbitSenderService.sendEmail(new MailDto(orderId, "status"));
+
     }
 }

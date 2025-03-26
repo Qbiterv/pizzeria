@@ -8,6 +8,7 @@ import pl.auctane.order.entities.Status;
 import pl.auctane.order.enums.StatusType;
 import pl.auctane.order.repositories.OrderStatusRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -18,7 +19,7 @@ public class OrderStatusService {
     @Autowired
     public OrderStatusService(OrderStatusRepository orderStatusRepository, StatusService statusService) {this.orderStatusRepository = orderStatusRepository; this.statusService = statusService;}
 
-    public Object getAllOrderStatuses() {
+    public List<OrderStatus> getAllOrderStatuses() {
         return orderStatusRepository.findAll();
     }
 

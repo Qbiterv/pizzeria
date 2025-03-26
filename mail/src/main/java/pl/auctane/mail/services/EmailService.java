@@ -1,8 +1,12 @@
 package pl.auctane.mail.services;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.ResourceLoader;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
@@ -26,26 +30,42 @@ import java.util.*;
 public class EmailService {
 
     private final OrderModuleService orderModuleService;
+    private final ResourceLoader resourceLoader;
     private final JavaMailSender mailSender;
 
     @Autowired
-    public EmailService(OrderModuleService orderModuleService, JavaMailSender mailSender) {
+    public EmailService(OrderModuleService orderModuleService, ResourceLoader resourceLoader, JavaMailSender mailSender) {
         this.orderModuleService = orderModuleService;
+        this.resourceLoader = resourceLoader;
         this.mailSender = mailSender;
     }
 
-    //main methods
-    public void sendEmail(String from, String to, String subject, String body) {
-        SimpleMailMessage message = new SimpleMailMessage();
+    @Value("${service.mail.username}")
+    private String username;
+    @Value("${service.mail.html-order-file-path}")
+    private String orderHtmlPath;
+    @Value("${service.mail.html-status-file-path}")
+    private String statusHtmlPath;
+    @Value("${service.mail.image-file-path}")
+    private String imageFilePath;
+    @Value("${service.mail.image-2-file-path}")
+    private String image2FilePath;
+    @Value("${service.mail.image-file-name}")
+    private String imageFileName;
+    @Value("${service.mail.image-2-file-name}")
+    private String image2FileName;
 
-        message.setFrom(from);
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(body);
+    private HtmlFileDto image1;
+    private HtmlFileDto image2;
 
-        mailSender.send(message);
+    @PostConstruct
+    public void init() {
+        image1 = new HtmlFileDto(imageFileName, resourceLoader.getResource("classpath:" + imageFilePath));
+        image2 = new HtmlFileDto(image2FileName, resourceLoader.getResource("classpath:" + image2FilePath));
     }
-    public void sendOrderEmail(String from, Long orderId, String htmlPath, List<HtmlFileDto> files) {
+
+    //main methods
+    public void sendOrderEmail(Long orderId) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = null;
 
@@ -54,18 +74,19 @@ public class EmailService {
 
             EmailOrderDataDto emailOrderDto = getEmailOrderDataDto(orderId);
 
-            messageHelper.setFrom(from);
+            messageHelper.setFrom(username);
             messageHelper.setTo(emailOrderDto.getTo());
             messageHelper.setSubject(emailOrderDto.getSubject());
 
             //read html
-            String html = getHtmlBody(htmlPath);
+            String html = getHtmlBody(orderHtmlPath);
             //put user info into html
             html = putOrderDataIntoHtml(html, emailOrderDto);
             //put html into mail
             messageHelper.setText(html, true);
 
             //put all attachments into mail
+            List<HtmlFileDto> files = List.of(image1, image2);
             for (HtmlFileDto file : files)
                 messageHelper.addInline(file.getFilename(), file.getFile());
 
@@ -75,7 +96,7 @@ public class EmailService {
             throw new RuntimeException(e);
         }
     }
-    public void sendStatusEmail(String from, Long orderId, String htmlPath, List<HtmlFileDto> files) {
+    public void sendStatusEmail(Long orderId) {
         MimeMessage message = mailSender.createMimeMessage();
         MimeMessageHelper messageHelper = null;
 
@@ -84,18 +105,19 @@ public class EmailService {
 
             EmailStatusDto emailDto = getEmailStatusDataDto(orderId);
 
-            messageHelper.setFrom(from);
+            messageHelper.setFrom(username);
             messageHelper.setTo(emailDto.getTo());
             messageHelper.setSubject(emailDto.getSubject());
 
             //read html
-            String html = getHtmlBody(htmlPath);
+            String html = getHtmlBody(statusHtmlPath);
             //put user info into html
             html = putStatusDataIntoHtml(html, emailDto);
             //put html into mail
             messageHelper.setText(html, true);
 
             //put all attachments into mail
+            List<HtmlFileDto> files = List.of(image1, image2);
             for (HtmlFileDto file : files)
                 messageHelper.addInline(file.getFilename(), file.getFile());
 

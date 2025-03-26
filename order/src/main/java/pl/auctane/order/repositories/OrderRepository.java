@@ -8,11 +8,8 @@ import java.util.List;
 
 @Repository
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    List<Order> findAllByOrderByIdAsc();
-
-    List<Order> findAllByFinalizedTrue();
-
-    List<Order> findAllByFinalizedFalse();
 
     List<Order> findAllByEmail(String email);
+
+    List<Order> findAllByFinalized(boolean finalized);
 }

@@ -77,6 +77,7 @@ services:
       - SPRING_PROFILES_ACTIVE=docker
       - JAVA_TOOL_OPTIONS=-javaagent:/usr/local/newrelic/newrelic.jar
       - NEW_RELIC_APP_NAME=order-service  # Change this to the name you want in New Relic
+      - SPRING_RABBITMQ_HOST=rabbitmq
     #    volumes:
     #      - ./newrelic:/usr/local/newrelic
     depends_on:
@@ -98,6 +99,7 @@ services:
       - SPRING_PROFILES_ACTIVE=secret
       - JAVA_TOOL_OPTIONS=-javaagent:/usr/local/newrelic/newrelic.jar
       - NEW_RELIC_APP_NAME=mail-service  # Change this to the name you want in New Relic
+      - SPRING_RABBITMQ_HOST=rabbitmq
     #    volumes:
     #      - ./newrelic:/usr/local/newrelic
     depends_on:
@@ -114,6 +116,9 @@ services:
     volumes:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
     networks:
       - "pizzaNetwork"
 
