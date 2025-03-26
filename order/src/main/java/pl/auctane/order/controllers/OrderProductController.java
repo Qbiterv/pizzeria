@@ -61,11 +61,8 @@ public class OrderProductController {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         //check if order exist
-        if(orderService.getOrderById(orderId).isEmpty()) {
-            JSON.put("success", false);
-            JSON.put("message", "Order with id " + orderId + " does not exist");
-            return ResponseEntity.badRequest().body(JSON);
-        }
+        if(orderService.getOrderById(orderId).isEmpty()) return ResponseEntity.noContent().build();
+
 
         List<ProductWithQuantityAndMealsDto> productsWithQuantity = mealModuleService.getProductWithMealsList(getProductsWithQuantity(orderId));
 
