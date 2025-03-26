@@ -22,16 +22,8 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
-    public List<Order> getOrdersSorted() {
-        return orderRepository.findAllByOrderByIdAsc();
-    }
-
-    public List<Order> getFinalizedOrders() {
-        return orderRepository.findAllByFinalizedTrue();
-    }
-
-    public List<Order> getNotFinalizedOrders() {
-        return orderRepository.findAllByFinalizedFalse();
+    public List<Order> getOrdersByStatus(boolean finalized) {
+        return orderRepository.findAllByFinalized(finalized);
     }
 
     public List<Order> getOrdersByEmail(String email) {
@@ -40,10 +32,6 @@ public class OrderService {
 
     public Optional<Order> getOrderById(Long id) {
         return orderRepository.findById(id);
-    }
-
-    public Order createOrder(Order order) {
-        return orderRepository.save(order);
     }
 
     public Order createOrder(OrderDto orderDto) {
@@ -58,13 +46,5 @@ public class OrderService {
     public void setFinalized(Order order) {
         order.setFinalized(true);
         orderRepository.save(order);
-    }
-
-    public void setFinalized(Long id) {
-        Optional<Order> order = orderRepository.findById(id);
-        order.ifPresent(value -> {
-            value.setFinalized(true);
-            orderRepository.save(value);
-        });
     }
 }

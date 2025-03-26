@@ -50,10 +50,7 @@ public class OrderProductController {
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        //get all products with quantity for order
-        List<ProductWithQuantityDto> productsWithQuantity = getProductsWithQuantity(orderId);
-
-        return ResponseEntity.ok().body(productsWithQuantity);
+        return ResponseEntity.ok().body(getProductsWithQuantity(orderId));
     }
 
     @GetMapping(value = "get-order-products/{orderId}")
@@ -61,12 +58,13 @@ public class OrderProductController {
         ObjectNode JSON = objectMapper.createObjectNode();
 
         //check if order exist
-        if(orderService.getOrderById(orderId).isEmpty()) return ResponseEntity.noContent().build();
+        if(orderService.getOrderById(orderId).isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Order with id " + orderId + " does not exist");
+            return ResponseEntity.badRequest().body(JSON);
+        }
 
-
-        List<ProductWithQuantityAndMealsDto> productsWithQuantity = mealModuleService.getProductWithMealsList(getProductsWithQuantity(orderId));
-
-        return ResponseEntity.ok().body(new OrderProductsDto(productsWithQuantity));
+        return ResponseEntity.ok().body(new OrderProductsDto(mealModuleService.getProductWithMealsList(getProductsWithQuantity(orderId))));
     }
 
     private List<ProductWithQuantityDto> getProductsWithQuantity(Long orderId) {
@@ -76,9 +74,8 @@ public class OrderProductController {
         List<ProductWithQuantityDto> productsWithQuantity = new ArrayList<>();
 
         //get product with quantity for each relation
-        for (OrderProduct orderProduct : orderProducts) {
+        for (OrderProduct orderProduct : orderProducts)
             mealModuleService.getProductFromId(orderProduct.getProductId()).ifPresent(product -> productsWithQuantity.add(new ProductWithQuantityDto(product, orderProduct.getQuantity())));
-        }
 
         return productsWithQuantity;
     }

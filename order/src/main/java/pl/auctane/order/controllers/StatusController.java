@@ -32,44 +32,36 @@ public class StatusController {
 
     @GetMapping("/get")
     public ResponseEntity<?> getStatuses() {
-        return ResponseEntity.ok().body(statusService.getAllStatuses());
+        List<Status> statuses = statusService.getAllStatuses();
+        if (statuses.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(statuses);
     }
 
-    @GetMapping("/statuses-names")
+    @GetMapping("/names")
     public ResponseEntity<?> getAllStatusesNames() {
-        return ResponseEntity.ok().body(statusService.getAllStatusesNamesWithoutCanceled());
+        List<String> statusNames = statusService.getAllStatusesNamesWithoutCanceled();
+        if (statusNames.isEmpty()) return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().body(statusNames);
     }
 
     @GetMapping("/get/{id}")
     public ResponseEntity<?> getStatusById(@PathVariable("id") Long id) {
         Optional<Status> status = statusService.getStatusById(id);
-
-        if(status.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-
+        if(status.isEmpty()) return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(status.get());
     }
 
     @GetMapping("/get/name/{name}")
     public ResponseEntity<?> getStatusByName(@PathVariable("name") String name) {
         Optional<Status> status = statusService.getStatusByName(name);
-
-        if(status.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-
+        if(status.isEmpty()) return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(status.get());
     }
 
     @GetMapping("/get/state/{state}")
     public ResponseEntity<?> getStatusByState(@PathVariable("state") int state) {
         Optional<Status> status = statusService.getStatusByState(state);
-
-        if(status.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
-
+        if(status.isEmpty()) return ResponseEntity.noContent().build();
         return ResponseEntity.ok().body(objectMapper.convertValue(status, Status.class));
     }
 
@@ -111,19 +103,17 @@ public class StatusController {
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        System.out.println(statusCreateDto.getType());
-
         statusService.createStatus(statusCreateDto);
 
         JSON.put("success", true);
         JSON.put("message", "Status " + statusCreateDto.getName() + " created successfully | Priority: " + statusCreateDto.getState());
-
         return ResponseEntity.ok().body(JSON);
     }
 
     @PatchMapping(value = "/edit/{id}", consumes = {MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<?> editStatus(@PathVariable("id") Long id, @RequestBody StatusPatchDto statusPatchDto) {
         ObjectNode JSON = objectMapper.createObjectNode();
+
         Optional<Status> status = statusService.getStatusById(id);
 
         if(status.isEmpty()) {
@@ -137,7 +127,6 @@ public class StatusController {
             if(statusState.isPresent()) {
                 JSON.put("success", false);
                 JSON.put("message", "Status with state " + statusPatchDto.getState() + " already exists | ID: " + statusState.get().getId());
-
                 return ResponseEntity.badRequest().body(JSON);
             }
 
@@ -156,7 +145,6 @@ public class StatusController {
 
         JSON.put("success", true);
         JSON.put("message", "Status " + status.get().getName() + " edited successfully | Priority: " + status.get().getState());
-
         return ResponseEntity.ok().body(JSON);
     }
 

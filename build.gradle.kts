@@ -68,6 +68,8 @@ project(":mail") {
 	dependencies {
 		implementation("org.springframework.boot:spring-boot-starter-mail")
 		implementation("org.springframework:spring-context-support")
+		implementation("org.springframework.amqp:spring-rabbit")
+
 	}
 }
 
@@ -76,6 +78,7 @@ project(":order") {
 
 	dependencies {
 		implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
+		implementation("org.springframework.amqp:spring-rabbit")
 	}
 }
 

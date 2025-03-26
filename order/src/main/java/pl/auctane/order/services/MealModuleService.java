@@ -68,7 +68,6 @@ public class MealModuleService {
 
         return productsWithMeals;
     }
-
     private List<MealWithQuantityDto> getMealsWithQuantity(Long productId) throws IllegalArgumentException {
         String url = mealServiceUrl + "/product-meal/product/" + productId;
 

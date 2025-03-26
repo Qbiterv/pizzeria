@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pl.auctane.meal.dtos.meal.MealWithQuantityDto;
 import pl.auctane.meal.dtos.productMeal.MealToSendDto;
 import pl.auctane.meal.entities.Meal;
 import pl.auctane.meal.entities.Product;
@@ -14,6 +15,8 @@ import pl.auctane.meal.services.MealService;
 import pl.auctane.meal.services.ProductMealService;
 import pl.auctane.meal.services.ProductService;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -60,6 +63,44 @@ public class ProductMealController {
 
         JSON.set("meals", objectMapper.valueToTree(meals));
         return ResponseEntity.ok().body(JSON);
+    }
+
+    @GetMapping("/meals-with-quantity/{productId}")
+    public ResponseEntity<?> getMealsWithQuantity(@PathVariable("productId") Long productId) {
+        ObjectNode JSON = objectMapper.createObjectNode();
+
+        Optional<Product> product = productService.getProduct(productId);
+
+        if (product.isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Product with id: " + productId + " doesn't exist");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        List<Meal> meals = productMealService.getProductMeals(productId);
+
+        //if there is only one meal, return empty list
+        if (meals.size() <= 1)
+            return ResponseEntity.noContent().build();
+
+        //list of meal and its index in the list
+        HashMap<Meal, Integer> mealsDictionary = new HashMap<>();
+        //final list
+        List<MealWithQuantityDto> mealsWithQuantity = new ArrayList<>();
+
+        //connect meals
+        for (Meal meal : meals) {
+            //if meal already exist in the list, increase quantity
+            if(mealsDictionary.containsKey(meal))
+                mealsWithQuantity.get(mealsDictionary.get(meal)).setQuantity(mealsWithQuantity.get(mealsDictionary.get(meal)).getQuantity() + 1);
+                //else put it into list and dictionary of indexes
+            else {
+                mealsWithQuantity.add(new MealWithQuantityDto(meal, 1));
+                mealsDictionary.put(meal, meals.indexOf(meal));
+            }
+        }
+
+        return ResponseEntity.ok().body(mealsWithQuantity);
     }
 
     @PostMapping(value = "/add/{id}/{mealId}", produces = MediaType.APPLICATION_JSON_VALUE)
