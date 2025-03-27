@@ -12,6 +12,7 @@ import pl.auctane.order.dtos.status.MailStatusPayloadDto;
 import pl.auctane.order.entities.Order;
 import pl.auctane.order.entities.OrderStatus;
 import pl.auctane.order.entities.Status;
+import pl.auctane.order.enums.StatusType;
 import pl.auctane.order.services.OrderService;
 import pl.auctane.order.services.OrderStatusService;
 import pl.auctane.order.services.StatusService;
@@ -121,8 +122,14 @@ public class OrderStatusController {
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        List<Status> allStatuses = statusService.getAllStatusesWithoutCanceled();
+        //check if order is canceled
+        if(orderStatus.get().getStatus().getType().equals(StatusType.CANCELED)){
+            JSON.put("success", false);
+            JSON.put("message", "Order with id " + orderId + " is canceled");
+            return ResponseEntity.badRequest().body(JSON);
+        }
 
+        List<Status> allStatuses = statusService.getAllStatusesWithoutCanceled();
         Status status = orderStatus.get().getStatus();
         int indexOfStatus  = allStatuses.indexOf(status);
 
@@ -136,9 +143,7 @@ public class OrderStatusController {
             orderService.setFinalized(order.get());
         }
 
-        Status nextStatus = allStatuses.get(indexOfStatus + 1);
-
-        orderStatusService.updateOrderStatus(orderStatus.get(), nextStatus);
+        orderStatusService.updateOrderStatus(orderStatus.get(), allStatuses.get(indexOfStatus + 1));
 
         sendEmail(orderId);
 
@@ -165,6 +170,13 @@ public class OrderStatusController {
         if(orderStatus.isEmpty()) {
             JSON.put("success", false);
             JSON.put("message", "!!!Bad thing happened!!! Order with id " + orderId + " does not have a status");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        //check if order is canceled
+        if(orderStatus.get().getStatus().getType().equals(StatusType.CANCELED)){
+            JSON.put("success", false);
+            JSON.put("message", "Order with id " + orderId + " is canceled");
             return ResponseEntity.badRequest().body(JSON);
         }
 

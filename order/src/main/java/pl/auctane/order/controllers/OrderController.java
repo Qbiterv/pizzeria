@@ -199,8 +199,9 @@ public class OrderController {
             return ResponseEntity.badRequest().body(JSON);
         }
 
-        //delete current orderStatus relation and create new one with status CANCELED
+        //set order status to CANCELED and set order as finalized
         orderStatusService.updateOrderStatus(orderStatus.get(), canceledStatus.get());
+        orderService.setFinalized(order.get());
 
         //send email
         sendStatusEmail(id);
