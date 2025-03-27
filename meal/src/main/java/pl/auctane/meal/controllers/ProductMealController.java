@@ -65,7 +65,7 @@ public class ProductMealController {
         return ResponseEntity.ok().body(JSON);
     }
 
-    @GetMapping("/meals-with-quantity/{productId}")
+    @GetMapping("/quantity/{productId}")
     public ResponseEntity<?> getMealsWithQuantity(@PathVariable("productId") Long productId) {
         ObjectNode JSON = objectMapper.createObjectNode();
 

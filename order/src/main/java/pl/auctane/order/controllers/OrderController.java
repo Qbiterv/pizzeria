@@ -165,7 +165,7 @@ public class OrderController {
         if(order.isEmpty()) {
             JSON.put("success", false);
             JSON.put("message", "Order with id " + id + " does not exist");
-            return ResponseEntity.badRequest().body(JSON);
+            return ResponseEntity.ok().body(JSON);
         }
 
         //check if order status exist
@@ -173,7 +173,7 @@ public class OrderController {
         if(orderStatus.isEmpty()) {
             JSON.put("success", false);
             JSON.put("message", "Order with id " + id + " does not have status");
-            return ResponseEntity.badRequest().body(JSON);
+            return ResponseEntity.ok().body(JSON);
         }
 
         //check if order is on status CREATED
