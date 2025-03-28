@@ -26,13 +26,13 @@ public class SessionController {
     public ResponseEntity<?> getAllSessions() {
         return ResponseEntity.ok().body(sessionService.getAllSessions());
     }
-    @GetMapping("/check-session")
+    @GetMapping("/check")
     public ResponseEntity<?> checkSession(@RequestHeader("Authorization") String authorization) {
         boolean isSessionActive = sessionService.isSessionActive(authorization);
 
         return (isSessionActive) ? ResponseEntity.ok().build() : ResponseEntity.status(401).build();
     }
-    @GetMapping("/check-access")
+    @GetMapping("/access")
     public ResponseEntity<?> checkAccess(@RequestHeader("Authorization") String authorization, ServerHttpRequest request) throws Exception {
         boolean hasUserAccess = sessionService.hasUserAccess(authorization, request);
 
@@ -61,6 +61,28 @@ public class SessionController {
 
         JSON.put("success", true);
         JSON.put("message", sessionId);
+        return ResponseEntity.ok().body(JSON);
+    }
+    @DeleteMapping
+    public ResponseEntity<?> destroySession(@RequestHeader("Authorization") String authorization, ServerHttpRequest request) {
+        ObjectNode JSON = objectMapper.createObjectNode();
+
+        if (authorization == null || authorization.isEmpty()) {
+            JSON.put("success", false);
+            JSON.put("message", "Authorization header is missing");
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        try{
+            sessionService.removeSession(authorization, request);
+        } catch (Exception e) {
+            JSON.put("success", false);
+            JSON.put("message", e.getMessage());
+            return ResponseEntity.badRequest().body(JSON);
+        }
+
+        JSON.put("success", true);
+        JSON.put("message", "Session destroyed");
         return ResponseEntity.ok().body(JSON);
     }
 

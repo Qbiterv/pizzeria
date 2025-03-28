@@ -66,15 +66,44 @@ public class SessionService {
         //check if the session is already created
         if (hasUserSession(userDataDto)) throw new IllegalArgumentException("Session already created");
 
+        String uuid = generateUniqueUUID();
+
         //create a session
-        SessionDto session = new SessionDto(UUID.randomUUID().toString(), userDataDto, timeToExpire);
+        SessionDto session = new SessionDto(uuid, userDataDto, timeToExpire);
 
         //add session to the list
         sessions.add(session);
 
         return session.getSessionId();
     }
+    public void removeSession(String sessionId, ServerHttpRequest request) throws Exception {
+        UserDataDto userDataDto = getUserData(request);
 
+        if(userDataDto == null) throw new IllegalArgumentException("Missing user data");
+
+        for(SessionDto session : sessions)
+            if(isUserSession(session, sessionId, userDataDto)) {
+                sessions.remove(session);
+                return;
+            }
+
+        throw new Exception("Session not found");
+    }
+
+    private String generateUniqueUUID() {
+        String uuid = UUID.randomUUID().toString();
+        boolean isUnique = false;
+        while (!isUnique) {
+            isUnique = true;
+            for (SessionDto session : sessions)
+                if (session.getSessionId().equals(uuid)) {
+                    isUnique = false;
+                    uuid = UUID.randomUUID().toString();
+                    break;
+                }
+        }
+        return uuid;
+    }
     private UserDataDto getUserData(ServerHttpRequest request) {
         String userAgent = request.getHeaders().getFirst("User-Agent");
         String ip = request.getRemoteAddress().getAddress().getHostAddress();
