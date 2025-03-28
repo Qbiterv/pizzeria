@@ -187,6 +187,7 @@ public class EmailService {
     }
 
     private EmailOrderDataDto getEmailOrderDataDto(Long orderId){
+//        return service.getOrder(orderId);
         EmailOrderDataDto emailOrderDataDto = new EmailOrderDataDto();
 
         //check if order exist

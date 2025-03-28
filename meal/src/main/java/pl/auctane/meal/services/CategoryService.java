@@ -34,8 +34,13 @@ public class CategoryService {
     }
 
     public void createCategory(String name) {
+//        Category category = Category.builder()
+//                .name(name)
+//                .build();
+
         Category category = new Category();
         category.setName(name);
+
         categoryRepository.save(category);
     }
 

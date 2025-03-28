@@ -1,9 +1,15 @@
 package pl.auctane.meal.entities;
 
 import jakarta.persistence.*;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Value;
+import lombok.extern.jackson.Jacksonized;
 
+//@Value
+//@Jacksonized
+//@Builder
 @Getter
 @Setter
 @Entity

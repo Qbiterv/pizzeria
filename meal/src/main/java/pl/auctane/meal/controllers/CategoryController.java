@@ -2,6 +2,7 @@ package pl.auctane.meal.controllers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,15 +18,11 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/category")
+@RequiredArgsConstructor
 public class CategoryController {
+
     private final CategoryService categoryService;
     private final ObjectMapper objectMapper;
-
-    @Autowired
-    public CategoryController(CategoryService categoryService, ObjectMapper objectMapper) {
-        this.categoryService = categoryService;
-        this.objectMapper = objectMapper;
-    }
 
     @GetMapping("/get")
     public ResponseEntity<?> getCategories() {
