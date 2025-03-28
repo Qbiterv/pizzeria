@@ -74,7 +74,7 @@ public class IngredientController {
 
         JSON.put("success", true);
         JSON.put("message", "deleted ingredient with id: " + id);
-        return ResponseEntity.badRequest().body(JSON);
+        return ResponseEntity.ok().body(JSON);
     }
 
     @PatchMapping(value = "/edit/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
