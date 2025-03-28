@@ -2,11 +2,13 @@ package pl.auctane.brandenburg.configurations;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.gateway.filter.GlobalFilter;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import pl.auctane.brandenburg.components.AuthFilter;
+import pl.auctane.brandenburg.services.SessionService;
 
 @Configuration
 public class RouterConfiguration {
@@ -19,12 +21,8 @@ public class RouterConfiguration {
     private String serviceMealUrl;
 
     @Bean
-    public ObjectMapper objectMapper() {
-        return new ObjectMapper();
-    }
-    @Bean
-    public AuthFilter authFilter(ObjectMapper objectMapper) {
-        return new AuthFilter(objectMapper);
+    public AuthFilter authFilter(ObjectMapper objectMapper, SessionService sessionService) {
+        return new AuthFilter(objectMapper, sessionService);
     }
 
     @Bean
@@ -32,7 +30,7 @@ public class RouterConfiguration {
         return builder.routes()
                 .route("order", r -> r.path("/order")
                         .and().method("POST").filters(f -> f.cacheRequestBody(String.class).rewritePath("/order", "/"+serviceVersion+"/order/create")
-                                .filters(authFilter))
+                                .filters())
                         .uri(serviceOrderUrl))
 
                 .route("products", r -> r.path("/products")
@@ -47,7 +45,7 @@ public class RouterConfiguration {
 
                 .route("meals", r -> r.path("/meals/{id}")
                         .and().method("GET").filters(f -> f.rewritePath("/meals/(?<id>.*)", "/"+serviceVersion+"/product-meal/product/${id}")
-                                .filters(authFilter))
+                                .filters())
                         .uri(serviceMealUrl))
 
                 .build();
