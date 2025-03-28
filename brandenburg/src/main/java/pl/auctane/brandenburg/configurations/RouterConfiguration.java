@@ -35,12 +35,12 @@ public class RouterConfiguration {
 
                 .route("products", r -> r.path("/products")
                         .and().method("GET").filters(f -> f.rewritePath("/products", "/"+serviceVersion+"/product/get")
-                                .filters(authFilter))
+                                .filters())
                         .uri(serviceMealUrl))
 
                 .route("product", r -> r.path("/product/{id}")
                         .and().method("GET").filters(f -> f.rewritePath("/product/(?<id>.*)", "/"+serviceVersion+"/product/get/${id}")
-                                .filters(authFilter))
+                                .filters())
                         .uri(serviceMealUrl))
 
                 .route("meals", r -> r.path("/meals/{id}")
