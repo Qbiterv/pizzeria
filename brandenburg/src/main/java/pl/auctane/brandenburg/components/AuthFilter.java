@@ -13,6 +13,7 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
+import pl.auctane.brandenburg.services.SessionService;
 import reactor.core.publisher.Mono;
 
 import java.util.Objects;
@@ -22,49 +23,57 @@ public class AuthFilter implements GatewayFilter {
 
     @Value("${authentication.enabled}")
     private boolean authenticationEnabled;
-    @Value("${authentication.token}")
-    private String token;
 
-    @Autowired
-    public AuthFilter(ObjectMapper objectMapper) {
+    public AuthFilter(ObjectMapper objectMapper, SessionService sessionService) {
         this.objectMapper = objectMapper;
+        this.sessionService = sessionService;
     }
 
     final ObjectMapper objectMapper;
+    final SessionService sessionService;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerHttpRequest request = exchange.getRequest();
 
         // Allow preflight requests to pass through
-        if ("OPTIONS".equalsIgnoreCase(request.getMethod().name())) {
-            return chain.filter(exchange);
-        }
+//        if ("OPTIONS".equalsIgnoreCase(request.getMethod().name()))
+//            return chain.filter(exchange);
 
-        if (!authenticationEnabled) {
-            System.out.println("Authentication is disabled. To enable it, make \"authentication.enabled\" property as true");
-            return chain.filter(exchange);
-        }
-
-        if (!hasAllCredentials(request)) {
+        if (!hasAllCredentials(request))
             return sendBack(exchange, "Credentials missing");
-        }
 
-        // check token
-        if (!Objects.equals(request.getHeaders().getFirst("Token"), token)) {
-            return sendBack(exchange, "Invalid token");
+        if (authenticationEnabled) {
+            boolean hasUserAccess = false;
+            try {
+                hasUserAccess = hasUserAccess(request);
+            } catch (Exception e) {
+                //session expired
+                return sendBack(exchange, e.getMessage());
+            }
+
+            if (hasUserAccess)
+                return chain.filter(exchange);
+
+            return sendBack(exchange, "Unauthorized");
         }
 
         return chain.filter(exchange);
     }
 
+
     private boolean hasAllCredentials(ServerHttpRequest request) {
-        return request.getHeaders().containsKey("Token") && request.getHeaders().containsKey("Role");
+        return request.getHeaders().containsKey("Authorization");
+    }
+    private boolean hasUserAccess(ServerHttpRequest request) throws Exception {
+        String authorization = request.getHeaders().getFirst("Authorization");
+        return sessionService.hasUserAccess(authorization, request);
     }
 
     private Mono<Void> sendBack(ServerWebExchange exchange, String message) {
         ServerHttpResponse response = exchange.getResponse();
         ObjectNode JSON = objectMapper.createObjectNode();
+
         response.setStatusCode(HttpStatus.UNAUTHORIZED);
         response.getHeaders().add(HttpHeaders.CONTENT_TYPE, "application/json");
 
