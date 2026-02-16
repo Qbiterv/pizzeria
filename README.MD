@@ -10,6 +10,5 @@
 2. Gradle
 3. Modular (One command, run everything)
 4. Docker
-5. Localstack as AWS
-6. **pgsql** / mariadb
-7. React very simple frontend
+5. **pgsql** / mariadb
+6. Vite/React simple frontend
